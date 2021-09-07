@@ -1,12 +1,36 @@
 var express = require('express');
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var db = mongoose.connect('mongodb://localhost:27017/deeleedb', {useNewUrlParser: true});
+
 var morgan = require('morgan');
 var path = require('path');
+
+var userSchema = new Schema({ 
+    firstName : {type : String},
+    lastName : {type: String},
+    age : {type : Number},
+    location : {type : String}
+})
+
+var companySchema = new Schema({ 
+    name : {type : String},
+    address : { street : {type: String},
+                number : {type : Number},
+                postcode : {type : Number}
+            },
+    category : { type: String,
+        allowedValues: ['restaurant', 'groceries', 'clothing', 'pub']},
+})
+
+var User = mongoose.model("users", userSchema);
+var Company = mongoose.model("companies", companySchema);
+
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
 
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
+var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/deeleedb';
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
@@ -29,6 +53,38 @@ app.use(morgan('dev'));
 // Enable cross-origin resource sharing for frontend must be registered before api
 app.options('*', cors());
 app.use(cors());
+
+// Users - database functions
+app.get('/users', function(req, res, next) {
+    User.find(function(err, users) {
+        if (err) {return next(err); } 
+        res.json({"users": users});
+    });
+});
+
+app.post('/users', function(req, res, next) {
+    var user = new User(req.body);
+    user.save(function(err) {
+        if (err) { return next(err); }
+        res.status(201).json(user);
+    });
+});
+
+// Companies - database functions
+app.get('/companies', function(req, res, next) {
+    Company.find(function(err, companies) {
+        if (err) {return next(err); } 
+        res.json({"companies": companies});
+    });
+});
+
+app.post('/companies', function(req, res, next) {
+    var company = new Company(req.body);
+    company.save(function(err) {
+        if (err) { return next(err); }
+        res.status(201).json(company);
+    });
+});
 
 // Import routes
 app.get('/api', function(req, res) {
