@@ -1,7 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var db = mongoose.connect('mongodb://localhost:27017/deeleedb', {useNewUrlParser: true});
+/*var db = mongoose.connect('mongodb://localhost:27017/deelee', {useNewUrlParser: true}); */
 
 var morgan = require('morgan');
 var path = require('path');
@@ -17,7 +17,8 @@ var companySchema = new Schema({
     name : {type : String},
     address : { street : {type: String},
                 number : {type : Number},
-                postcode : {type : Number}
+                postcode : {type : Number},
+                city : {type : String},
             },
     category : { type: String,
         allowedValues: ['restaurant', 'groceries', 'clothing', 'pub']},
