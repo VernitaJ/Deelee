@@ -1,12 +1,8 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 /*var db = mongoose.connect('mongodb://localhost:27017/deelee', {useNewUrlParser: true}); */
 var morgan = require('morgan');
 var path = require('path');
-var userSchema = require()
-// var User = mongoose.model("users", userSchema);
-// var Company = mongoose.model("companies", companySchema);
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
 
@@ -44,6 +40,7 @@ app.get('/api', function(req, res) {
 });
 
 app.use(usersController);
+
 app.use(companiesController);
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
