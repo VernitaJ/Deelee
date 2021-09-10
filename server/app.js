@@ -1,10 +1,9 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-/*var db = mongoose.connect('mongodb://localhost:27017/deelee', {useNewUrlParser: true}); */
-
 var morgan = require('morgan');
 var path = require('path');
+var usersController = require('./controllers/users.js')
 
 var userSchema = new Schema({ 
     firstName : {type : String},
@@ -31,7 +30,7 @@ var cors = require('cors');
 var history = require('connect-history-api-fallback');
 
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/deeleedb';
+var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/deelee'
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
@@ -56,14 +55,21 @@ app.options('*', cors());
 app.use(cors());
 
 // Users - database functions
-app.get('/users', function(req, res, next) {
+app.get('/api/users', function(req, res, next) {
     User.find(function(err, users) {
         if (err) {return next(err); } 
         res.json({"users": users});
     });
 });
 
-app.post('/users', function(req, res, next) {
+app.get('/api/users/c:id', function(req, res, next) {
+    User.find(function(err, user) {
+        if (err) {return next(err); } 
+        res.send(req.params._id);
+    });
+});
+
+app.post('/api/users', function(req, res, next) {
     var user = new User(req.body);
     user.save(function(err) {
         if (err) { return next(err); }
@@ -71,15 +77,17 @@ app.post('/users', function(req, res, next) {
     });
 });
 
+app.use(usersController);
+
 // Companies - database functions
-app.get('/companies', function(req, res, next) {
+app.get('/api/companies', function(req, res, next) {
     Company.find(function(err, companies) {
         if (err) {return next(err); } 
         res.json({"companies": companies});
     });
 });
 
-app.post('/companies', function(req, res, next) {
+app.post('/api/companies', function(req, res, next) {
     var company = new Company(req.body);
     company.save(function(err) {
         if (err) { return next(err); }
@@ -92,10 +100,11 @@ app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT341 backend ExpressJS project!'});
 });
 
-// Catch all non-error handler for api (i.e., 404 Not Found)
-app.use('/api/*', function (req, res) {
-    res.status(404).json({ 'message': 'Not Found' });
-});
+// // Catch all non-error handler for api (i.e., 404 Not Found)
+// app.use('/api/*/*', function (req, res) {
+//     res.status(404).json({ 'message': 'Not Found' });
+// });
+
 
 // Configuration for serving frontend in production mode
 // Support Vuejs HTML 5 history mode
