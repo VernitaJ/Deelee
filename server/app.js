@@ -1,12 +1,16 @@
 var express = require('express');
 var mongoose = require('mongoose');
+/*var db = mongoose.connect('mongodb://localhost:27017/deelee', {useNewUrlParser: true}); */
 var morgan = require('morgan');
 var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
 
+var usersController = require('./controllers/users');
+var companiesController = require ('./controllers/companies');
+
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
+var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/deelee'
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
@@ -34,6 +38,10 @@ app.use(cors());
 app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT341 backend ExpressJS project!'});
 });
+
+app.use(usersController);
+
+app.use(companiesController);
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {

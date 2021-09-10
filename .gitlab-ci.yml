@@ -43,7 +43,7 @@ deploy:
     - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
   environment:
     name: production
-    url: https://$HEROKU_APP_NAME.herokuapp.com/
+    url: https://deelee.herokuapp.com/
   only:
     refs:
       - master
