@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Deal = ('../models/deal');
+var Deal = require('../models/deal');
 
 // Deals - database functions
 router.get('/deals', function(req, res, next) {
@@ -28,11 +28,22 @@ router.post('/deals', function(req, res, next) {
 });
 
 router.delete('/deals', function(req, res){
-    var deals = deals;
-    delete deals;
+    Deal.delete(function (err, deals) {
+        if (err) {return next(err); }
+        res.status(200).json(deal);
+    });
 });
 
-router.put ('/deals:id', function(req,res){
+router.delete('/deals/:id', function(req, res){
+    var id = req.params.id;
+    var deal = deals[id];
+    deal.delete(function(err) {
+        if (err) {return next(err); }
+        res.status(200).json(deal);
+    });    
+});
+
+router.put ('/deals/:id', function(req,res){
     var id = req.params.id;
     var updated_deal = {
         "id" : id,
@@ -41,6 +52,18 @@ router.put ('/deals:id', function(req,res){
     }
     deals[id] =updated_deal;
     res.json(updated_deal);
+});
+
+router.patch('/deals/:id', function(req, res){
+    var id = req.params.id;
+    var deal = deals[id];
+    var updated_deal = {
+        "id" : id,
+        "tag" : (req.body.tag || deal.tag),
+        "name" : (req.body.name || deal.name)
+    };
+    deals[id] = updated_deal;
+    res.json(updated_deal)
 });
 
 module.exports = router;
