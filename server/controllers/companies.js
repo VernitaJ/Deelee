@@ -17,7 +17,7 @@ router.get('/companies/:id', function(req, res) {
 router.post('/companies', function(req, res, next) {
     var company = new Company(req.body);
     var new_company = {
-        "id" : id,
+        //"id" : id,
         "name" : req.body.name,
         "adress" : req.body.adress,
         "category" : req.body.category
@@ -37,23 +37,34 @@ router.delete('/companies', function(req, res){
 
 router.delete('/companies/:id', function(req, res){
     var id = req.params.id;
-    var company = companies[id];
+    var company = Company[id];
     company.delete(function(err) {
         if (err) {return next(err); }
         res.status(200);
     });    
 });
 
-router.put ('/compannies/:id', function(req,res){
+router.put ('/companies/:id', function(req,res){
     var id = req.params.id;
-    var updated_company = {
+    /*var updated_company = {
         "id" : id,
         "name" : req.body.name,
         "adress" : req.body.adress,
         "category" : req.body.category
     }
-    companies[id] =updated_company;
-    res.json(updated_company);
+    var companies = res.json(companies[id]);
+    companies = updated_company;
+    res.json(updated_company);*/
+
+    var company = res.json(Company[id]);
+    //company.name = req.body.name;
+    company = {
+        "id" : id,
+        "name" : req.body.name,
+        "adress" : req.body.adress,
+        "category" : req.body.category
+    }
+    res.json(company)
 });
 
 router.patch('/companies/:id', function(req, res){
