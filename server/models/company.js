@@ -10,7 +10,10 @@ var companySchema = new Schema(
       postcode: { type: Number },
       city: { type: String },
     },
-    contact: { email: { type: String }, phone: { type: string } },
+    contact: {
+      email: { type: String },
+      phone: { type: String },
+    },
     category: {
       type: String,
       allowedValues: ["restaurant", "groceries", "clothing", "pub"],
