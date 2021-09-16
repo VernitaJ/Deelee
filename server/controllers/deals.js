@@ -36,7 +36,7 @@ router.post("/deals", function (req, res, next) {
 });
 
 router.delete("/deals", function (req, res) {
-  Deal.delete(function (err) {
+  Deal.deleteMany(function (err) {
     if (err) {
       return next(err);
     }
@@ -75,21 +75,34 @@ router.put("/deals/:id", (req, res, next) => {
   });
 });
 
-router.patch("/deals/:id", function (req, res) {
-  var id = req.params.id;
-  Deal.findByIdAndUpdate(id, function (err, deal) {
-    if (err) {
-      return next(err);
-    }
-    if (deal == null) {
-      return res.status(404).json({ message: "Deal not found" });
-    }
-    deal.name = req.body.name || deal.name;
-    deal.tag = deal.tag.push(req.body.tag) || deal.tag;
-    deal.support = req.body.support || deal.support;
-    deal.company = req.body.company;
-    res.json(deal);
-  });
+router.patch("/deals/:id", (req, res) => {
+  Company.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .then((deals) => {
+      if (!deals) {
+        return res.status(404).send();
+      }
+      res.send(deals);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
 });
+
+// router.patch("/deals/:id", function (req, res) {
+//   var id = req.params.id;
+//   Deal.findByIdAndUpdate(id, function (err, deal) {
+//     if (err) {
+//       return next(err);
+//     }
+//     if (deal == null) {
+//       return res.status(404).json({ message: "Deal not found" });
+//     }
+//     deal.name = req.body.name || deal.name;
+//     deal.tag = deal.tag.push(req.body.tag) || deal.tag;
+//     deal.support = req.body.support || deal.support;
+//     deal.company = req.body.company;
+//     res.json(deal);
+//   });
+// });
 
 module.exports = router;

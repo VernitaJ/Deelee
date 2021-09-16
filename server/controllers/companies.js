@@ -16,6 +16,7 @@ router.get("/companies", function (req, res, next) {
 router.get("/companies/:id", function (req, res, next) {
   Company.findById(req.params.id, (err, company) => {
     if (err) return res.status(500).send(err);
+    company.populate(deals);
     return res.status(200).send(company);
   });
 });
@@ -31,7 +32,7 @@ router.post("/companies", function (req, res, next) {
 });
 
 router.delete("/companies", function (req, res) {
-  Company.delete(function (err) {
+  Company.deleteMany(function (err) {
     if (err) {
       return next(err);
     }
@@ -69,27 +70,41 @@ router.put("/companies/:id", (req, res) => {
   });
 });
 
-router.patch("/companies/:id", function (req, res) {
-  var id = req.params.id;
-  Company.findByIdAndUpdate(id, function (err, company) {
-    if (err) {
-      return next(err);
-    }
-    if (company == null) {
-      return res.status(404).json({ message: "Company not found" });
-    }
-    company.name = req.body.name || company.name;
-    company.address.street = req.body.address.street || company.address.street;
-    company.address.number = req.body.address.number || company.address.number;
-    company.address.postcode =
-      req.body.address.postcode || company.address.postcode;
-    company.address.city = req.body.address.city || company.address.city;
-    company.contact.email = req.body.contact.email || company.contact.email;
-    company.contact.phone = req.body.contact.email || company.contact.phone;
-    company.category = req.body.category || company.category;
-    company.deals = company.deals.push(req.body.deals) || company.deals;
-    res.json(company);
-  });
+router.patch("/companies/:id", (req, res) => {
+  Company.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .then((company) => {
+      if (!company) {
+        return res.status(404).send();
+      }
+      res.send(company);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
 });
+
+// router.patch("/companies/:id", function (req, res, next) {
+//   var id = req.params.id;
+//   Company.findByIdAndUpdate(id, function (err, company) {
+//     if (err) {
+//       return next(err);
+//     }
+//     if (company == null) {
+//       return res.status(404).json({ message: "Company not found" });
+//     }
+//     company.name = req.body.name || company.name;
+//     company.address.street = req.body.address.street || company.address.street;
+//     company.address.number = req.body.address.number || company.address.number;
+//     company.address.postcode =
+//       req.body.address.postcode || company.address.postcode;
+//     company.address.city = req.body.address.city || company.address.city;
+//     company.contact.email = req.body.contact.email || company.contact.email;
+//     company.contact.phone = req.body.contact.email || company.contact.phone;
+//     company.category = req.body.category || company.category;
+//     company.deals = company.deals.push(req.body.deals) || company.deals;
+//     company.save();
+//     res.json(company);
+//   });
+// });
 
 module.exports = router;
