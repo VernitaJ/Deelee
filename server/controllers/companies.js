@@ -12,11 +12,15 @@ router.get("/companies", function (req, res, next) {
   });
 });
 
-router.get("/companies/:id", function (req, res, next) {
-  Company.findById(req.params.id, (err, company) => {
-    if (err) return res.status(500).send(err);
-    return res.status(200).send(company);
-  });
+// router.get("/companies/:id", function (req, res, next) {
+//   Company.findById(req.params.id, (err, company) => {
+//     if (err) return res.status(500).send(err);
+//     return res.status(200).send(company);
+//   });
+// });
+
+router.get("/companies/:id", function (req, res) {
+  res.json(companies[req.params.id]);
 });
 
 router.post("/companies", function (req, res, next) {
@@ -29,18 +33,25 @@ router.post("/companies", function (req, res, next) {
   });
 });
 
-// router.put("/companies/:id", function (req, res) {
-//   var id = req.params.id;
-//   var updated_company = {
-//     name: req.body.name,
-//     adress: req.body.adress,
-//     contact: req.body.contact,
-//     category: req.body.category,
-//     deals: ["613fb14024606a0514aeab09", "613fb18424606a0514aeab0d"],
-//   };
-//   Company[id] = updated_company;
-//   res.json(updated_company);
-// });
+router.delete("/companies", function (req, res) {
+  Company.delete(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.status(200);
+  });
+});
+
+router.delete("/companies/:id", function (req, res) {
+  var id = req.params.id;
+  var company = Company[id];
+  company.delete(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.status(200);
+  });
+});
 
 router.put("/companies/:id", (req, res) => {
   var id = req.params.id;
@@ -56,6 +67,19 @@ router.put("/companies/:id", (req, res) => {
     company.save();
     res.json(company);
   });
+});
+
+router.patch("/companies/:id", function (req, res) {
+  var id = req.params.id;
+  var company = companies[id];
+  var updated_company = {
+    id: id,
+    name: req.body.name || company.name,
+    adress: req.body.adress || company.adress,
+    category: req.body.category || company.category,
+  };
+  companies[id] = updated_company;
+  res.json(updated_company);
 });
 
 module.exports = router;
