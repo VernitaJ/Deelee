@@ -78,7 +78,16 @@ router.patch("/companies/:id", function (req, res) {
     if (company == null) {
       return res.status(404).json({ message: "Company not found" });
     }
-    company.name = req.body.name;
+    company.name = req.body.name || company.name;
+    company.address.street = req.body.address.street || company.address.street;
+    company.address.number = req.body.address.number || company.address.number;
+    company.address.postcode =
+      req.body.address.postcode || company.address.postcode;
+    company.address.city = req.body.address.city || company.address.city;
+    company.contact.email = req.body.contact.email || company.contact.email;
+    company.contact.phone = req.body.contact.email || company.contact.phone;
+    company.category = req.body.category || company.category;
+    company.deals = company.deals.push(req.body.deals) || company.deals;
     res.json(company);
   });
 });

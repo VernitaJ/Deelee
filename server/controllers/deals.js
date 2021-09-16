@@ -13,16 +13,20 @@ router.get("/deals", function (req, res, next) {
 });
 
 router.get("/deals/:id", function (req, res) {
-  res.json(deals[req.params.id]);
+  var id = req.params.id;
+  Deal.findById(req.params.id, function (err, deal) {
+    if (err) {
+      return next(err);
+    }
+    if (deal == null) {
+      return res.status(404).json({ message: "Deal not found" });
+    }
+    res.json(deal);
+  });
 });
 
 router.post("/deals", function (req, res, next) {
   var deal = new Deal(req.body);
-  var new_deal = {
-    id: id,
-    tag: req.body.tag,
-    name: req.body.name,
-  };
   deal.save(function (err) {
     if (err) {
       return next(err);
@@ -51,27 +55,38 @@ router.delete("/deals/:id", function (req, res) {
   });
 });
 
-router.put("/deals/:id", function (req, res) {
+router.put("/deals/:id", (req, res, next) => {
   var id = req.params.id;
-  var updated_deal = {
-    id: id,
-    tag: req.body.tag,
-    name: req.body.name,
-  };
-  deals[id] = updated_deal;
-  res.json(updated_deal);
+  Deal.findById(id, function (err, deal) {
+    if (err) {
+      return next(err);
+    }
+    if (deal == null) {
+      return res.status(404).json({ message: "Deal not found" });
+    }
+    deal.name = req.body.name;
+    deal.support = req.body.support;
+    deal.tag.push(req.body.tag); //only one tag at a time
+    deal.save();
+    res.json(deal);
+  });
 });
 
 router.patch("/deals/:id", function (req, res) {
   var id = req.params.id;
-  var deal = deals[id];
-  var updated_deal = {
-    id: id,
-    tag: req.body.tag || deal.tag,
-    name: req.body.name || deal.name,
-  };
-  deals[id] = updated_deal;
-  res.json(updated_deal);
+  Deal.findByIdAndUpdate(id, function (err, deal) {
+    if (err) {
+      return next(err);
+    }
+    if (deal == null) {
+      return res.status(404).json({ message: "Deal not found" });
+    }
+    deal.name = req.body.name || deal.name;
+    deal.tag = deal.tag.push(req.body.tag) || deal.tag;
+    deal.support = req.body.support || deal.support;
+    deal.company = req.body.company;
+    res.json(deal);
+  });
 });
 
 module.exports = router;
