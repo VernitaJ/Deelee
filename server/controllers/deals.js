@@ -36,7 +36,7 @@ router.post("/deals", function (req, res, next) {
 });
 
 router.delete("/deals", function (req, res) {
-  Deal.delete(function (err, deals) {
+  Deal.delete(function (err) {
     if (err) {
       return next(err);
     }
@@ -44,14 +44,17 @@ router.delete("/deals", function (req, res) {
   });
 });
 
-router.delete("/deals/:id", function (req, res) {
+router.delete("/deals/:id", function (req, res, next) {
   var id = req.params.id;
-  var deal = deals[id];
-  deal.delete(function (err) {
+  Deal.findByIdAndDelete(id, function (err, deal) {
     if (err) {
       return next(err);
     }
-    res.status(200).json(deal);
+    if (deal == null) {
+      return res.status(404).json({ message: "Deal not found" });
+    }
+    console.log("Deal successfully deleted :", deal.name);
+    res.json(deal);
   });
 });
 
