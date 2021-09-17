@@ -50,7 +50,6 @@ router.get("/companies/:co_id/deals/:deal_id", function (req, res, next) {
       if (err) {
         return res.status(500).send(err);
       }
-      Deal.findOne();
       console.log(company.deals);
       return res.status(200).send(deal);
     });
@@ -163,7 +162,7 @@ router.patch("/companies/:id", (req, res) => {
       if (company == null) {
         return res.status(404).send();
       }
-      res.send(company);
+      res.status(204).send(company);
     })
     .catch((error) => {
       res.status(500).send(error);
