@@ -81,7 +81,7 @@ router.patch("/deals/:id", (req, res) => {
       if (!deals) {
         return res.status(404).send();
       }
-      res.send(deals);
+      res.status(204).send(deals);
     })
     .catch((error) => {
       res.status(500).send(error);
