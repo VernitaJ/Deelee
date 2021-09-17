@@ -107,6 +107,39 @@ router.delete("/companies/:id", function (req, res, next) {
   });
 });
 
+router.delete("/companies/:co_id/deals/:deal_id", function (req, res, next) {
+  Company.updateOne(
+    { _id: req.params.co_id }, // you not need to use ObjectId here
+    { $pull: { deals: { _id: req.params.deal_id } } },
+    function (err, company) {
+      if (err) {
+        return next(err);
+      }
+      if (company == null) {
+        return res.status(404).json({ message: "Company not found" });
+      }
+      res.status(200).json(company);
+    }
+  );
+});
+
+// router.delete("/companies/:co_id/deals/:deal_id", function (req, res, next) {
+//   var id = req.params.id;
+//   Company.findById(req.params.co_id, function (err, company) {
+//     if (err) {
+//       return next(err);
+//     }
+//     if (company == null) {
+//       return res.status(404).json({ message: "Company not found" });
+//     }
+//   });
+//   console.log("Company successfully deleted :", company.name);
+//   Deal.findByIdAndDelete(req.params.deal_id, function (err, deal) {
+
+//   })
+//   res.status(200).json(company);
+// });
+
 router.put("/companies/:id", (req, res) => {
   var id = req.params.id;
   Company.findById(id, function (err, company) {
