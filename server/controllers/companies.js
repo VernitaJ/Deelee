@@ -1,5 +1,4 @@
 var express = require("express");
-var mongoose = require("mongoose");
 var router = express.Router();
 var Company = require("../models/company");
 
@@ -10,15 +9,51 @@ router.get("/companies", function (req, res, next) {
       return next(err);
     }
     res.json({ companies: companies });
+    res.status(200);
   });
 });
 
 router.get("/companies/:id", function (req, res, next) {
-  Company.findById(req.params.id, (err, company) => {
-    if (err) return res.status(500).send(err);
-    company.populate(deals);
-    return res.status(200).send(company);
-  });
+  Company.findOne({ _id: req.params.id })
+    .populate("deals")
+    .exec(function (err, company) {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      console.log(
+        "The first deal in the company array is named '%s'",
+        company.deals[0].name
+      );
+      return res.status(200).send(company);
+    });
+});
+
+router.get("/companies/:id/deals", function (req, res, next) {
+  Company.findOne({ _id: req.params.id })
+    .populate("deals")
+    .exec(function (err, company) {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      console.log(company.deals);
+      return res.status(200).send(company);
+    });
+});
+
+// GET /cars/:car_id/drivers/:driver_id (relationship)
+router.get("/companies/:co_id/deals/:deal_id", function (req, res, next) {
+  Company.findOne({ _id: req.params.co_id })
+    .populate("deals", {
+      match: { _id: { $ne: req.params.deal_id } },
+    })
+    .exec(function (err, company) {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      Deal.findOne();
+      console.log(company.deals);
+      return res.status(200).send(deal);
+    });
 });
 
 router.post("/companies", function (req, res, next) {
@@ -27,6 +62,23 @@ router.post("/companies", function (req, res, next) {
     if (err) {
       return next(err);
     }
+    console.log("New Company ", company.name, "created");
+    res.status(201).json(company);
+  });
+});
+
+router.post("/companies/:id/deals", function (req, res, next) {
+  Company.findById(req.params.id, function (err, company) {
+    if (err) {
+      return next(err);
+    }
+    if (company == null) {
+      return res.status(404).json({ message: "Company not found" });
+    }
+    for (deal in req.body.deals) {
+      company.deals.push(deal);
+    }
+    console.log("Deals added to ", company.name);
     res.status(201).json(company);
   });
 });
@@ -36,6 +88,7 @@ router.delete("/companies", function (req, res) {
     if (err) {
       return next(err);
     }
+    console.log("Deleted all instances of Company");
     res.status(200);
   });
 });
@@ -50,7 +103,7 @@ router.delete("/companies/:id", function (req, res, next) {
       return res.status(404).json({ message: "Company not found" });
     }
     console.log("Company successfully deleted :", company.name);
-    res.json(company);
+    res.status(200).json(company);
   });
 });
 
@@ -66,14 +119,15 @@ router.put("/companies/:id", (req, res) => {
     company.name = req.body.name;
     company.deals.push(req.body.deals); //adds to the array - only one deal at a time
     company.save();
-    res.json(company);
+    console.log("Company updated");
+    res.status(200).json(company);
   });
 });
 
 router.patch("/companies/:id", (req, res) => {
   Company.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((company) => {
-      if (!company) {
+      if (company == null) {
         return res.status(404).send();
       }
       res.send(company);
@@ -84,8 +138,7 @@ router.patch("/companies/:id", (req, res) => {
 });
 
 // router.patch("/companies/:id", function (req, res, next) {
-//   var id = req.params.id;
-//   Company.findByIdAndUpdate(id, function (err, company) {
+//   Company.findByIdAndUpdate(req.params.id, function (err, company) {
 //     if (err) {
 //       return next(err);
 //     }
@@ -103,8 +156,13 @@ router.patch("/companies/:id", (req, res) => {
 //     company.category = req.body.category || company.category;
 //     company.deals = company.deals.push(req.body.deals) || company.deals;
 //     company.save();
-//     res.json(company);
+//     res.send(company);
 //   });
 // });
+
+// POST /cars/:car_id/drivers (relationship)
+// GET /cars/:car_id/drivers (relationship)
+// GET /cars/:car_id/drivers/:driver_id (relationship)
+// DELETE /cars/:car_id/drivers/:driver_id (relationship)
 
 module.exports = router;
