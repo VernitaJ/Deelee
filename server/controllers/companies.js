@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var Company = require("../models/company");
+var Deal = require("../models/deal");
 
 // Companies - database functions
 router.get("/companies", function (req, res, next) {
@@ -20,10 +21,10 @@ router.get("/companies/:id", function (req, res, next) {
       if (err) {
         return res.status(500).send(err);
       }
-      console.log(
-        "The first deal in the company array is named '%s'",
-        company.deals[0].name
-      );
+      // console.log(
+      //   "The first deal in the company array is named '%s'",
+      //   company.deals[0].name
+      // );
       return res.status(200).send(company);
     });
 });
@@ -36,7 +37,7 @@ router.get("/companies/:id/deals", function (req, res, next) {
         return res.status(500).send(err);
       }
       console.log(company.deals);
-      return res.status(200).send(company);
+      return res.status(200).send(company.deals);
     });
 });
 
@@ -51,7 +52,7 @@ router.get("/companies/:co_id/deals/:deal_id", function (req, res, next) {
         return res.status(500).send(err);
       }
       console.log(company.deals);
-      return res.status(200).send(deal);
+      return res.status(200).send(company.deals);
     });
 });
 
@@ -66,7 +67,28 @@ router.post("/companies", function (req, res, next) {
   });
 });
 
+router.get("/companies/category/:category", function (req, res, next) {
+  console.log("finding");
+  Company.find({ category: { $all: [req.params.category] } }).exec(function (
+    err,
+    company
+  ) {
+    if (err) {
+      return console.log(err);
+    }
+    console.log("success");
+    return res.status(200).json(company);
+  });
+});
+
 router.post("/companies/:id/deals", function (req, res, next) {
+  var deal = new Deal(req.body);
+  deal.save(function (err) {
+    if (err) {
+      return next(err);
+    }
+    console.log("Deal " + deal.name + " created.");
+  });
   Company.findById(req.params.id, function (err, company) {
     if (err) {
       return next(err);
@@ -74,21 +96,19 @@ router.post("/companies/:id/deals", function (req, res, next) {
     if (company == null) {
       return res.status(404).json({ message: "Company not found" });
     }
-    for (deal in req.body.deals) {
-      company.deals.push(deal);
-    }
+    company.deals.push(deal);
     console.log("Deals added to ", company.name);
-    res.status(201).json(company);
+    return res.status(201).json(company);
   });
 });
 
 router.delete("/companies", function (req, res) {
-  Company.deleteMany(function (err) {
+  Company.deleteMany(function (err, company) {
     if (err) {
       return next(err);
     }
     console.log("Deleted all instances of Company");
-    res.status(200);
+    res.status(200).json(company);
   });
 });
 
@@ -108,7 +128,7 @@ router.delete("/companies/:id", function (req, res, next) {
 
 router.delete("/companies/:co_id/deals/:deal_id", function (req, res, next) {
   Company.updateOne(
-    { _id: req.params.co_id }, // you not need to use ObjectId here
+    { _id: req.params.co_id },
     { $pull: { deals: { _id: req.params.deal_id } } },
     function (err, company) {
       if (err) {
@@ -152,7 +172,7 @@ router.put("/companies/:id", (req, res) => {
     company.deals.push(req.body.deals); //adds to the array - only one deal at a time
     company.save();
     console.log("Company updated");
-    res.status(200).json(company);
+    res.status(201).json(company);
   });
 });
 
@@ -188,13 +208,8 @@ router.patch("/companies/:id", (req, res) => {
 //     company.category = req.body.category || company.category;
 //     company.deals = company.deals.push(req.body.deals) || company.deals;
 //     company.save();
-//     res.send(company);
+//     res.json(company);
 //   });
 // });
-
-// POST /cars/:car_id/drivers (relationship)
-// GET /cars/:car_id/drivers (relationship)
-// GET /cars/:car_id/drivers/:driver_id (relationship)
-// DELETE /cars/:car_id/drivers/:driver_id (relationship)
 
 module.exports = router;

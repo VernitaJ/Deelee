@@ -36,7 +36,7 @@ router.post("/deals", function (req, res, next) {
 });
 
 router.delete("/deals", function (req, res) {
-  Deal.deleteMany(function (err) {
+  Deal.deleteMany(function (err, deal) {
     if (err) {
       return next(err);
     }
@@ -71,17 +71,17 @@ router.put("/deals/:id", (req, res, next) => {
     deal.support = req.body.support;
     deal.tag.push(req.body.tag); //only one tag at a time
     deal.save();
-    res.json(deal);
+    res.status(201).json(deal);
   });
 });
 
 router.patch("/deals/:id", (req, res) => {
-  Company.findByIdAndUpdate(req.params.id, req.body, { new: true })
+  Deal.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((deals) => {
       if (!deals) {
         return res.status(404).send();
       }
-      res.status(204).send(deals);
+      res.status(201).send(deals);
     })
     .catch((error) => {
       res.status(500).send(error);
@@ -97,10 +97,12 @@ router.patch("/deals/:id", (req, res) => {
 //     if (deal == null) {
 //       return res.status(404).json({ message: "Deal not found" });
 //     }
+//     console.log(deal);
 //     deal.name = req.body.name || deal.name;
 //     deal.tag = deal.tag.push(req.body.tag) || deal.tag;
 //     deal.support = req.body.support || deal.support;
 //     deal.company = req.body.company;
+//     deal.save();
 //     res.json(deal);
 //   });
 // });
