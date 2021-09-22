@@ -43,7 +43,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Company A\",\r\n    \"address\" : {\"street\" : \"A street\",\r\n                \"number\" : 22,\r\n                \"postcode\":\"21214\",\r\n                \"city\" : \"Stockholm\"\r\n                },\r\n    \"category\" : \"clothing\"\r\n}",
+					"raw": "{\r\n    \"name\" : \"Company A\",\r\n    \"address\" : {\"street\" : \"A street\",\r\n                \"number\" : 22,\r\n                \"postcode\":\"21214\",\r\n                \"city\" : \"Stockholm\"\r\n                },\r\n    \"category\" : \"pub\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -309,7 +309,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"first deal\",\r\n    \"tag\": [\"food\", \"pasta\", \"stockholm\"],\r\n    \"support\": 11,\r\n    \"company\": \"Mamma Mia\"\r\n}",
+					"raw": "{\r\n    \"name\": \"first deal\",\r\n    \"tag\": [\"pub\", \"pasta\", \"stockholm\"],\r\n    \"support\": 11,\r\n    \"company\": \"Company A\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -427,7 +427,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Another deal for company A\",\r\n    \"tag\": [\"food\", \"pasta\", \"stockholm\"],\r\n    \"support\": 11,\r\n    \"company\": \"Mamma Mia\"\r\n}",
+					"raw": "{\r\n    \"name\": \"And another deal\",\r\n    \"tag\": [\"leggins\", \"20%\", \"sale\"],\r\n    \"support\": 9,\r\n    \"company\": \"Company A\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -660,6 +660,15 @@
 			"request": {
 				"method": "PATCH",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"this\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "localhost:{{port}}/companies/{{company_id}}",
 					"host": [
@@ -1053,7 +1062,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:{{port}}/companies/category/:find",
+					"raw": "localhost:{{port}}/companies/category/:category",
 					"host": [
 						"localhost"
 					],
@@ -1061,12 +1070,12 @@
 					"path": [
 						"companies",
 						"category",
-						":find"
+						":category"
 					],
 					"variable": [
 						{
-							"key": "find",
-							"value": "clothing"
+							"key": "category",
+							"value": "pub"
 						}
 					]
 				}
