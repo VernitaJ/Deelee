@@ -5,14 +5,17 @@
       <p>Message from the server:<br/>
       {{ message }}</p>
     </b-jumbotron>
+    <add-google-map/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
+import AddGoogleMap from '../components/AddGoogleMap.vue'
 
 export default {
+  components: { AddGoogleMap },
   name: 'home',
   data() {
     return {
