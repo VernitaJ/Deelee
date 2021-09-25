@@ -9,6 +9,7 @@ var history = require("connect-history-api-fallback");
 var usersController = require("./controllers/users");
 var companiesController = require("./controllers/companies");
 var dealsController = require("./controllers/deals");
+var authController = require("./controllers/auth");
 
 // Variables
 var mongoURI = process.env.MONGODB_URI || "mongodb://localhost:27017/deelee";
@@ -49,6 +50,8 @@ app.use(usersController);
 app.use(companiesController);
 
 app.use(dealsController);
+
+app.use(authController);
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use("/api/*", function (req, res) {
