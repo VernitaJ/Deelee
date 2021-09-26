@@ -18,6 +18,11 @@ export default new Router({
       path: '/users',
       name: 'users',
       component: User
+    },
+    {
+      path: '/deals',
+      name: 'deals',
+      component: () => import('./components/Deals')
     }
   ]
 })
