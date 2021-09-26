@@ -1,6 +1,5 @@
 var express = require("express");
 var mongoose = require("mongoose");
-/*var db = mongoose.connect('mongodb://localhost:27017/deelee', {useNewUrlParser: true}); */
 var morgan = require("morgan");
 var path = require("path");
 var cors = require("cors");
@@ -44,10 +43,9 @@ app.get("/api", function (req, res) {
   res.json({ message: "Welcome to your DIT341 backend ExpressJS project!" });
 });
 
+// Controller access
 app.use(usersController);
-
 app.use(companiesController);
-
 app.use(dealsController);
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
