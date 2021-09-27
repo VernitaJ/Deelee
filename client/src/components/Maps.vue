@@ -5,18 +5,19 @@
 
       <label>
         <gmap-autocomplete @place_changed="initMarker"></gmap-autocomplete>
-
         <button @click="addLocationMarker">Add</button>
       </label>
       <br/>
     </div>
     <br>
+    <div>{{deals}}</div>
     <ul v-for="deal in deals" :key="deal.name">
       {{ deal.name }}
   </ul>
     <gmap-map
         :zoom="14"
         :center="center"
+        :clickable="true"
         style="width:100%;  height: 600px;"
       >
       <gmap-marker
@@ -61,7 +62,7 @@ export default {
       },
       infoWindow: {
         open: false,
-        content: '<img src="https://ik.imagekit.io/ikmedia/women-dress-2.jpg" width="150" height="200">'
+        content: '<img src="https://assets.icanet.se/e_sharpen:80,q_auto,dpr_1.25,w_718,h_718,c_lfill/imagevaultfiles/id_217089/cf_259/smash_burger.jpg" width="150" height="200">'
       },
       locationMarkers: [{
         position: {
