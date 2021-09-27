@@ -51,18 +51,20 @@
 </template>
 
 <script>
+
 export default {
   name: 'GoogleMap',
   props: ['deals'],
   data() {
     return {
+      map: undefined,
       center: {
         lat: 39.7837304,
         lng: -100.4458825
       },
       infoWindow: {
         open: false,
-        content: '<img src="https://assets.icanet.se/e_sharpen:80,q_auto,dpr_1.25,w_718,h_718,c_lfill/imagevaultfiles/id_217089/cf_259/smash_burger.jpg" width="150" height="200">'
+        content: '<img src="https://assets.icanet.se/e_sharpen:80,q_auto,dpr_1.25,w_718,h_718,c_lfill/imagevaultfiles/id_217089/cf_259/smash_burger.jpg" width="150" height="200"><a href="http://localhost:8080/users">DEALS</a>'
       },
       locationMarkers: [{
         position: {
@@ -78,6 +80,10 @@ export default {
 
   mounted() {
     this.locateGeoLocation()
+    // this.$refs.mapRef.$mapPromise.then((map) => {
+    //   this.map = map
+    //   this.init()
+    // })
   },
 
   methods: {
@@ -107,6 +113,31 @@ export default {
     toggleWindow(index) {
       this.infoWindow.open = this.infoWindow.open === index ? null : index
     }
+    // addMap() {
+    //   const map = new this.google.maps.Map(document.getElementById('map'), {
+    //     zoom: 4,
+    //     center: this.locationMarkers.position
+    //   })
+    //   let info = new this.google.maps.InfoWindow({
+    //     content: 'Click the map to get Lat/Lng!',
+    //     position: this.locationMarkers.position
+    //   })
+    //   info.open(map)
+    //   // Configure the click listener.
+    //   map.addListener('click', (mapsMouseEvent) => {
+    //     // Close the current InfoWindow.
+    //     info.close()
+    //     // Create a new InfoWindow.
+    //     info = new gmapApi.maps.InfoWindow({
+    //       position: mapsMouseEvent.latLng,
+    //     })
+    //     info.setContent(
+    //       JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+    //     )
+    //     info.open(map)
+    //   })
+    // }
   }
 }
+
 </script>
