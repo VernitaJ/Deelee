@@ -1,9 +1,6 @@
 <template>
   <div>
     <b-jumbotron header="Users" lead="All the users">
-      <b-button class="btn_message" variant="primary" v-on:click="getMessage()" >Get Message from Server</b-button>
-      <p>Message from the server:<br/>
-      {{ message }}</p>
     </b-jumbotron>
   </div>
 </template>
@@ -13,21 +10,14 @@
 import { Api } from '@/Api'
 
 export default {
-  name: 'home',
+  name: 'user',
   data() {
     return {
       message: 'none'
     }
   },
   methods: {
-    getMessage() {
-      Api.get('/')
-        .then(response => {
-          this.message = response.data.message
-        })
-        .catch(error => {
-          this.message = error
-        })
+    getUser() {
     }
   }
 }
