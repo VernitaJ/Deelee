@@ -11,6 +11,7 @@ var companiesController = require("./controllers/companies");
 var dealsController = require("./controllers/deals");
 //const review = require("./models/review");
 var reviewsController = require("./controllers/reviews");
+var authController = require("./controllers/auth");
 
 // Variables
 var mongoURI = process.env.MONGODB_URI || "mongodb://localhost:27017/deelee";
@@ -54,6 +55,7 @@ app.use(dealsController);
 
 //Reviews
 app.use(reviewsController);
+app.use(authController);
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use("/api/*", function (req, res) {
