@@ -14,7 +14,10 @@
     <ul v-for="deal in deals" :key="deal.name">
       {{ deal.name }}
   </ul>
-    <gmap-map
+  <button v-on:click="panning()"></button>
+    <GmapMap
+        v-on:click="panning()"
+        ref="mapRef"
         :zoom="14"
         :center="center"
         :clickable="true"
@@ -46,25 +49,30 @@
                           }"
         ></gmap-info-window>
       </gmap-marker>
-    </gmap-map>
+    </GmapMap>
   </div>
 </template>
 
 <script>
 
+import { gmapApi } from 'gmap-vue'
+
 export default {
+  computed: {
+    google: gmapApi
+  },
   name: 'GoogleMap',
   props: ['deals'],
   data() {
     return {
-      map: undefined,
+      map: null,
       center: {
         lat: 39.7837304,
         lng: -100.4458825
       },
       infoWindow: {
         open: false,
-        content: '<img src="https://assets.icanet.se/e_sharpen:80,q_auto,dpr_1.25,w_718,h_718,c_lfill/imagevaultfiles/id_217089/cf_259/smash_burger.jpg" width="150" height="200"><a href="http://localhost:8080/users">DEALS</a>'
+        content: '<img src="https://assets.icanet.se/e_sharpen:80,q_auto,dpr_1.25,w_718,h_718,c_lfill/imagevaultfiles/id_217089/cf_259/smash_burger.jpg" width="150" height="200"><a href="http://localhost:8080/deals">DEALS</a>'
       },
       locationMarkers: [{
         position: {
@@ -79,11 +87,12 @@ export default {
   },
 
   mounted() {
+    this.$refs.mapRef.$mapPromise.then((map) => {
+      console.log('this')
+      this.map = map
+    })
     this.locateGeoLocation()
-    // this.$refs.mapRef.$mapPromise.then((map) => {
-    //   this.map = map
-    //   this.init()
-    // })
+    this.initMap()
   },
 
   methods: {
@@ -112,31 +121,31 @@ export default {
     },
     toggleWindow(index) {
       this.infoWindow.open = this.infoWindow.open === index ? null : index
+    },
+    panning() {
+      this.map.panTo({ lat: 1.38, lng: 103.80 })
+    },
+    initMap() {
+      // Create the initial InfoWindow.
+      // let info = new this.google.maps.InfoWindow({
+      //   content: "Click the map to get Lat/Lng!",
+      //   position: myLatlng
+      // })
+
+      // info.open(this.map)
+      // Configure the click listener.
+      this.map.addListener('click', (mapsMouseEvent) => {
+        // Close the current InfoWindow.
+        // Create a new InfoWindow.
+        const info = new this.google.maps.InfoWindow({
+          position: mapsMouseEvent.latLng
+        })
+        info.setContent(
+          JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+        )
+        info.open(this.map)
+      })
     }
-    // addMap() {
-    //   const map = new this.google.maps.Map(document.getElementById('map'), {
-    //     zoom: 4,
-    //     center: this.locationMarkers.position
-    //   })
-    //   let info = new this.google.maps.InfoWindow({
-    //     content: 'Click the map to get Lat/Lng!',
-    //     position: this.locationMarkers.position
-    //   })
-    //   info.open(map)
-    //   // Configure the click listener.
-    //   map.addListener('click', (mapsMouseEvent) => {
-    //     // Close the current InfoWindow.
-    //     info.close()
-    //     // Create a new InfoWindow.
-    //     info = new gmapApi.maps.InfoWindow({
-    //       position: mapsMouseEvent.latLng,
-    //     })
-    //     info.setContent(
-    //       JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
-    //     )
-    //     info.open(map)
-    //   })
-    // }
   }
 }
 

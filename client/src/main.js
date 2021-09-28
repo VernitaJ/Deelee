@@ -5,12 +5,12 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-import * as VueGoogleMaps from 'vue2-google-maps' // Import package
+import * as GmapVue from 'gmap-vue'
 
 Vue.config.productionTip = false
-require('dotenv').config()
+
 Vue.use(BootstrapVue)
-Vue.use(VueGoogleMaps, {
+Vue.use(GmapVue, {
   load: {
     key: process.env.VUE_APP_API_KEY,
     libraries: 'places'
