@@ -12,7 +12,7 @@ router.get("/api/deals", function (req, res, next) {
   });
 });
 
-router.get("/deals/:id", function (req, res) {
+router.get("/api/deals/:id", function (req, res) {
   var id = req.params.id;
   Deal.findById(req.params.id, function (err, deal) {
     if (err) {
