@@ -14,9 +14,8 @@
     <ul v-for="deal in deals" :key="deal.name">
       {{ deal.name }}
   </ul>
-  <button v-on:click="panning()"></button>
+  <button v-on:click="initMap()"></button>
     <GmapMap
-        v-on:click="panning()"
         ref="mapRef"
         :zoom="14"
         :center="center"
@@ -126,12 +125,6 @@ export default {
       this.map.panTo({ lat: 1.38, lng: 103.80 })
     },
     initMap() {
-      // Create the initial InfoWindow.
-      // let info = new this.google.maps.InfoWindow({
-      //   content: "Click the map to get Lat/Lng!",
-      //   position: myLatlng
-      // })
-
       // info.open(this.map)
       // Configure the click listener.
       this.map.addListener('click', (mapsMouseEvent) => {
