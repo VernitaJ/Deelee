@@ -3,7 +3,7 @@ var router = express.Router();
 var Deal = require("../models/deal");
 
 // Deals - database functions
-router.get("/api/deals", function (req, res, next) {
+router.get("/deals", function (req, res, next) {
   Deal.find(function (err, deals) {
     if (err) {
       return next(err);

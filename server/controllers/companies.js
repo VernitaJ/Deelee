@@ -85,13 +85,13 @@ router.post("/companies/:id/deals", function (req, res, next) {
   var deal = new Deal(req.body);
   deal.save(function (err) {
     if (err) {
-      return next(err);
+      return res.status(500).send(err);
     }
     console.log("Deal " + deal.name + " created.");
   });
   Company.findById(req.params.id, function (err, company) {
     if (err) {
-      return next(err);
+      return res.status(500).send(err);
     }
     if (company == null) {
       return res.status(404).json({ message: "Company not found" });
