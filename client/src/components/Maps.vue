@@ -1,32 +1,26 @@
 <template>
   <div>
     <div>
-      <h2>Vue Js Search and Add Marker</h2>
-
+      <h2>Search</h2>
       <label>
         <gmap-autocomplete @place_changed="initMarker"></gmap-autocomplete>
-        <button @click="addLocationMarker">Add</button>
+        <button @click="panTo">Go to</button>
       </label>
       <br/>
     </div>
     <br>
-    <div>{{deals}}</div>
-    <ul v-for="deal in deals" :key="deal.name">
-      {{ deal.name }}
-  </ul>
-  <button v-on:click="initMap()"></button>
     <GmapMap
         ref="mapRef"
         :zoom="14"
         :center="center"
         :clickable="true"
-        style="width:100%;  height: 600px;"
+        style="width:80%;  height: 500px;"
       >
       <gmap-marker
         icon="https://img.icons8.com/color/48/000000/map-pin.png"
         :key="index"
-        v-for="(m, index) in locationMarkers"
-        :position="m.position"
+        v-for="(deal, index) in deals"
+        :position="deal.position"
         @click="toggleWindow(index)"
       >
         <gmap-info-window
@@ -39,7 +33,7 @@
         :opened="infoWindow.open === index"
         >
         <div v-html="infoWindow.template"></div>
-      </gmap-info-window>
+        </gmap-info-window>
       </gmap-marker>
     </GmapMap>
   </div>
@@ -88,6 +82,16 @@ export default {
   methods: {
     initMarker(loc) {
       this.existingPlace = loc
+    },
+    panTo() {
+      if (this.existingPlace) {
+        const marker = {
+          lat: this.existingPlace.geometry.location.lat(),
+          lng: this.existingPlace.geometry.location.lng()
+        }
+        const latLng = new this.google.maps.LatLng(marker)
+        this.map.panTo(latLng)
+      }
     },
     addLocationMarker() {
       if (this.existingPlace) {

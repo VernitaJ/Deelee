@@ -9,17 +9,19 @@ var dealSchema = new Schema(
     position: {
       lat: {
         type: Number,
-        min: -30,
-        max: 30,
+        min: 30,
+        max: 70,
+        required: true,
       },
       lng: {
         type: Number,
-        min: -90,
-        max: 90,
+        min: 5,
+        max: 15,
+        required: true,
       },
     },
-    company: [{ type: Schema.Types.ObjectId, ref: "companies" }],
-    user: { type: Schema.Types.ObjectId, ref: "user" },
+    company: { type: Schema.Types.ObjectId, ref: "companies" },
+    user: { type: Schema.Types.ObjectId, ref: "users" },
   },
   {
     timestamps: true,
