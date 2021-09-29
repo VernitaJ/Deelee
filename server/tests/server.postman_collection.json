@@ -426,11 +426,10 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/companies/{{company_id}}/deals",
+					"raw": "{{host}}/companies/{{company_id}}/deals",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"companies",
 						"{{company_id}}",
@@ -487,11 +486,10 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/companies/{{company_id}}/deals/{{deal_id}}",
+					"raw": "{{host}}/companies/{{company_id}}/deals/{{deal_id}}",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"companies",
 						"{{company_id}}",
@@ -530,11 +528,10 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/companies/{{company_id}}",
+					"raw": "{{host}}/companies/{{company_id}}",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"companies",
 						"{{company_id}}"
@@ -591,14 +588,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/companies/",
+					"raw": "{{host}}/deals",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
-						"companies",
-						""
+						"deals"
 					]
 				}
 			},
