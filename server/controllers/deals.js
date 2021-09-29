@@ -4,7 +4,7 @@ var Deal = require("../models/deal");
 var Company = require("../models/company");
 
 // Deals - database functions
-router.get("/deals", function (req, res, next) {
+router.get("/api/deals", function (req, res, next) {
   Deal.find(function (err, deals) {
     if (err) {
       return next(err);
@@ -26,7 +26,7 @@ router.get("/api/deals/:id", function (req, res) {
   });
 });
 
-router.post("/deals", function (req, res, next) {
+router.post("/api/deals", function (req, res, next) {
   var deal = new Deal(req.body);
   deal.save(function (err) {
     if (err) {
@@ -91,11 +91,10 @@ router.patch("/deals/:id", (req, res) => {
 
 //Relationship Deals- Companies
 //frontend put deal ID in companies
-router.post("/deals/:id/companies", function (req,res,next) {
-
+router.post("/deals/:id/companies", function (req, res, next) {
   var company = new Company(req.body);
   company.save(function (err) {
-    if (err){
+    if (err) {
       return next(err);
     }
     console.log("Company " + company.name + " created.");
@@ -105,11 +104,11 @@ router.post("/deals/:id/companies", function (req,res,next) {
       return next(err);
     }
     if (deal == null) {
-      return res.status(404).json({ message: "Deal not found"});
+      return res.status(404).json({ message: "Deal not found" });
     }
     deal.company = company;
     console.log("Company added to ", deal.name);
-    return res.status(201).json(deal)
+    return res.status(201).json(deal);
   });
 });
 

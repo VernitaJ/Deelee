@@ -3,7 +3,6 @@ var router = express.Router();
 var Company = require("../models/company");
 var Deal = require("../models/deal");
 
-
 // Companies - database functions
 router.get("/companies", function (req, res, next) {
   Company.find(function (err, companies) {
@@ -57,7 +56,7 @@ router.get("/companies/:co_id/deals/:deal_id", function (req, res, next) {
     });
 });
 
-router.post("/companies", function (req, res, next) {
+router.post("/api/companies", function (req, res, next) {
   var company = new Company(req.body);
   company.save(function (err) {
     if (err) {

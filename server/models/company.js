@@ -19,7 +19,7 @@ var companySchema = new Schema(
       allowedValues: ["restaurant", "groceries", "clothing", "pub"],
     },
     deals: [{ type: Schema.Types.ObjectId, ref: "deals" }],
-    reviews: [{ type: Schema.Types.ObjectId, ref: "review" }],
+    reviews: [{ type: Schema.Types.ObjectId, ref: "reviews" }],
   },
 
   { timestamps: true }

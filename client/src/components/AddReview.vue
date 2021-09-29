@@ -3,7 +3,15 @@
     <h1>Add Review</h1>
     <button type="button" class="close" @click="dealReviewed()">X</button>
     <b-container fluid>
-      <b-row class="my-4">
+      <b-row class="my-5">
+        <b-col sm="2">
+          <label for="input-medium"></label>
+        </b-col>
+          <b-form-rating no border no-border v-model="input.stars" variant="warning" class="mb-2"></b-form-rating>
+          {{input.stars}}
+      </b-row>
+
+      <b-row class="my-3">
         <b-col sm="2">
           <label for="input-medium">Title</label>
         </b-col>
@@ -21,8 +29,28 @@
           </b-form-invalid-feedback>
         </b-col>
       </b-row>
+
+      <b-row class="my-3">
+        <b-col sm="2">
+          <label for="input-medium">Description</label>
+        </b-col>
+        <b-col sm="10">
+          <b-form-input
+            id="input-live"
+            v-model="input.description"
+            :state="descriptionState"
+            aria-describedby="input-live-help input-live-feedback"
+            placeholder="Description"
+            trim
+          ></b-form-input>
+          <b-form-invalid-feedback id="input-live-feedback">
+            Enter at least 15 characters
+          </b-form-invalid-feedback>
+        </b-col>
+      </b-row>
+
     </b-container>
-    <button @click="getName()" ></button>
+    <button @click="createReview()" ></button>
   </div>
 </template>
 
@@ -35,20 +63,26 @@ export default {
   computed: {
     titleState() {
       return this.input.title.length > 8
+    },
+    descriptionState() {
+      return this.input.description.length > 15
     }
   },
   name: 'AddReview',
+  props: {
+    user : String
+  },
   components: {
   },
   data() {
     return {
-      id: ['615357a4220b2a0f1c2c9967'],
+      id: ['615459d91c0e580ba4876f34'],
       review: {},
       deal: {},
       userId: '',
       input: {
         title: '',
-        date: '',
+        description: '',
         stars: ''
       }
     }
@@ -56,15 +90,18 @@ export default {
 
   methods: {
     createObject() {
-      this.review = new Review()
-
+      console.log(this.deal.company)
       // Add to form data
-      this.review.append('user', this.userId)
-      this.review.append('company', this.deal.company)
-      this.review.append('deal', this.deal.name)
-      this.review.append('title', this.input.title)
-      this.review.append('date', this.input.date)
-      this.review.append('stars', this.input.stars)
+      this.review = JSON.stringify({
+        // purchase: {
+        //   user: this.userId,
+        //   item: this.deal._id,
+        //   company: this.deal.company
+        // },
+        title: this.input.title,
+        description: this.input.description,
+        stars: this.input.stars
+      })
       console.log('Object created: ' + this.review)
     },
     createReview() {
@@ -88,7 +125,7 @@ export default {
         })
       console.log(this.deal)
     },
-    getName() {
+    getTitle() {
       console.log(this.input.title)
     }
   },
