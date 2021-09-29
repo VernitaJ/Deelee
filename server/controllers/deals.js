@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var Deal = require("../models/deal");
+var Company = require("../models/company");
 
 // Deals - database functions
 router.get("/api/deals", function (req, res, next) {
@@ -86,6 +87,30 @@ router.patch("/deals/:id", (req, res) => {
     .catch((error) => {
       res.status(500).send(error);
     });
+});
+
+//Relationship Deals- Companies
+//frontend put deal ID in companies
+router.post("/deals/:id/companies", function (req,res,next) {
+
+  var company = new Company(req.body);
+  company.save(function (err) {
+    if (err){
+      return next(err);
+    }
+    console.log("Company " + company.name + " created.");
+  });
+  Deal.findById(req.params.id, function (err, deal) {
+    if (err) {
+      return next(err);
+    }
+    if (deal == null) {
+      return res.status(404).json({ message: "Deal not found"});
+    }
+    deal.company = company;
+    console.log("Company added to ", deal.name);
+    return res.status(201).json(deal)
+  });
 });
 
 // router.patch("/deals/:id", function (req, res) {

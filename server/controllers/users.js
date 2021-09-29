@@ -2,8 +2,7 @@ var express = require("express");
 const user = require("../models/user");
 var router = express.Router();
 
-
-
+// Users - database functions
 // Show the list of Users
 router.get("/users", function (req, res, next) {
     user.find()
@@ -75,4 +74,6 @@ router.delete("/users/:id", function (req,res) {
   });
 });
 
+
 module.exports = router;
+

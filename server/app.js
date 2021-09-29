@@ -8,6 +8,8 @@ var history = require("connect-history-api-fallback");
 var usersController = require("./controllers/users");
 var companiesController = require("./controllers/companies");
 var dealsController = require("./controllers/deals");
+//const review = require("./models/review");
+var reviewsController = require("./controllers/reviews");
 var authController = require("./controllers/auth");
 
 // Variables
@@ -49,6 +51,8 @@ app.use(usersController);
 app.use(companiesController);
 app.use(dealsController);
 
+//Reviews
+app.use(reviewsController);
 app.use(authController);
 
 // Catch all non-error handler for api (i.e., 404 Not Found)

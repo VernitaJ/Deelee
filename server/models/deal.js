@@ -6,7 +6,8 @@ var dealSchema = new Schema(
     name: { type: String },
     tag: [{ type: String }],
     support: { type: Number },
-    company: [{ type: Schema.Types.ObjectId, ref: "companies" }]
+    company: { type: Schema.Types.ObjectId, ref: "companies" },
+    user: { type: Schema.Types.ObjectId, ref: "user" },
   },
   {
     timestamps: true,
