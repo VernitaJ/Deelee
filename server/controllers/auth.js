@@ -2,39 +2,83 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs")
 const user = require("../models/user")
+const jwt = require('jsonwebtoken');
 
 
 //Registeration
-
 router.post("/users", function (req, res, next) {
-    bcrypt.hash(req.body.password, 10, function(err, hashedPass) {
-        if(err){
-            res.status(400).json({
-                error: err
-            })
+    const newUser = new user({
+        firstName: req.body.firstName,
+        lastName: req.body.lastname,
+        age: req.body.age,
+        location: req.body.location,
+        email: req.body.email,
+        password: bcrypt.hashSync(req.body.password, 10)
+      })
+      newUser.save(err => {
+        if (err) {
+          return res.status(400).json({
+            title: 'error',
+            error: 'email in use'
+          })
         }
-        let User = new user ({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            age: req.body.age,
-            location: req.body.location,
-            email: req.body.email,
-            password: hashedPass
+        return res.status(200).json({
+          title: 'signup success'
         })
-        User.save()
-        .then(user => {
-            res.status(200).json({
-                message: "User Added Successfully!", 
-                data: User
-            })
+      })
+    })
+//Login
+router.post('/users/login', (req, res, next) => {
+    user.findOne({ email: req.body.email }, (err, user) => {
+      if (err) return res.status(500).json({
+        title: 'server error',
+        error: err
+      })
+      if (!user) {
+        return res.status(401).json({
+          title: 'user not found',
+          error: 'invalid credentials'
         })
-        .catch(error => {
-            res.status(400).json({
-                message: "An error occured!"
-        
-            })
+      }
+      //incorrect password
+      if (!bcrypt.compareSync(req.body.password, user.password)) {
+        return res.status(401).json({
+          tite: 'login failed',
+          error: 'invalid credentials'
         })
-})
-});
+      }
+      //IF ALL IS GOOD create a token and send to frontend
+      let token = jwt.sign({ userId: user._id}, 'secretkey');
+      return res.status(200).json({
+        title: 'login sucess',
+        token: token
+      })
+    })
+  })
+  
+  //grabbing user info
+  router.get('/user', (req, res, next) => {
+    let token = req.headers.token; //token
+    jwt.verify(token, 'secretkey', (err, decoded) => {
+      if (err) return res.status(401).json({
+        title: 'unauthorized'
+      })
+      //token is valid
+      user.findOne({ _id: decoded.userId }, (err, user) => {
+        if (err) return console.log(err)
+        return res.status(200).json({
+          title: 'user grabbed',
+          user: {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            age: user.age,
+            location: user.location,
+            email: user.email
+          }
+        })
+      })
+  
+    })
+  })
 
 module.exports = router;

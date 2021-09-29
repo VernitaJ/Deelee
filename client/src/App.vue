@@ -4,6 +4,8 @@
       <nav class="navbar navbar-expand navbar-dark bg-dark">
       <router-link to="/">Home</router-link>
       <router-link to="/users">Users</router-link>
+      <router-link to="/signUp">SignUp</router-link>
+      <router-link to="/logIn">LogIn</router-link>
       </nav>
     </div>
     <!-- Render the content of the current page view -->
