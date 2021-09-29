@@ -1,24 +1,29 @@
 <template>
   <div>
     <b-jumbotron header="DIT341 Frontend" lead="Welcome to your DIT341 Frontend Vue.js App">
-      <b-button class="btn_message" variant="primary" v-on:click="getMessage()" >Get Message from Server</b-button>
+      <b-button class="btn_message" variant="primary" v-on:click="getDeals()" >Get Message from Server</b-button>
       <p>Message from the server:<br/>
       {{ message }}</p>
+       <ul v-for="deal in deals" :key="deal.name">
+      {{ deal.name }}
+  </ul>
     </b-jumbotron>
+    <google-map v-bind:deals="deals"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
+import GoogleMap from '../components/Maps.vue'
 
 export default {
+  components: { GoogleMap },
   name: 'home',
-  data() {
-    return {
-      message: 'none'
-    }
-  },
+  data: () => ({
+    message: 'this is working',
+    deals: []
+  }),
   methods: {
     getMessage() {
       Api.get('/')
@@ -28,6 +33,16 @@ export default {
         .catch(error => {
           this.message = error
         })
+    },
+    getDeals() {
+      Api.get('/deals')
+        .then(response => {
+          this.deals = response.data.deals
+        })
+        .catch(error => {
+          this.message = error
+        })
+      console.log(this.deals)
     }
   }
 }
