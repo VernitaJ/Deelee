@@ -3,10 +3,22 @@ var Schema = mongoose.Schema;
 
 var dealSchema = new Schema(
   {
-    name: { type: String },
+    name: { type: String, required: true },
     tag: [{ type: String }],
     support: { type: Number },
-    company: [{ type: Schema.Types.ObjectId, ref: "companies" }]
+    position: {
+      lat: {
+        type: Number,
+        min: -30,
+        max: 30,
+      },
+      lng: {
+        type: Number,
+        min: -90,
+        max: 90,
+      },
+    },
+    company: [{ type: Schema.Types.ObjectId, ref: "companies" }],
   },
   {
     timestamps: true,
