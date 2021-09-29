@@ -19,7 +19,7 @@ router.post("/api/reviews", async (req, res, next) => {
 });
 
 // Reviews get by ID
-router.get("/reviews/:id", async (req, res, next) => {
+router.get("/api/reviews/:id", async (req, res, next) => {
   try {
     var review = await Review.findById(req.params.id);
     res.status(200).json(review);
@@ -43,7 +43,7 @@ router.get("/api/reviews", async (req, res, next) => {
 });
 
 // Delete Many
-router.delete("/reviews", async (req, res, next) => {
+router.delete("/api/reviews", async (req, res, next) => {
   try {
     await Review.deleteMany(function (err, review) {
       if (err) {
@@ -57,7 +57,7 @@ router.delete("/reviews", async (req, res, next) => {
 });
 
 // Delete One by Id
-router.delete("/reviews/:id", async (req, res) => {
+router.delete("/api/reviews/:id", async (req, res) => {
   const review = await Review.findById(req.params.id);
 
   try {
@@ -69,7 +69,7 @@ router.delete("/reviews/:id", async (req, res) => {
 });
 
 // Update by Id
-router.put("/reviews/:id", async (req, res) => {
+router.put("/api/reviews/:id", async (req, res) => {
   await Review.findById(req.params.id);
   try {
     const updateReviews = await Review.findByIdAndUpdate(
@@ -86,7 +86,7 @@ router.put("/reviews/:id", async (req, res) => {
 });
 
 //Update by Id (Patch)
-router.patch("/reviews/:id", (req, res) => {
+router.patch("/api/reviews/:id", (req, res) => {
   Review.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     useFindAndModify: false,
