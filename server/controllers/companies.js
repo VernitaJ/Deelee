@@ -3,6 +3,7 @@ var router = express.Router();
 var Company = require("../models/company");
 var Deal = require("../models/deal");
 
+
 // Companies - database functions
 router.get("/companies", function (req, res, next) {
   Company.find(function (err, companies) {
