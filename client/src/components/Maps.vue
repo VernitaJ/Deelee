@@ -39,14 +39,7 @@
         :opened="infoWindow.open === index"
         >
         <div v-html="infoWindow.template"></div>
-    </gmap-info-window>
-     <gmap-info-window :opened="true"
-                         :options="{
-                            pixelOffset: { width: 0, height: 0 },
-                            content: `<b>Destination Address <br>
-                            ${m.position.lat} , ${m.position.lng}</b>`,
-                          }"
-        ></gmap-info-window>
+      </gmap-info-window>
       </gmap-marker>
     </GmapMap>
   </div>
@@ -84,16 +77,14 @@ export default {
       existingPlace: null
     }
   },
-
   mounted() {
     this.$refs.mapRef.$mapPromise.then((map) => {
       console.log('this')
       this.map = map
+      this.initMap()
     })
     this.locateGeoLocation()
-    this.initMap()
   },
-
   methods: {
     initMarker(loc) {
       this.existingPlace = loc
