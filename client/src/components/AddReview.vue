@@ -1,6 +1,6 @@
 <template>
   <div id="container" class="container">
-    <h1>Add Review</h1>
+    <h4>Add Review</h4>
     <button type="button" class="close" @click="dealReviewed()">X</button>
     <b-container fluid>
       <b-row class="my-5">
@@ -50,7 +50,25 @@
       </b-row>
 
     </b-container>
-    <button @click="createReview()" ></button>
+    <button @click="togglePreview()" ></button>
+    <div v-show='preview' >
+     <b-card
+    no-body
+    style="max-width: 20rem;"
+    img-src="https://cdn.winsightmedia.com/platform/files/public/600x450/culinary-competition-winner-food-rb-slide.jpg"
+    img-alt="Image"
+    img-top
+  >
+    <b-card-body>
+      <b-card-title>{{input.title}}</b-card-title>
+      <b-card-sub-title class="mb-2">{{reviewer}}</b-card-sub-title>
+      <b-card-text>
+        {{input.description}}
+      </b-card-text>
+    </b-card-body>
+    <b-button href="#" variant="primary" @click="createReview()">Post Review</b-button>
+  </b-card>
+    </div>
   </div>
 </template>
 
@@ -76,10 +94,11 @@ export default {
   },
   data() {
     return {
-      id: ['615459d91c0e580ba4876f34'],
+      id: ['61547c299aeda447b87cbf11'],
       review: {},
       deal: {},
-      userId: '',
+      preview: false,
+      reviewer: 'Jenny',
       input: {
         title: '',
         description: '',
@@ -89,31 +108,27 @@ export default {
   },
 
   methods: {
-    createObject() {
-      console.log(this.deal.company)
-      // Add to form data
-      this.review = JSON.stringify({
-        // purchase: {
-        //   user: this.userId,
-        //   item: this.deal._id,
-        //   company: this.deal.company
-        // },
-        title: this.input.title,
-        description: this.input.description,
-        stars: this.input.stars
-      })
-      console.log('Object created: ' + this.review)
+    togglePreview(){
+      this.preview ? this.preview = false : this.preview = true
     },
-    createReview() {
-      this.createObject()
-      Api.post('/reviews', this.review)
-        .then(response => {
-          console.log('Review submitted successfully')
-        })
-        .catch(error => {
-          console.log('Submission failed: ' + error)
-        })
-      console.log(this.review)
+    async createReview() {
+      // POST request using fetch with async/await
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          purchase: {
+            user: this.reviewer,
+            item: this.deal.name,
+            company: this.deal.company
+          },
+          title: this.input.title,
+          description: this.input.description,
+          stars: this.input.stars })
+      };
+      const response = await fetch("http://localhost:3000/api/reviews", requestOptions);
+      const data = await response.json();
+      this.postId = data.id;
     },
     dealReviewed() {
       Api.get(`/deals/${this.id}`)

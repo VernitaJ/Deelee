@@ -8,8 +8,8 @@ var reviewSchema = new Schema(
     description: { type: String },
     stars: { type: Number },
     purchase: {
-      user: { type: Schema.Types.ObjectId, ref: "user" },
-      item: { type: Schema.Types.ObjectId, ref: "deal" },
+      user: { type: String },
+      item: { type: String },
       company: { type: Schema.Types.ObjectId, ref: "company" },
       date: { type: Date, default: moment().add(2, "hours") },
     },
