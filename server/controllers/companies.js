@@ -4,7 +4,7 @@ var Company = require("../models/company");
 var Deal = require("../models/deal");
 
 // Companies - database functions
-router.get("/companies", function (req, res, next) {
+router.get("/api/companies", function (req, res, next) {
   Company.find(function (err, companies) {
     if (err) {
       return next(err);
@@ -14,7 +14,7 @@ router.get("/companies", function (req, res, next) {
   });
 });
 
-router.get("/companies/:id", function (req, res, next) {
+router.get("/api/companies/:id", function (req, res, next) {
   Company.findOne({ _id: req.params.id })
     .populate("deals")
     .exec(function (err, company) {
@@ -29,7 +29,7 @@ router.get("/companies/:id", function (req, res, next) {
     });
 });
 
-router.get("/companies/:id/deals", function (req, res, next) {
+router.get("/api/companies/:id/deals", function (req, res, next) {
   Company.findOne({ _id: req.params.id })
     .populate("deals")
     .exec(function (err, company) {
@@ -42,7 +42,7 @@ router.get("/companies/:id/deals", function (req, res, next) {
 });
 
 // GET /cars/:car_id/drivers/:driver_id (relationship)
-router.get("/companies/:co_id/deals/:deal_id", function (req, res, next) {
+router.get("/api/companies/:co_id/deals/:deal_id", function (req, res, next) {
   Company.findOne({ _id: req.params.co_id })
     .populate("deals", {
       match: { _id: { $ne: req.params.deal_id } },
@@ -56,7 +56,7 @@ router.get("/companies/:co_id/deals/:deal_id", function (req, res, next) {
     });
 });
 
-router.post("/companies", function (req, res, next) {
+router.post("/api/companies", function (req, res, next) {
   var company = new Company(req.body);
   company.save(function (err) {
     if (err) {
@@ -67,7 +67,7 @@ router.post("/companies", function (req, res, next) {
   });
 });
 
-router.get("/companies/category/:category", function (req, res, next) {
+router.get("/api/companies/category/:category", function (req, res, next) {
   console.log("finding");
   Company.find({ category: { $all: [req.params.category] } }).exec(function (
     err,
@@ -81,14 +81,7 @@ router.get("/companies/category/:category", function (req, res, next) {
   });
 });
 
-router.post("/companies/:id/deals", function (req, res, next) {
-  var deal = new Deal(req.body);
-  deal.save(function (err) {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    console.log("Deal " + deal.name + " created.");
-  });
+router.post("/api/companies/:id/deals", function (req, res, next) {
   Company.findById(req.params.id, function (err, company) {
     if (err) {
       return res.status(500).send(err);
@@ -96,13 +89,21 @@ router.post("/companies/:id/deals", function (req, res, next) {
     if (company == null) {
       return res.status(404).json({ message: "Company not found" });
     }
+    var deal = new Deal(req.body);
+    deal.save(function (err) {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      console.log("Deal " + deal.name + " created.");
+    });
     company.deals.push(deal);
-    console.log("Deals added to ", company.name);
+    company.save();
+    console.log("Deals added to ", company.name, " ", deal.name);
     return res.status(201).json(company);
   });
 });
 
-router.delete("/companies", function (req, res) {
+router.delete("/api/companies", function (req, res) {
   Company.deleteMany(function (err, company) {
     if (err) {
       return next(err);
@@ -112,7 +113,7 @@ router.delete("/companies", function (req, res) {
   });
 });
 
-router.delete("/companies/:id", function (req, res, next) {
+router.delete("/api/companies/:id", function (req, res, next) {
   var id = req.params.id;
   Company.findByIdAndDelete(id, function (err, company) {
     if (err) {
@@ -126,23 +127,26 @@ router.delete("/companies/:id", function (req, res, next) {
   });
 });
 
-router.delete("/companies/:co_id/deals/:deal_id", function (req, res, next) {
-  Company.updateOne(
-    { _id: req.params.co_id },
-    { $pull: { deals: { _id: req.params.deal_id } } },
-    function (err, company) {
-      if (err) {
-        return next(err);
+router.delete(
+  "/api/companies/:co_id/deals/:deal_id",
+  function (req, res, next) {
+    Company.updateOne(
+      { _id: req.params.co_id },
+      { $pull: { deals: { _id: req.params.deal_id } } },
+      function (err, company) {
+        if (err) {
+          return next(err);
+        }
+        if (company == null) {
+          return res.status(404).json({ message: "Company not found" });
+        }
+        res.status(200).json(company);
       }
-      if (company == null) {
-        return res.status(404).json({ message: "Company not found" });
-      }
-      res.status(200).json(company);
-    }
-  );
-});
+    );
+  }
+);
 
-// router.delete("/companies/:co_id/deals/:deal_id", function (req, res, next) {
+// router.delete("/api/companies/:co_id/deals/:deal_id", function (req, res, next) {
 //   var id = req.params.id;
 //   Company.findById(req.params.co_id, function (err, company) {
 //     if (err) {
@@ -159,7 +163,7 @@ router.delete("/companies/:co_id/deals/:deal_id", function (req, res, next) {
 //   res.status(200).json(company);
 // });
 
-router.put("/companies/:id", (req, res) => {
+router.put("/api/companies/:id", (req, res) => {
   var id = req.params.id;
   Company.findById(id, function (err, company) {
     if (err) {
@@ -176,7 +180,7 @@ router.put("/companies/:id", (req, res) => {
   });
 });
 
-router.patch("/companies/:id", (req, res) => {
+router.patch("/api/companies/:id", (req, res) => {
   Company.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((company) => {
       if (company == null) {
@@ -189,7 +193,7 @@ router.patch("/companies/:id", (req, res) => {
     });
 });
 
-// router.patch("/companies/:id", function (req, res, next) {
+// router.patch("/api/companies/:id", function (req, res, next) {
 //   Company.findByIdAndUpdate(req.params.id, function (err, company) {
 //     if (err) {
 //       return next(err);
