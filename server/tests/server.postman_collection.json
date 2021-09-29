@@ -1076,11 +1076,12 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "localhost:{{port}}/api"
+			"value": "localhost:3001/api"
 		},
 		{
 			"key": "port",
-			"value": "3001"
+			"value": "3001",
+			"disabled": true
 		}
 	]
 }
