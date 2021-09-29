@@ -10,8 +10,8 @@
         <b-col sm="10">
           <b-form-input
             id="input-live"
-            v-model="name"
-            :state="nameState"
+            v-model="input.title"
+            :state="titleState"
             aria-describedby="input-live-help input-live-feedback"
             placeholder="Review title"
             trim
@@ -29,11 +29,12 @@
 <script>
 
 import { Api } from '@/Api'
+import Review from '../../../server/models/review'
 
 export default {
   computed: {
-    nameState() {
-      return this.name.length > 8
+    titleState() {
+      return this.input.title.length > 8
     }
   },
   name: 'AddReview',
@@ -42,19 +43,38 @@ export default {
   data() {
     return {
       id: ['615357a4220b2a0f1c2c9967'],
+      review: {},
       deal: {},
-      name: ''
+      userId: '',
+      input: {
+        title: '',
+        date: '',
+        stars: ''
+      }
     }
   },
 
   methods: {
+    createObject() {
+      this.review = new Review()
+
+      // Add to form data
+      this.review.append('user', this.userId)
+      this.review.append('company', this.deal.company)
+      this.review.append('deal', this.deal.name)
+      this.review.append('title', this.input.title)
+      this.review.append('date', this.input.date)
+      this.review.append('stars', this.input.stars)
+      console.log('Object created: ' + this.review)
+    },
     createReview() {
-      Api.post('/reviews')
+      this.createObject()
+      Api.post('/reviews', this.review)
         .then(response => {
-          this.review = response.data.review
+          console.log('Review submitted successfully')
         })
         .catch(error => {
-          this.message = error
+          console.log('Submission failed: ' + error)
         })
       console.log(this.review)
     },
@@ -69,7 +89,7 @@ export default {
       console.log(this.deal)
     },
     getName() {
-      console.log(this.name)
+      console.log(this.input.title)
     }
   },
 
