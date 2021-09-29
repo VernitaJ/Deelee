@@ -51,11 +51,10 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/companies",
+					"raw": "{{host}}/companies",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"companies"
 					]
@@ -107,11 +106,10 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/companies",
+					"raw": "{{host}}/companies",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"companies"
 					]
@@ -163,11 +161,10 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/companies",
+					"raw": "{{host}}/companies",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"companies"
 					]
@@ -223,11 +220,10 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/companies/",
+					"raw": "{{host}}/companies/",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"companies",
 						""
@@ -257,12 +253,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:{{port}}/companies/{{company_id}}",
-					"protocol": "http",
+					"raw": "{{host}}/companies/{{company_id}}",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"companies",
 						"{{company_id}}"
@@ -317,11 +311,10 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/deals",
+					"raw": "{{host}}/deals",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"deals"
 					]
@@ -372,11 +365,10 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/companies/{{company_id}}/deals",
+					"raw": "{{host}}/companies/{{company_id}}/deals",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
 						"companies",
 						"{{company_id}}",
@@ -552,414 +544,7 @@
 			"response": []
 		},
 		{
-			"name": "PUT / deals / :id",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Successful PUT request\", () => {\r",
-							"  pm.response.to.have.status(201);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": " {\r\n     \"name\" : \"company A's deal\"\r\n }",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:{{port}}/deals/{{deal_id}}",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"deals",
-						"{{deal_id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET / companies / :category",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:{{port}}/companies/category/:category",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"companies",
-						"category",
-						":category"
-					],
-					"variable": [
-						{
-							"key": "category",
-							"value": "pub"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "PATCH / companies / :id",
-			"request": {
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"this\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:{{port}}/companies/{{company_id}}",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"companies",
-						"{{company_id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "PATCH / deals / :id",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Successful PUT request\", () => {\r",
-							"  pm.response.to.have.status(201);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"that\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:{{port}}/deals/{{deal_id}}",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"deals",
-						"{{deal_id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET / deals / :id",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"  pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:{{port}}/deals/{{deal_id}}",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"deals",
-						"{{deal_id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "DELETE / companies / :co_id / deals / :deal_id",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Succesful response with json returned\", function () {\r",
-							"     pm.response.to.be.ok;\r",
-							"     pm.response.to.be.withBody;\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:{{port}}/companies/{{company_id}}/deals/{{deal_id}}",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"companies",
-						"{{company_id}}",
-						"deals",
-						"{{deal_id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "DELETE / deals / :id",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:{{port}}/deals/{{deal_id}}",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"deals",
-						"{{deal_id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "DELETE / companies / :id",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Succesful deletion with json returned\", function () {\r",
-							"     pm.response.to.be.ok;\r",
-							"     pm.response.to.be.withBody;\r",
-							"     pm.response.to.be.json;\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:{{port}}/companies/{{company_id}}",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"companies",
-						"{{company_id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "DELETE / deals",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Succesful deletion with json returned\", function () {\r",
-							"     pm.response.to.be.ok;\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "localhost:{{port}}/deals",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"deals"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET / deals empty",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Succesful response with json returned\", function () {\r",
-							"    const responseJson = pm.response.json();\r",
-							"    pm.expect(responseJson.name).to.eql(undefined);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:{{port}}/deals",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"deals"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "DELETE / companies",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Succesful deletion with json returned\", function () {\r",
-							"     pm.response.to.be.ok;\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "localhost:{{port}}/companies",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"companies"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET / companies empty",
+			"name": "GET / deals",
 			"event": [
 				{
 					"listen": "test",
@@ -1018,6 +603,459 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "PUT / deals / :id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful PUT request\", () => {\r",
+							"  pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n     \"name\" : \"company A's deal\"\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/deals/{{deal_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"deals",
+						"{{deal_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET / companies / :category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/companies/category/:category",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"companies",
+						"category",
+						":category"
+					],
+					"variable": [
+						{
+							"key": "category",
+							"value": "pub"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH / companies / :id",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"this\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/companies/{{company_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"companies",
+						"{{company_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH / deals / :id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful PUT request\", () => {\r",
+							"  pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"that\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/deals/{{deal_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"deals",
+						"{{deal_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET / deals / :id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/deals/{{deal_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"deals",
+						"{{deal_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE / companies / :co_id / deals / :deal_id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Succesful response with json returned\", function () {\r",
+							"     pm.response.to.be.ok;\r",
+							"     pm.response.to.be.withBody;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/companies/{{company_id}}/deals/{{deal_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"companies",
+						"{{company_id}}",
+						"deals",
+						"{{deal_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE / deals / :id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/deals/{{deal_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"deals",
+						"{{deal_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE / companies / :id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Succesful deletion with json returned\", function () {\r",
+							"     pm.response.to.be.ok;\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/companies/{{company_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"companies",
+						"{{company_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE / deals",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Succesful deletion with json returned\", function () {\r",
+							"     pm.response.to.be.ok;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/deals",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"deals"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET / deals empty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Succesful response with json returned\", function () {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.name).to.eql(undefined);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/deals",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"deals"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE / companies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Succesful deletion with json returned\", function () {\r",
+							"     pm.response.to.be.ok;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/companies",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"companies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET / companies empty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Succesful response with json returned\", function () {\r",
+							"     pm.response.to.be.ok;\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/companies/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"companies",
+						""
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -1041,6 +1079,10 @@
 		}
 	],
 	"variable": [
+		{
+			"key": "host",
+			"value": "localhost:{{port}}/api"
+		},
 		{
 			"key": "port",
 			"value": "3001"
