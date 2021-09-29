@@ -51,12 +51,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/companies",
+					"raw": "{{host}}/api/companies",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"companies"
 					]
 				}
@@ -107,12 +107,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/companies",
+					"raw": "{{host}}/api/companies",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"companies"
 					]
 				}
@@ -163,12 +163,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/companies",
+					"raw": "{{host}}/api/companies",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"companies"
 					]
 				}
@@ -223,12 +223,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/companies/",
+					"raw": "{{host}}/api/companies/",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"companies",
 						""
 					]
@@ -257,13 +257,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:{{port}}/companies/{{company_id}}",
-					"protocol": "http",
+					"raw": "{{host}}/api/companies/{{company_id}}",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"companies",
 						"{{company_id}}"
 					]
@@ -317,12 +316,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/deals",
+					"raw": "{{host}}/api/deals",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"deals"
 					]
 				}
@@ -372,12 +371,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/companies/{{company_id}}/deals",
+					"raw": "{{host}}/api/companies/{{company_id}}/deals",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"companies",
 						"{{company_id}}",
 						"deals"
@@ -434,12 +433,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/companies/{{company_id}}/deals",
+					"raw": "{{host}}/api/companies/{{company_id}}/deals",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"companies",
 						"{{company_id}}",
 						"deals"
@@ -495,12 +494,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/companies/{{company_id}}/deals/{{deal_id}}",
+					"raw": "{{host}}/api/companies/{{company_id}}/deals/{{deal_id}}",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"companies",
 						"{{company_id}}",
 						"deals",
@@ -538,14 +537,74 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/companies/{{company_id}}",
+					"raw": "{{host}}/api/companies/{{company_id}}",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"companies",
 						"{{company_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET / deals",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Succesful response with json returned\", function () {\r",
+							"     pm.response.to.be.ok;\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/deals",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"deals"
 					]
 				}
 			},
@@ -579,68 +638,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/deals/{{deal_id}}",
+					"raw": "{{host}}/api/deals/{{deal_id}}",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"deals",
 						"{{deal_id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET / companies / :category",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:{{port}}/companies/category/:category",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"companies",
-						"category",
-						":category"
-					],
-					"variable": [
-						{
-							"key": "category",
-							"value": "pub"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "PATCH / companies / :id",
-			"request": {
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"this\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:{{port}}/companies/{{company_id}}",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"companies",
-						"{{company_id}}"
 					]
 				}
 			},
@@ -674,12 +679,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/deals/{{deal_id}}",
+					"raw": "{{host}}/api/deals/{{deal_id}}",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"deals",
 						"{{deal_id}}"
 					]
@@ -733,14 +738,186 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/deals/{{deal_id}}",
+					"raw": "{{host}}/api/deals/{{deal_id}}",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"deals",
 						"{{deal_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST / review",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", () => {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var data = pm.response.json();\r",
+							"pm.environment.set(\"deal_id\", data._id);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\":\"fsfasdasdasd\",\"description\":\"dsadsadasdasdadda\",\"stars\":3}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/reviews",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET / reviews",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Succesful response with json returned\", function () {\r",
+							"     pm.response.to.be.ok;\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/reviews",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET / companies / :category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/companies/category/:category",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"companies",
+						"category",
+						":category"
+					],
+					"variable": [
+						{
+							"key": "category",
+							"value": "pub"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH / companies / :id",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"this\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/companies/{{company_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"companies",
+						"{{company_id}}"
 					]
 				}
 			},
@@ -766,13 +943,12 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:{{port}}/companies/{{company_id}}/deals/{{deal_id}}",
-					"protocol": "http",
+					"raw": "{{host}}/api/companies/{{company_id}}/deals/{{deal_id}}",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"companies",
 						"{{company_id}}",
 						"deals",
@@ -788,13 +964,12 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:{{port}}/deals/{{deal_id}}",
-					"protocol": "http",
+					"raw": "{{host}}/api/deals/{{deal_id}}",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"deals",
 						"{{deal_id}}"
 					]
@@ -823,13 +998,12 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:{{port}}/companies/{{company_id}}",
-					"protocol": "http",
+					"raw": "{{host}}/api/companies/{{company_id}}",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"companies",
 						"{{company_id}}"
 					]
@@ -856,12 +1030,12 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:{{port}}/deals",
+					"raw": "{{host}}/api/deals",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"deals"
 					]
 				}
@@ -915,12 +1089,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/deals",
+					"raw": "{{host}}/api/deals",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"deals"
 					]
 				}
@@ -946,12 +1120,12 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:{{port}}/companies",
+					"raw": "{{host}}/api/companies",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"companies"
 					]
 				}
@@ -1006,12 +1180,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:{{port}}/companies/",
+					"raw": "{{host}}/api/companies/",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"companies",
 						""
 					]
@@ -1042,8 +1216,13 @@
 	],
 	"variable": [
 		{
+			"key": "host",
+			"value": "localhost:3001"
+		},
+		{
 			"key": "port",
-			"value": "3001"
+			"value": "3001",
+			"disabled": true
 		}
 	]
 }
