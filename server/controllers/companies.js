@@ -82,13 +82,6 @@ router.get("/api/companies/category/:category", function (req, res, next) {
 });
 
 router.post("/api/companies/:id/deals", function (req, res, next) {
-  var deal = new Deal(req.body);
-  deal.save(function (err) {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    console.log("Deal " + deal.name + " created.");
-  });
   Company.findById(req.params.id, function (err, company) {
     if (err) {
       return res.status(500).send(err);
@@ -96,8 +89,16 @@ router.post("/api/companies/:id/deals", function (req, res, next) {
     if (company == null) {
       return res.status(404).json({ message: "Company not found" });
     }
+    var deal = new Deal(req.body);
+    deal.save(function (err) {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      console.log("Deal " + deal.name + " created.");
+    });
     company.deals.push(deal);
-    console.log("Deals added to ", company.name);
+    company.save();
+    console.log("Deals added to ", company.name, " ", deal.name);
     return res.status(201).json(company);
   });
 });
