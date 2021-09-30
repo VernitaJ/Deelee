@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import User from './views/User.vue'
+import Deal from './views/Deal.vue'
+import Deals from './views/Deals.vue'
+import addDeals from './views/addDeals.vue'
 
 Vue.use(Router)
 
@@ -20,9 +23,20 @@ export default new Router({
       component: User
     },
     {
-      path: '/deals',
+      path: '/deal',
+      name: 'deal',
+      component: Deal
+    },
+    {
+      path: '/deals/:id',
       name: 'deals',
-      component: () => import('./components/Deals')
+      component: Deals,
+      props: true
+    },
+    {
+      path: '/deals/',
+      name: 'addDeals',
+      component: addDeals
     }
   ]
 })
