@@ -1,16 +1,18 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-const moment = require('moment');
+const moment = require("moment");
 
 var reviewSchema = new Schema(
   {
-    Purchase: {
-      user: [{ type: Schema.Types.ObjectId, ref: "user" }],
-      item: [{ type: Schema.Types.ObjectId, ref: "deal" }],
-      Date: { type: Date, default: moment().add(2, 'hours')},  
-    },
+    title: { type: String },
     description: { type: String },
     stars: { type: Number },
+    purchase: {
+      user: { type: String },
+      item: { type: String },
+      company: { type: Schema.Types.ObjectId, ref: "company" },
+      date: { type: Date, default: moment().add(2, "hours") },
+    },
   },
   { timestamps: true }
 );

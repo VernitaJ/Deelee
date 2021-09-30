@@ -7,12 +7,12 @@ const moment = require("moment");
 router.post("/api/reviews", async (req, res, next) => {
   var review = new Review(req.body);
   try {
-    var saveReview = await review.save();
+    var savedReview = await review.save();
     console.log(
       "New Review ",
       +review.description + " Added." + moment.locale()
     );
-    res.status(200).json(saveReview);
+    res.status(200).json(savedReview);
   } catch (err) {
     return next(err);
   }

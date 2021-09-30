@@ -1,22 +1,24 @@
 <template>
   <div>
-    <b-jumbotron header="Users" lead="All the users">
-    </b-jumbotron>
+    <add-review>
+    </add-review>
   </div>
 </template>
 
 <script>
+// @ is an alias to /src
+
+import AddReview from '../components/AddReview.vue'
 
 export default {
-  name: 'user',
+  components: { AddReview },
+  name: 'Review',
   data() {
     return {
       message: 'none'
     }
   },
   methods: {
-    getUser() {
-    }
   }
 }
 </script>

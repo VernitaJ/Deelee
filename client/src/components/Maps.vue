@@ -62,7 +62,7 @@ export default {
   },
   name: 'GoogleMap',
   props: ['deals'],
-  data() {
+  data: function () {
     return {
       map: null,
       center: {
@@ -91,7 +91,6 @@ export default {
       this.map = map
     })
     this.locateGeoLocation()
-    this.initMap()
   },
 
   methods: {
