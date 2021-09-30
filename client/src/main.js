@@ -18,6 +18,18 @@ Vue.use(GmapVue, {
   installComponents: true
 })
 
+const InfoWindowButton = Vue.extend({
+  template:
+    '<button type="button" @click="infoWindowButtonClicked()">This is a button</button></div>',
+  methods: {
+    infoWindowButtonClicked: function() {
+      Event.fire('infoWindowButtonClicked')
+    }
+  }
+})
+
+Event.fire('infoWindowButton', new InfoWindowButton().$mount())
+
 new Vue({
   router,
   render: h => h(App)
