@@ -28,7 +28,7 @@
         :options="{
           maxWidth: 300,
           pixelOffset: { width: 0, height: 0 },
-          content: this.setContent(deal),
+          content: setContent(deal),
         }"
         :position="infoWindow.position"
         :opened="infoWindow.open === index"
@@ -121,18 +121,24 @@ export default {
       this.map.panTo({ lat: 1.38, lng: 103.80 })
     },
     setContent(deal) {
-      this.content = `<img src="https://assets.icanet.se/e_sharpen:80,q_auto,dpr_1.25,w_718,h_718,c_lfill/imagevaultfiles/id_217089/cf_259/smash_burger.jpg" width="150" height="200"><a href="http://localhost:8080/${deal._id}">${deal.name}</a>`
+      this.content = `<div>
+                      <a href="http://localhost:8080/${deal._id}">${deal.name}</a>
+                      <img src="https://picsum.photos/200">
+                      </div>`
+      return this.content
     },
     initMap() {
       // info.open(this.map)
       // Configure the click listener.
       this.map.addListener('click', (mapsMouseEvent) => {
-        // Close the current InfoWindow.
         // Create a new InfoWindow.
         const info = new this.google.maps.InfoWindow({
           position: mapsMouseEvent.latLng
         })
         info.setContent(
+          `<p>Add a deal?</p>
+          <button @click="$router.push('add_deal')">Yes</button>
+          <button>Cancel</button>`
           JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
         )
         info.open(this.map)
