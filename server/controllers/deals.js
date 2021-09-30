@@ -4,7 +4,7 @@ var Deal = require("../models/deal");
 var Company = require("../models/company");
 
 // Deals - database functions
-router.get("/deals", function (req, res, next) {
+router.get("/api/deals", function (req, res, next) {
   Deal.find(function (err, deals) {
     if (err) {
       return next(err);
@@ -13,7 +13,7 @@ router.get("/deals", function (req, res, next) {
   });
 });
 
-router.get("/deals/:id", function (req, res) {
+router.get("/api/deals/:id", function (req, res) {
   var id = req.params.id;
   Deal.findById(req.params.id, function (err, deal) {
     if (err) {
@@ -26,7 +26,7 @@ router.get("/deals/:id", function (req, res) {
   });
 });
 
-router.post("/deals", function (req, res, next) {
+router.post("/api/deals", function (req, res, next) {
   var deal = new Deal(req.body);
   deal.save(function (err) {
     if (err) {
@@ -36,7 +36,7 @@ router.post("/deals", function (req, res, next) {
   });
 });
 
-router.delete("/deals", function (req, res) {
+router.delete("/api/deals", function (req, res) {
   Deal.deleteMany(function (err, deal) {
     if (err) {
       return next(err);
@@ -45,7 +45,7 @@ router.delete("/deals", function (req, res) {
   });
 });
 
-router.delete("/deals/:id", function (req, res, next) {
+router.delete("/api/deals/:id", function (req, res, next) {
   var id = req.params.id;
   Deal.findByIdAndDelete(id, function (err, deal) {
     if (err) {
@@ -59,7 +59,7 @@ router.delete("/deals/:id", function (req, res, next) {
   });
 });
 
-router.put("/deals/:id", (req, res, next) => {
+router.put("/api/deals/:id", (req, res, next) => {
   var id = req.params.id;
   Deal.findById(id, function (err, deal) {
     if (err) {
@@ -76,7 +76,7 @@ router.put("/deals/:id", (req, res, next) => {
   });
 });
 
-router.patch("/deals/:id", (req, res) => {
+router.patch("/api/deals/:id", (req, res) => {
   Deal.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((deals) => {
       if (!deals) {
@@ -91,11 +91,10 @@ router.patch("/deals/:id", (req, res) => {
 
 //Relationship Deals- Companies
 //frontend put deal ID in companies
-router.post("/deals/:id/companies", function (req,res,next) {
-
+router.post("/api/deals/:id/companies", function (req, res, next) {
   var company = new Company(req.body);
   company.save(function (err) {
-    if (err){
+    if (err) {
       return next(err);
     }
     console.log("Company " + company.name + " created.");
@@ -105,15 +104,15 @@ router.post("/deals/:id/companies", function (req,res,next) {
       return next(err);
     }
     if (deal == null) {
-      return res.status(404).json({ message: "Deal not found"});
+      return res.status(404).json({ message: "Deal not found" });
     }
     deal.company = company;
     console.log("Company added to ", deal.name);
-    return res.status(201).json(deal)
+    return res.status(201).json(deal);
   });
 });
 
-// router.patch("/deals/:id", function (req, res) {
+// router.patch("/api/deals/:id", function (req, res) {
 //   var id = req.params.id;
 //   Deal.findByIdAndUpdate(id, function (err, deal) {
 //     if (err) {
