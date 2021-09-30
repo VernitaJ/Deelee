@@ -53,7 +53,7 @@ export default new Router({
       props: true
     },
     {
-      path: '/newdeal',
+      path: '/newdeal/:position',
       name: 'newDeal',
       component: NewDeal,
       props: true

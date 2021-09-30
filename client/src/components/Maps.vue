@@ -93,10 +93,6 @@ export default {
     initMarker(loc) {
       this.existingPlace = loc
     },
-    addAMarker() {
-      console.log("position", this.position)
-      this.$router.push({ name: 'newDeal', params: { position: this.position } })
-    },
     panTo() {
       if (this.existingPlace) {
         const marker = {
@@ -135,10 +131,14 @@ export default {
     },
     setContent(deal) {
       this.content = `<div>
-                      <a href="http://localhost:8080/${deal._id}">${deal.name}</a>
+                      <a href="deals/${deal._id}">${deal.name}</a>
                       <img src="https://picsum.photos/200">
                       </div>`
       return this.content
+    },
+    addAMarker() {
+      console.log("position", this.position)
+      this.router.push({ name: 'user', params: { position: this.position } })
     },
     initMap() {
       // info.open(this.map)
@@ -146,15 +146,15 @@ export default {
       this.map.addListener('click', (mapsMouseEvent) => {
         // Create a new InfoWindow.
         this.position = mapsMouseEvent.latLng
-        this.addAMarker()
         const info = new this.google.maps.InfoWindow({
           position: mapsMouseEvent.latLng
         })
-        this.position = mapsMouseEvent.latLng
-        info.setContent(this.string
-          // JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+        const position = this.position.toString()
+        info.setContent(
+        `'<a href="newdeal/${position}">link</a>`
         )
         info.open(this.map)
+        // this.$router.push({ name: 'newDeal', params: { position: mapsMouseEvent.latLng } })
       })
     }
   }
