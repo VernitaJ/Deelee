@@ -2,6 +2,7 @@
   <div>
     <add-review>
     </add-review>
+    <reviews/>
   </div>
 </template>
 
