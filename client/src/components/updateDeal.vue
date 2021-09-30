@@ -8,17 +8,10 @@
     <label> UPDATE DEAL NAME </label>
     <input type="text" class="form-control" v-model="name" placeholder="name"/>
   </div>
-
 <div class ="form">
     <label> UPDATE DEAL TAGS </label>
     <input type="text" class="form-control" v-model="tag" placeholder="tag"/>
   </div>
-
-<div class ="form">
-    <label> UPDATE DEAL SUPPORT </label>
-    <input type="number" class="form-control" v-model="support" placeholder="support"/>
-  </div>
-
 <div class ="form">
     <label> UPDATE DEAL COMPANY </label>
     <input type="text" class="form-control" v-model="company" placeholder="company"/>
@@ -37,7 +30,7 @@ export default {
     return {
       name: '',
       tag: '',
-      support: '',
+      support: '0',
       company: ''
     }
   },
