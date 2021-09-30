@@ -4,6 +4,11 @@
       <nav class="navbar navbar-expand navbar-dark bg-dark">
       <router-link to="/">Home</router-link>
       <router-link to="/users">Users</router-link>
+      <router-link to="/signUp">SignUp</router-link>
+      <router-link to="/logIn">LogIn</router-link>
+       <router-link to="/deal">Deals</router-link> |
+      <router-link to="/deals">AddDeals</router-link> |
+       <router-link to="/deals/:id">Deal</router-link>
       </nav>
     </div>
     <!-- Render the content of the current page view -->
@@ -18,5 +23,17 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+#nav a {
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+#nav a.router-link-exact-active {
+  color: white;
+  background: crimson;
 }
 </style>
