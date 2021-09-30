@@ -54,7 +54,7 @@ app.use(dealsController);
 
 //Reviews
 app.use(reviewsController);
-app.use('/api', authController);
+app.use(authController);
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use("/api/*", function (req, res) {

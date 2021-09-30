@@ -6,6 +6,7 @@
       <router-link to="/users">Users</router-link>
       <router-link to="/signUp">SignUp</router-link>
       <router-link to="/logIn">LogIn</router-link>
+      <router-link to="/profilePage">Profile-Page</router-link>
       </nav>
     </div>
     <!-- Render the content of the current page view -->

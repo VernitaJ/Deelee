@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import User from './views/User.vue'
 import signUp from './views/signUp.vue'
 import logIn from './views/logIn.vue'
+import profilePage from './views/profilePage.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -34,6 +35,11 @@ export default new Router({
       path: '/logIn',
       name: 'logIn',
       component: logIn
+    },
+    {
+      path: '/profilePage',
+      name: 'profilePage',
+      component: profilePage
     }
   ]
 })

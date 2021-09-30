@@ -28,7 +28,7 @@ router.post("/users", function (req, res, next) {
       })
     })
 //Login
-router.post('/users/login', (req, res, next) => {
+router.post('/api/users/login', (req, res, next) => {
     user.findOne({ email: req.body.email }, (err, user) => {
       if (err) return res.status(500).json({
         title: 'server error',
@@ -57,7 +57,7 @@ router.post('/users/login', (req, res, next) => {
   })
   
   //grabbing user info
-  router.get('/user', (req, res, next) => {
+  router.get('/api/user', (req, res, next) => {
     let token = req.headers.token; //token
     jwt.verify(token, 'secretkey', (err, decoded) => {
       if (err) return res.status(401).json({
@@ -73,7 +73,8 @@ router.post('/users/login', (req, res, next) => {
             lastName: user.lastName,
             age: user.age,
             location: user.location,
-            email: user.email
+            email: user.email,
+            id: user.id
           }
         })
       })

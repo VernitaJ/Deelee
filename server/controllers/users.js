@@ -19,8 +19,8 @@ router.get("/users", function (req, res, next) {
 });
 
 // Show User with Id
-router.get("/users/:id", function (req,res) {
-  user.findById(req.params.id)
+router.get("/api/users/:email", function (req,res) {
+  user.find({email: req.params.email})
   .then(response =>{
       res.status(200).json({
           response
@@ -60,7 +60,7 @@ router.put("/users/:id", async (req,res) =>{
 });
 
 // Delete a user by Id
-router.delete("/users/:id", function (req,res) {
+router.delete("/api/users/:id", function (req,res) {
   const id = req.params.id;
   user.findByIdAndDelete(id, function (err, user) {
     if (err) {
