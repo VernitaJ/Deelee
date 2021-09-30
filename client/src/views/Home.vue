@@ -21,6 +21,12 @@ export default {
   mounted() {
     this.getDeals()
   },
+  created() {
+    // user is not authorized
+    if (localStorage.getItem('token') === null) {
+      this.$router.push('/login')
+    }
+  },
   methods: {
     getMessage() {
       Api.get('/')
@@ -40,6 +46,10 @@ export default {
           this.message = error
         })
       console.log(this.deals)
+    },
+    logout() {
+      localStorage.clear()
+      this.$router.push('/login')
     }
   }
 }
