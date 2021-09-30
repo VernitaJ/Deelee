@@ -57,6 +57,7 @@ export default {
   props: ['deals'],
   data() {
     return {
+      string: '<div><button @click="this.addAMarker()"></button></div>',
       map: null,
       center: {
         lat: 39.7837304,
@@ -65,6 +66,10 @@ export default {
       infoWindow: {
         open: false,
         content: ''
+      },
+      position: {
+        lat: 0,
+        lng: 0
       },
       locationMarkers: [{
         position: {
@@ -79,7 +84,6 @@ export default {
   },
   mounted() {
     this.$refs.mapRef.$mapPromise.then((map) => {
-      console.log('this')
       this.map = map
       this.initMap()
     })
@@ -88,6 +92,10 @@ export default {
   methods: {
     initMarker(loc) {
       this.existingPlace = loc
+    },
+    addAMarker() {
+      console.log("position", this.position)
+      this.$router.push({ name: 'newDeal', params: { position: this.position } })
     },
     panTo() {
       if (this.existingPlace) {
@@ -137,13 +145,13 @@ export default {
       // Configure the click listener.
       this.map.addListener('click', (mapsMouseEvent) => {
         // Create a new InfoWindow.
+        this.position = mapsMouseEvent.latLng
+        this.addAMarker()
         const info = new this.google.maps.InfoWindow({
           position: mapsMouseEvent.latLng
         })
-        info.setContent(
-          `<button>
-          <router-link to = "/add-deal">Router Link 1</router-link>
-          </button>`
+        this.position = mapsMouseEvent.latLng
+        info.setContent(this.string
           // JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
         )
         info.open(this.map)
