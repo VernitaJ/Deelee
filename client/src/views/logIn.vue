@@ -14,7 +14,7 @@
     </form>
 </template>
 <script>
-import axios from 'axios'
+import { Api } from '@/Api'
 export default {
   name: 'logIn',
   data() {
@@ -30,7 +30,7 @@ export default {
         email: this.email,
         password: this.password
       }
-      axios.post('http://localhost:3000/api/users/login', user)
+      Api.post('http://localhost:3000/api/users/login', user)
         .then(res => {
           // if successfull
           if (res.status === 200) {
