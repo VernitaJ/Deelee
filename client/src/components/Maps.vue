@@ -43,8 +43,13 @@
 <script>
 
 import { gmapApi } from 'gmap-vue'
+import InfoContent from './infoContent.vue'
 
 export default {
+  components: {
+    // eslint-disable-next-line vue/no-unused-components
+    InfoContent
+  },
   computed: {
     google: gmapApi
   },
@@ -136,10 +141,10 @@ export default {
           position: mapsMouseEvent.latLng
         })
         info.setContent(
-          `<p>Add a deal?</p>
-          <button @click="$router.push('add_deal')">Yes</button>
-          <button>Cancel</button>`
-          JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+          `<button>
+          <router-link to = "/add-deal">Router Link 1</router-link>
+          </button>`
+          // JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
         )
         info.open(this.map)
       })

@@ -6,7 +6,7 @@
 
 <script>
 
-import addDeal from '../components/addDeals.vue'
+import addDeal from '../components/addDeal.vue'
 
 export default {
   components: { addDeal },

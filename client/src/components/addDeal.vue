@@ -1,6 +1,6 @@
 <template>
 <div>
-  <h1>ADD DEALS</h1>
+  <h1>ADD DEAL</h1>
 
 <form @submit.prevent="createDeal">
 
@@ -27,6 +27,9 @@ import { Api } from '@/Api'
 
 export default {
   name: 'addDeal',
+  props: {
+    exampleProp: Object
+  },
   data() {
     return {
       name: '',
