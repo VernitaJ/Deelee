@@ -13,7 +13,8 @@ var reviewsController = require("./controllers/reviews");
 var authController = require("./controllers/auth");
 
 // Variables
-var mongoURI = process.env.MONGODB_URI || "mongodb://localhost:27017/deelee";
+//mongodb://localhost:27017/deelee
+var mongoURI = process.env.MONGODB_URI || "mongodb+srv://dbmongo:Pakistan12@cluster0.azogz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
