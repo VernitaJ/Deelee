@@ -54,8 +54,7 @@ export default new Router({
     {
       path: '/profilePage',
       name: 'profilePage',
-      component: profilePage,
-      props: true
+      component: profilePage
     },
     {
       path: '/deals/',
