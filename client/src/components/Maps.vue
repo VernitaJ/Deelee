@@ -14,6 +14,7 @@
         :zoom="14"
         :center="center"
         :clickable="true"
+        map-type-id= "roadmap"
         style="width:80%;  height: 500px;"
       >
       <gmap-marker
@@ -27,7 +28,7 @@
         :options="{
           maxWidth: 300,
           pixelOffset: { width: 0, height: 0 },
-          content: infoWindow.content,
+          content: this.setContent(deal),
         }"
         :position="infoWindow.position"
         :opened="infoWindow.open === index"
@@ -58,7 +59,7 @@ export default {
       },
       infoWindow: {
         open: false,
-        content: '<img src="https://assets.icanet.se/e_sharpen:80,q_auto,dpr_1.25,w_718,h_718,c_lfill/imagevaultfiles/id_217089/cf_259/smash_burger.jpg" width="150" height="200"><a href="http://localhost:8080/deals">DEALS</a>'
+        content: ''
       },
       locationMarkers: [{
         position: {
@@ -118,6 +119,9 @@ export default {
     },
     panning() {
       this.map.panTo({ lat: 1.38, lng: 103.80 })
+    },
+    setContent(deal) {
+      this.content = `<img src="https://assets.icanet.se/e_sharpen:80,q_auto,dpr_1.25,w_718,h_718,c_lfill/imagevaultfiles/id_217089/cf_259/smash_burger.jpg" width="150" height="200"><a href="http://localhost:8080/${deal._id}">${deal.name}</a>`
     },
     initMap() {
       // info.open(this.map)
