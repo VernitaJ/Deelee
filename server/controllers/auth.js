@@ -6,10 +6,10 @@ const jwt = require('jsonwebtoken');
 
 
 //Registeration
-router.post("/users", function (req, res, next) {
+router.post("/api/users", function (req, res, next) {
     const newUser = new user({
         firstName: req.body.firstName,
-        lastName: req.body.lastname,
+        lastName: req.body.lastName,
         age: req.body.age,
         location: req.body.location,
         email: req.body.email,

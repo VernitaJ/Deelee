@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { Api } from '@/Api'
 export default {
   name: 'signUp',
   data() {
@@ -62,9 +62,9 @@ export default {
         email: this.email,
         password: this.password
       }
-      axios.post('http://localhost:3000/api/users', newUser)
+      Api.post('http://localhost:3000/api/users', newUser)
         .then(res => {
-          this.error = ''
+          console.log(res)
           this.$router.push('/login')
         }, err => {
           console.log(err.response)

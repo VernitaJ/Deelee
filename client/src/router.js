@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import User from './views/User.vue'
-// import signUp from './views/signUp.vue'
-// eslint-disable-next-line no-unused-vars
-// import logIn from './views/logIn.vue'
+import Review from './views/Review.vue'
+import signUp from './views/signUp.vue'
+import logIn from './views/logIn.vue'
 import Deal from './views/Deal.vue'
 import ListOfDeals from './views/ListOfDeals.vue'
 import NewDeal from './views/NewDeal.vue'
@@ -36,6 +36,21 @@ export default new Router({
       name: 'deals',
       component: Deal
     },
+    {
+      path: '/review',
+      name: 'review',
+      component: Review
+    },
+    {
+      path: '/signUp',
+      name: 'signUp',
+      component: signUp
+    },
+    {
+      path: '/logIn',
+      name: 'logIn',
+      component: logIn
+    },
     // {
     //   path: '/signUp',
     //   name: 'signUp',
@@ -49,8 +64,7 @@ export default new Router({
     {
       path: '/profilePage',
       name: 'profilePage',
-      component: profilePage,
-      props: true
+      component: profilePage
     },
     {
       path: '/newdeal/:position',

@@ -55,7 +55,7 @@ export default {
   },
   name: 'GoogleMap',
   props: ['deals'],
-  data() {
+  data: function () {
     return {
       string: '<div><button @click="this.addAMarker()"></button></div>',
       map: null,

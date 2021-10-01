@@ -6,6 +6,7 @@ var dealSchema = new Schema(
     name: { type: String, required: true },
     tag: [{ type: String }],
     support: { type: Number },
+<<<<<<< HEAD
     position: {
       lat: {
         type: Number,
@@ -20,6 +21,8 @@ var dealSchema = new Schema(
         required: true,
       },
     },
+=======
+>>>>>>> 2e5a9218a239e69e49f43fb4a921213dc1ee697b
     company: { type: Schema.Types.ObjectId, ref: "companies" },
     user: { type: Schema.Types.ObjectId, ref: "users" },
   },
