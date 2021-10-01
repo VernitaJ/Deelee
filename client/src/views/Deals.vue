@@ -26,6 +26,12 @@ export default {
       deal: {}
     }
   },
+  created() {
+    // user is not authorized
+    if (localStorage.getItem('token') === null) {
+      this.$router.push('/login')
+    }
+  },
   methods: {
     getDeal() {
       Api.get('deals/' + this.$route.params.id)

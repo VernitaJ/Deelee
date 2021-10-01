@@ -30,6 +30,12 @@ export default {
     return {
       deals: []
     }
+  },
+  created() {
+    // user is not authorized
+    if (localStorage.getItem('token') === null) {
+      this.$router.push('/login')
+    }
   }
 }
 </script>
