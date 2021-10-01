@@ -53,6 +53,7 @@ app.use(dealsController);
 
 //Reviews
 app.use(reviewsController);
+
 app.use(authController);
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
