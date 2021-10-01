@@ -13,8 +13,7 @@ var reviewsController = require("./controllers/reviews");
 var authController = require("./controllers/auth");
 
 // Variables
-//mongodb://localhost:27017/deelee
-var mongoURI = process.env.MONGODB_URI || "mongodb+srv://dbmongo:Pakistan12@cluster0.azogz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+var mongoURI = process.env.MONGODB_URI || "mongodb://localhost:27017/deelee";
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
@@ -54,6 +53,7 @@ app.use(dealsController);
 
 //Reviews
 app.use(reviewsController);
+
 app.use(authController);
 
 // Catch all non-error handler for api (i.e., 404 Not Found)

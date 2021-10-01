@@ -5,9 +5,9 @@
       <router-link to="/">Home</router-link>
       <router-link to="/users">Users</router-link>
       <router-link to="/signUp">SignUp</router-link>
-      <router-link to="/logIn">LogIn</router-link>
+     <!-- //<router-link to="/">LogIn</router-link> -->
        <router-link to="/deal">Deals</router-link> |
-      <router-link to="/deals">AddDeals</router-link> |
+      <router-link to="/newdeal">AddDeals</router-link> |
        <router-link to="/deals/:id">Deal</router-link>
       </nav>
     </div>
