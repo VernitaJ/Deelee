@@ -308,7 +308,65 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"second deal\",\r\n    \"tag\": [\"pub\", \"pasta\", \"stockholm\"],\r\n    \"support\": 11,\r\n    \"company\": \"{{company_id}}\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Dinner deal\",\r\n    \"tag\": [\"restaurant\", \"salad\", \"backaplan\"],\r\n    \"support\": 24,\r\n    \"company\": \"{{company_id}}\",\r\n    \"position\": { \"lat\": 57.72192829286142, \"lng\": 11.963178671031045 },\r\n    \"user\": \"6154a234234a994080bd3ec8\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/deals",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"deals"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST / deal A Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", () => {\r",
+							"  pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"var data = pm.response.json();\r",
+							"pm.environment.set(\"deal_id\", data._id);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Pizza deal\",\r\n    \"tag\": [\"restaurant\", \"piza\", \"backaplan\"],\r\n    \"support\": 24,\r\n    \"company\": \"{{company_id}}\",\r\n    \"position\": { \"lat\": 57.71301017059749, \"lng\": 11.914426839976358 },\r\n    \"user\": \"6154a234234a994080bd3ec8\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -363,7 +421,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"And another deal\",\r\n    \"tag\": [\"leggins\", \"20%\", \"sale\"],\r\n    \"support\": 9,\r\n    \"company\": \"{{company_id}}\"\r\n}",
+					"raw": "{\r\n   \"name\": \"Sarmies - 3 for 2\",\r\n    \"tag\": [\"restaurant\", \"sandwich\", \"backaplan\"],\r\n    \"support\": 24,\r\n    \"company\": \"{{company_id}}\",\r\n    \"position\": { \"lat\": 57.72522833874753, \"lng\": 11.943609274058389 },\r\n    \"user\": \"6154a234234a994080bd3ec8\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -870,6 +928,66 @@
 			"response": []
 		},
 		{
+			"name": "GET / users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Succesful response with json returned\", function () {\r",
+							"     pm.response.to.be.ok;\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/users",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "GET / companies / :category",
 			"request": {
 				"method": "GET",
@@ -1221,7 +1339,7 @@
 		},
 		{
 			"key": "port",
-			"value": "3001",
+			"value": "3000",
 			"disabled": true
 		}
 	]

@@ -1,13 +1,6 @@
 <template>
   <div>
-    <b-jumbotron header="DIT341 Frontend" lead="Welcome to your DIT341 Frontend Vue.js App">
-      <b-button class="btn_message" variant="primary" v-on:click="getDeals()" >Get Message from Server</b-button>
-      <p>Message from the server:<br/>
-      {{ message }}</p>
-      <button @click="logout">logout</button>
-       <ul v-for="deal in deals" :key="deal.name">
-      {{ deal.name }}
-  </ul>
+    <b-jumbotron header="Deelee" lead="Find or Share">
     </b-jumbotron>
     <google-map v-bind:deals="deals"/>
   </div>
@@ -26,6 +19,9 @@ export default {
     deals: [],
     user: {}
   }),
+  mounted() {
+    this.getDeals()
+  },
   // created() {
   //   // user is not authorized
   //   if (localStorage.getItem('token') === null) {

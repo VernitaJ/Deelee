@@ -8,7 +8,7 @@
       <router-link to="/logIn">LogIn</router-link>
       <router-link to="/profilePage">ProfilePage</router-link>
        <router-link to="/deal">Deals</router-link> |
-      <router-link to="/deals">AddDeals</router-link> |
+      <router-link to="/newdeal">AddDeals</router-link> |
        <router-link to="/deals/:id">Deal</router-link>
       </nav>
     </div>

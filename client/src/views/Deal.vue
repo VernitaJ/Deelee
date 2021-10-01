@@ -1,34 +1,55 @@
 <template>
   <div>
-    <h1>LIST OF DEALS</h1>
-     <div v-for="deal in deals" v-bind:key="deal.id" class="deals">
-       <router-link to="/deals/:id">
-      <h2>{{ deal.name }}</h2>
-       </router-link>
-     </div>
+    <h1> SELECTED DEAL</h1>
+    <p>The Deal id is {{$route.params.id}}</p>
+      <h2>{{ deal.name }} </h2>
+      <h2>{{ deal.tag }} </h2>
+      <h2>{{ deal.support }} </h2>
+      <h2>{{ deal.company }} </h2>
+      <button @click="getDeal()">GET</button> |
+      <button @click="delDeal()">DELETE</button>
+      <div>
+      <updDeal />
+      </div>
   </div>
 </template>
 
 <script>
 import { Api } from '@/Api'
+import updDeal from '../components/updateDeal.vue'
 
 export default {
-  name: 'deals',
-  mounted() {
-    console.log('Page is loaded!')
-    Api.get('deals')
-      .then(response => {
-        console.log(response)
-        this.deals = response.data.deals
-      })
-      .catch(error => {
-        this.deals = []
-        console.log(error)
-      })
-  },
+  components: { updDeal },
+  name: 'deal',
   data() {
     return {
-      deals: []
+      deal: {}
+    }
+  },
+  methods: {
+    getDeal() {
+      Api.get('deals/' + this.$route.params.id)
+        .then(response => {
+          console.log(response.data)
+          this.deal = response.data
+        })
+        .catch(error => {
+          this.deal = []
+          console.log(error)
+        })
+    },
+    delDeal() {
+      Api.delete('deals/' + this.$route.params.id)
+        .then(response => {
+          console.log(response.data)
+          this.$router.push('/deal')
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    update() {
+      this.$router.push('/updatedeals')
     }
   },
   created() {
@@ -40,19 +61,7 @@ export default {
 }
 </script>
 <style>
-.deals h2{
-  background: #f4f4f4;
-  padding: 20px;
-  border-radius: 10px;
-  margin: 10px auto;
-  max-width: 600px;
-  cursor: pointer;
-  color: #444;
-}
-.deals h2:hover {
-  background: #ddd;
-}
-.deals a{
-  text-decoration: none;
+.btn_message {
+  margin-bottom: 1em;
 }
 </style>
