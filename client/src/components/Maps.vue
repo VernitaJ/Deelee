@@ -43,12 +43,9 @@
 <script>
 
 import { gmapApi } from 'gmap-vue'
-import InfoContent from './infoContent.vue'
 
 export default {
   components: {
-    // eslint-disable-next-line vue/no-unused-components
-    InfoContent
   },
   computed: {
     google: gmapApi
@@ -137,7 +134,7 @@ export default {
       return this.content
     },
     addAMarker() {
-      console.log("position", this.position)
+      console.log('position', this.position)
       this.router.push({ name: 'user', params: { position: this.position } })
     },
     initMap() {
