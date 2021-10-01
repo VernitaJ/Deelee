@@ -26,12 +26,12 @@ export default {
     deals: [],
     user: {}
   }),
-  created() {
-    // user is not authorized
-    if (localStorage.getItem('token') === null) {
-      this.$router.push('/login')
-    }
-  },
+  // created() {
+  //   // user is not authorized
+  //   if (localStorage.getItem('token') === null) {
+  //     this.$router.push('/login')
+  //   }
+  // },
   methods: {
     getMessage() {
       Api.get('/')

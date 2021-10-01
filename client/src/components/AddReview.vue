@@ -75,7 +75,6 @@
 <script>
 
 import { Api } from '@/Api'
-import Review from '../../../server/models/review'
 
 export default {
   computed: {
@@ -88,13 +87,13 @@ export default {
   },
   name: 'AddReview',
   props: {
-    user : String
+    user: String
   },
   components: {
   },
   data() {
     return {
-      id: ['61547c299aeda447b87cbf11'],
+      id: ['61560b6745f3091088cec00b'],
       review: {},
       deal: {},
       preview: false,
@@ -106,29 +105,31 @@ export default {
       }
     }
   },
-
+  mounted() {
+    this.dealReviewed()
+  },
   methods: {
-    togglePreview(){
+    togglePreview() {
       this.preview ? this.preview = false : this.preview = true
     },
-    async createReview() {
-      // POST request using fetch with async/await
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          purchase: {
-            user: this.reviewer,
-            item: this.deal.name,
-            company: this.deal.company
-          },
-          title: this.input.title,
-          description: this.input.description,
-          stars: this.input.stars })
-      };
-      const response = await fetch("http://localhost:3000/api/reviews", requestOptions);
-      const data = await response.json();
-      this.postId = data.id;
+    createReview() {
+      const newReview = {
+        purchase: {
+          user: this.reviewer,
+          item: this.deal.name,
+          company: this.deal.company
+        },
+        title: this.input.title,
+        description: this.input.description,
+        stars: this.input.stars
+      }
+      Api.post('/reviews', newReview)
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     dealReviewed() {
       Api.get(`/deals/${this.id}`)
@@ -143,10 +144,6 @@ export default {
     getTitle() {
       console.log(this.input.title)
     }
-  },
-
-  mounted() {
-    this.dealReviewed()
   }
 }
 
