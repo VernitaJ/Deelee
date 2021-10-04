@@ -16,7 +16,7 @@ router.get("/api/deals", function (req, res, next) {
 router.get("/api/deals/:id", function (req, res) {
   var id = req.params.id;
   Deal.findOne({ _id: req.params.id })
-    .populate("company", "user")
+    .populate("company")
     .exec(function (err, deal) {
       if (err) {
         return res.status(500).send(err);

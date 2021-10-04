@@ -8,7 +8,8 @@
   >
     <b-card-body>
       <b-card-title>{{deal.name}}</b-card-title>
-      <b-card-sub-title class="mb-2">Offered by {{deal.company.name}}</b-card-sub-title>
+      <b-card-sub-title class="mb-2">Offered by
+      <a v-bind:href="'/companies/' + deal.company._id">{{deal.company.name}}</a></b-card-sub-title>
       <div v-for="(tag, index) in deal.tag" v-bind:key="index">
         {{tag}}
       </div>
