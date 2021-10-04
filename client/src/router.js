@@ -7,6 +7,7 @@ import signUp from './views/signUp.vue'
 import logIn from './views/logIn.vue'
 import Deal from './views/Deal.vue'
 import profilePage from './views/profilePage.vue'
+import Company from './views/Company.vue'
 
 Vue.use(Router)
 
@@ -33,6 +34,11 @@ export default new Router({
       path: '/review',
       name: 'review',
       component: Review
+    },
+    {
+      path: '/company',
+      name: 'CompanyPage',
+      component: Company
     },
     {
       path: '/signUp',
