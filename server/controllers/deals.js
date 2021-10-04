@@ -15,15 +15,17 @@ router.get("/api/deals", function (req, res, next) {
 
 router.get("/api/deals/:id", function (req, res) {
   var id = req.params.id;
-  Deal.findById(req.params.id, function (err, deal) {
-    if (err) {
-      return next(err);
-    }
-    if (deal == null) {
-      return res.status(404).json({ message: "Deal not found" });
-    }
-    res.json(deal);
-  });
+  Deal.findOne({ _id: req.params.id })
+    .populate("company", "user")
+    .exec(function (err, deal) {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      if (deal == null) {
+        return res.status(404).json({ message: "Deal not found" });
+      }
+      res.json(deal);
+    });
 });
 
 router.post("/api/deals", function (req, res, next) {

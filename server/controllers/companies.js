@@ -21,10 +21,6 @@ router.get("/api/companies/:id", function (req, res, next) {
       if (err) {
         return res.status(500).send(err);
       }
-      // console.log(
-      //   "The first deal in the company array is named '%s'",
-      //   company.deals[0].name
-      // );
       return res.status(200).send(company);
     });
 });

@@ -6,7 +6,6 @@ import Review from './views/Review.vue'
 import signUp from './views/signUp.vue'
 import logIn from './views/logIn.vue'
 import Deal from './views/Deal.vue'
-import ListOfDeals from './views/ListOfDeals.vue'
 import profilePage from './views/profilePage.vue'
 
 Vue.use(Router)
@@ -26,13 +25,8 @@ export default new Router({
       component: User
     },
     {
-      path: '/deal',
-      name: 'deal',
-      component: ListOfDeals
-    },
-    {
       path: '/deals/:id',
-      name: 'deals',
+      name: 'deal',
       component: Deal
     },
     {
