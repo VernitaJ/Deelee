@@ -13,12 +13,13 @@
       <div v-for="(tag, index) in deal.tag" v-bind:key="index">
         {{tag}}
       </div>
-    <b-card-text>
-      {{deal.support}}
-    </b-card-text>
-    <button class="like-button" @click="addSupport()">
+    <button  v-if="unclicked" class="like-button" @click="addSupport()">
     <b-icon icon="check2-circle" scale="2" variant="success"></b-icon>
     </button>
+    <button  v-else class="like-button">
+    <b-icon icon="check2-circle" scale="2" variant="success"></b-icon>
+    </button>
+    {{deal.support}}
     </b-card-body>
   </b-card>
       <button @click="delDeal()">DELETE</button>
@@ -34,7 +35,8 @@ export default {
   name: 'deal',
   data() {
     return {
-      deal: {}
+      deal: {},
+      unclicked: true
     }
   },
   mounted() {
@@ -45,6 +47,7 @@ export default {
       Api.get('deals/' + this.$route.params.id)
         .then(response => {
           console.log(response.data)
+          console.log(localStorage)
           this.deal = response.data
         })
         .catch(error => {
@@ -57,6 +60,17 @@ export default {
         .then(response => {
           console.log(response.data)
           this.$router.push('/deal')
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    addSupport() {
+      this.unclicked = false
+      const updateSupport = { support: this.deal.support + 1 }
+      Api.patch('/deals/' + this.$route.params.id, updateSupport)
+        .then(response => {
+          this.getDeal()
         })
         .catch(error => {
           console.log(error)
