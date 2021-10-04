@@ -2,7 +2,7 @@
   <div>
     <b-jumbotron header="Deelee" lead="Find or Share">
     </b-jumbotron>
-    <google-map v-bind:deals="deals"/>
+    <google-map v-bind:deals="deals" @toggle="toggle()"/>
   </div>
 </template>
 
@@ -51,6 +51,9 @@ export default {
     logout() {
       localStorage.clear()
       this.$router.push('/login')
+    },
+    toggle() {
+      this.getDeals()
     }
   }
 }

@@ -62,7 +62,7 @@ export default {
         email: this.email,
         password: this.password
       }
-      Api.post('http://localhost:3000/api/users', newUser)
+      Api.post('/users', newUser)
         .then(res => {
           console.log(res)
           this.$router.push('/login')
