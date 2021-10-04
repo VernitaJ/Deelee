@@ -7,7 +7,6 @@ import signUp from './views/signUp.vue'
 import logIn from './views/logIn.vue'
 import Deal from './views/Deal.vue'
 import ListOfDeals from './views/ListOfDeals.vue'
-import NewDeal from './views/NewDeal.vue'
 import profilePage from './views/profilePage.vue'
 
 Vue.use(Router)
@@ -51,26 +50,20 @@ export default new Router({
       name: 'logIn',
       component: logIn
     },
-    // {
-    //   path: '/signUp',
-    //   name: 'signUp',
-    //   component: signUp
-    // },
-    // {
-    //   path: '/logIn',
-    //   name: 'logIn',
-    //   component: Home
-    // },
+    {
+      path: '/signUp',
+      name: 'signUp',
+      component: signUp
+    },
+    {
+      path: '/logIn',
+      name: 'logIn',
+      component: Home
+    },
     {
       path: '/profilePage',
       name: 'profilePage',
       component: profilePage
-    },
-    {
-      path: '/newdeal/:position',
-      name: 'newDeal',
-      component: NewDeal,
-      props: true
     }
   ]
 })

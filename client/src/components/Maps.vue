@@ -37,15 +37,21 @@
         </gmap-info-window>
       </gmap-marker>
     </GmapMap>
+    <div v-if="adding">
+      <button @click="handleCancel()">Cancel</button>
+      <add-deal v-bind:position="position" v-bind:adding="adding"/>
+    </div>
   </div>
 </template>
 
 <script>
 
 import { gmapApi } from 'gmap-vue'
+import AddDeal from './addDeal.vue'
 
 export default {
   components: {
+    AddDeal
   },
   computed: {
     google: gmapApi
@@ -60,6 +66,7 @@ export default {
         lat: 39.7837304,
         lng: -100.4458825
       },
+      adding: false,
       infoWindow: {
         open: false,
         content: ''
@@ -126,6 +133,9 @@ export default {
     panning() {
       this.map.panTo({ lat: 1.38, lng: 103.80 })
     },
+    handleCancel() {
+      this.adding = !this.adding
+    },
     setContent(deal) {
       this.content = `<div>
                       <a href="deals/${deal._id}">${deal.name}</a>
@@ -143,14 +153,19 @@ export default {
       this.map.addListener('click', (mapsMouseEvent) => {
         // Create a new InfoWindow.
         this.position = mapsMouseEvent.latLng
-        const info = new this.google.maps.InfoWindow({
-          position: mapsMouseEvent.latLng
-        })
-        const position = this.position.toString()
-        info.setContent(
-        `'<a href="newdeal/${position}">link</a>`
-        )
-        info.open(this.map)
+        // const info = new this.google.maps.InfoWindow({
+        //   position: mapsMouseEvent.latLng
+        // })
+        // // const position = this.position.toString()
+        // info.setContent('<add-deal/>'
+        //   //         `<a href="newdeal/${position}">link</a>
+        //   //         <router-link :to="{name: 'newDeal'}">
+        //   //   <button id="myButton" class="foo bar">Go!</button>
+        //   // </router-link>
+        //   //         `
+        // )
+        // info.open(this.map)
+        this.adding = !this.adding
         // this.$router.push({ name: 'newDeal', params: { position: mapsMouseEvent.latLng } })
       })
     }
@@ -158,3 +173,7 @@ export default {
 }
 
 </script>
+
+<style>
+
+</style>
