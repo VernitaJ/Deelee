@@ -29,7 +29,6 @@ export default {
     position: Object,
     adding: Boolean
   },
-  emits: ['input'],
   data() {
     return {
       name: '',
