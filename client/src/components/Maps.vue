@@ -39,7 +39,7 @@
     </GmapMap>
     <div v-if="adding">
       <button @click="handleCancel()">Cancel</button>
-      <add-deal v-bind:position="position" v-bind:adding="adding"/>
+      <add-deal v-bind:position="position" v-bind:adding="adding" @toggle="toggle()"/>
     </div>
   </div>
 </template>
@@ -133,8 +133,9 @@ export default {
     panning() {
       this.map.panTo({ lat: 1.38, lng: 103.80 })
     },
-    handleCancel() {
-      this.adding = !this.adding
+    toggle() {
+      this.adding = false
+      this.$emit('toggle', {})
     },
     setContent(deal) {
       this.content = `<div>

@@ -1,7 +1,6 @@
 <template>
 <div class="overlay">
   <h1 class="heading">Add a deal</h1>
-
 <form class="form-container" @submit.prevent="createDeal">
   <div class ="form">
     <label class="label"> TITLE </label>
@@ -30,15 +29,19 @@ export default {
     position: Object,
     adding: Boolean
   },
+  emits: ['input'],
   data() {
     return {
       name: '',
       tag: '',
       support: '0',
-      company: ''
+      company: '615b09f54a3eaa3a08c869da'
     }
   },
   methods: {
+    handleToggle() {
+      this.$emit('toggle', false)
+    },
     createDeal() {
       const newDeal = {
         name: this.name,
@@ -50,7 +53,7 @@ export default {
       Api.post('/deals', newDeal)
         .then(response => {
           console.log(response)
-          this.$router.push('/deal')
+          this.$emit('toggle', false)
         })
         .catch(error => {
           console.log(error)
