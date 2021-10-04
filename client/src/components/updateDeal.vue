@@ -42,7 +42,7 @@ export default {
         support: this.support,
         company: this.company
       }
-      Api.put('/deals/' + this.$route.params.id, updDeal)
+      Api.patch('/deals/' + this.$route.params.id, updDeal)
         .then(response => {
           console.log(response)
           this.$router.push('/deal')
