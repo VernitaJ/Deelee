@@ -2,20 +2,33 @@
   <div id="app">
     <div id="nav">
       <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <router-link to="/">Home</router-link>
-      <router-link to="/users">Users</router-link>
+     <li class="nav-item" v-if="isLoggedIn==null">
       <router-link to="/signUp">SignUp</router-link>
       <router-link to="/logIn">LogIn</router-link>
+     </li>
+     <li class="nav-item" v-else >
+      <router-link to="/">Home</router-link>
+      <router-link to="/users">Users</router-link>
       <router-link to="/profilePage">ProfilePage</router-link>
        <router-link to="/deal">Deals</router-link> |
       <router-link to="/newdeal">AddDeals</router-link> |
        <router-link to="/deals/:id">Deal</router-link>
+       </li>
       </nav>
     </div>
     <!-- Render the content of the current page view -->
     <router-view/>
   </div>
 </template>
+<script>
+export default {
+  computed: {
+    isLoggedIn() {
+      return window.localStorage.getItem('token')
+    }
+  }
+}
+</script>
 
 <style>
 #app {
