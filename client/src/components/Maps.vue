@@ -15,7 +15,7 @@
         :center="center"
         :clickable="true"
         map-type-id= "roadmap"
-        style="width:80%;  height: 500px;"
+        style="width:80%;  height: 900px; margin-left: 5em;"
       >
       <gmap-marker
         icon="https://img.icons8.com/color/48/000000/map-pin.png"
@@ -38,7 +38,6 @@
       </gmap-marker>
     </GmapMap>
     <div v-if="adding">
-      <button @click="handleCancel()">Cancel</button>
       <add-deal v-bind:position="position" v-bind:adding="adding" @toggle="toggle()"/>
     </div>
   </div>

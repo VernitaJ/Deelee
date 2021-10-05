@@ -1,39 +1,31 @@
 <template>
 <div>
-  <h1>ADD COMPANY</h1>
+  <h1>New company</h1>
 
 <form @submit.prevent="createCompany">
 
   <div class ="form">
-    <label> COMPANY NAME </label>
+    <label> Name </label>
     <input type="text" class="form-control" v-model="name" placeholder="name"/>
   </div>
 
 <div class ="form">
-    <label> COMPANY ADDRESS </label>
+    <label> Address </label>
     <input type="text" class="form-control" v-model="address.street" placeholder="street"/>
      <input type="text" class="form-control" v-model="address.number" placeholder="number"/>
       <input type="text" class="form-control" v-model="address.postcode" placeholder="postcode"/>
        <input type="text" class="form-control" v-model="address.city" placeholder="city"/>
   </div>
 <div class ="form">
-    <label> COMPANY COMTACT </label>
+    <label> Contact </label>
     <input type="text" class="form-control" v-model="contact.email" placeholder="email"/>
         <input type="text" class="form-control" v-model="contact.phone" placeholder="phone"/>
   </div>
   <div class ="form">
-    <label> COMPANY CATEGORY </label>
+    <label> Category </label>
     <input type="text" class="form-control" v-model="category" placeholder="category"/>
   </div>
-  <div class ="form">
-    <label> COMPANY DEAL </label>
-    <input type="text" class="form-control" v-model="deals" placeholder="deals"/>
-  </div>
-  <div class ="form">
-    <label> COMPANY REVIEWS </label>
-    <input type="text" class="form-control" v-model="reviews" placeholder="reviews"/>
-  </div>
- <button class="btn btn-primary btn-block">ADD</button>
+  <button class="btn btn-primary btn-block">ADD</button>
 </form>
 </div>
 </template>
@@ -57,8 +49,7 @@ export default {
         phone: ''
       },
       category: '',
-      deals: '',
-      reviews: ''
+      deals: ''
     }
   },
   methods: {
@@ -72,8 +63,7 @@ export default {
         email: this.contact.email,
         phone: this.contact.phone,
         category: this.category,
-        deals: this.deals,
-        reviews: this.reviews
+        deals: this.deals
       }
       Api.post('/companies', newCompany)
         .then(response => {

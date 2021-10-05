@@ -1,32 +1,48 @@
 <template>
 <div class="overlay">
   <h1 class="heading">Add a deal</h1>
-<form class="form-container" @submit.prevent="createDeal">
+<form class="form-container">
   <div class ="form">
-    <label class="label"> TITLE </label>
+    <label class="label"> Title </label>
     <input type="text" class="input" v-model="name" placeholder="name"/>
   </div>
 
 <div class ="form">
-    <label class="label"> TAGS </label>
+    <label class="label"> Tags </label>
     <input type="text" class="input" v-model="tag" placeholder="tag"/>
   </div>
-<div class ="form">
-    <label class="label"> COMPANY </label>
-    <input type="text" class="input" v-model="company" placeholder="company"/>
+  <div class="form">
+  <label class="label" for="example-datepicker">Choose a date</label>
+    <b-form-datepicker id="example-datepicker" class="input" v-model="date"></b-form-datepicker>
   </div>
- <button class="btn btn-primary btn-block">Add this deal</button>
+<div class ="form">
+    <label class="label"> Company </label>
+    <div class="input">
+    <autocomplete  :source="companies" placeholder="company">
+    </autocomplete>
+    </div>
+    <button class="addnewbutton" type="button" @click="showAdd">New Company</button>
+    <div v-if="newCompany">
+      <companies/>
+    </div>
+  </div>
+ <b-button pill variant="info" class="submit-button">Add this deal</b-button>
 </form>
 </div>
 </template>
 
 <script>
 import { Api } from '@/Api'
+import Autocomplete from 'vuejs-auto-complete'
+import Companies from './Companies.vue'
 
 export default {
   name: 'addDeal',
+  components: {
+    Autocomplete,
+    Companies
+  },
   props: {
-    position: Object,
     adding: Boolean
   },
   data() {
@@ -34,12 +50,30 @@ export default {
       name: '',
       tag: '',
       support: '0',
-      company: '615b09f54a3eaa3a08c869da'
+      company: '615b09f54a3eaa3a08c869da',
+      companies: {},
+      newCompany: false,
+      date: ''
     }
+  },
+  mounted() {
+    this.getCompanies()
   },
   methods: {
     handleToggle() {
       this.$emit('toggle', false)
+    },
+    getCompanies() {
+      Api.get('/companies')
+        .then(response => {
+          this.companies = response.data.companies
+        })
+        .catch(error => {
+          this.message = error
+        })
+    },
+    showAdd() {
+      this.newCompany = !this.newCompany
     },
     createDeal() {
       const newDeal = {
@@ -73,13 +107,13 @@ export default {
    padding: 10px;
  }
  .heading {
-   color: rgb(168, 241, 234);
+   color: rgb(184, 224, 220);
    padding-top: 100px;
  }
  .label {
    color:white;
    display: inline-block;
-   margin: 25px 0 15px;
+   margin: 25px 15px 5px;
    font-size: 0.9em;
    text-transform: uppercase;
    box-sizing: border-box;
@@ -88,11 +122,12 @@ export default {
  .input {
    display: block;
    padding: 15px 10px;
+   height: 40px;
    box-sizing: border-box;
    border: none;
    border-bottom: 1px solid black;
    text-align: left;
-   border-radius: 10px;
+   border-radius: 50px;
  }
  .deal-container {
    width: 80%;
@@ -108,6 +143,7 @@ export default {
  }
  .overlay {
   position: fixed;
+  overflow: scroll;
   width: 50%;
   height: 100%;
   top: 0;
@@ -116,5 +152,21 @@ export default {
   bottom: 0;
   background-color: rgba(0,0,0,0.6);
   cursor: pointer; /* Add a pointer on hover */
+}
+.addnewbutton {
+  margin-top: 1em;
+  margin-right: 0;
+  padding:5px;
+  background-color: turquoise;
+  color: black;
+  float: right;
+  border-radius: 50px;
+}
+.submit-button {
+  margin-left: 20px;
+  margin-top: 3em;
+  font-size: 2em;
+  height: 50px;
+  color: yellow;
 }
 </style>
