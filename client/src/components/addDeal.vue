@@ -8,8 +8,8 @@
   </div>
 
 <div class ="form">
-    <label class="label"> TAGS </label>
-    <input type="text" class="input" v-model="tag" placeholder="tag"/>
+    <label class ="label"> TAG</label>
+      <b-form-tags input-id="tags-basic" v-model="tag"></b-form-tags>
   </div>
 <div class ="form">
     <label class="label"> COMPANY </label>
@@ -34,7 +34,7 @@ export default {
       name: '',
       tag: '',
       support: '0',
-      company: '615b09f54a3eaa3a08c869da'
+      company: '614c6aacb945f14c746f96fa'
     }
   },
   methods: {
