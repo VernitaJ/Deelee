@@ -18,15 +18,16 @@
 <div class ="form">
     <label class="label"> Company </label>
     <div class="input">
-    <autocomplete  :source="companies" placeholder="company">
+    <autocomplete  :source="companies" :selected="setCompany">
     </autocomplete>
+    {{this.selectedCompany}}
     </div>
-    <button class="addnewbutton" type="button" @click="showAdd">New Company</button>
-    <div v-if="newCompany">
-      <companies/>
+    <button class="addnewbutton" type="button" @click="addCompany">{{ text }}</button>
+    <div v-if="show">
+      <companies @setChanges="setChanges" v-bind:position="position"/>
     </div>
   </div>
- <b-button pill variant="info" class="submit-button">Add this deal</b-button>
+ <b-button v-if="!show" pill variant="info" type="submit" class="submit-button">Add this deal</b-button>
 </form>
 </div>
 </template>
@@ -43,17 +44,20 @@ export default {
     Companies
   },
   props: {
-    adding: Boolean
+    adding: Boolean,
+    position: Object
   },
   data() {
     return {
+      text: 'New Company',
       name: '',
       tag: '',
       support: '0',
       company: '615b09f54a3eaa3a08c869da',
       companies: {},
-      newCompany: false,
-      date: ''
+      show: false,
+      date: '',
+      selectedCompany: ''
     }
   },
   mounted() {
@@ -72,8 +76,18 @@ export default {
           this.message = error
         })
     },
-    showAdd() {
-      this.newCompany = !this.newCompany
+    setCompany(value) {
+      this.selectedCompany = value
+    },
+    addCompany() {
+      this.text === 'New Company' ? this.text = 'Cancel' : this.text = 'New Company'
+      this.show = !this.show
+    },
+    setChanges(value) {
+      this.company = value
+      console.log(this.company)
+      this.addCompany()
+      this.getCompanies()
     },
     createDeal() {
       const newDeal = {
@@ -107,7 +121,7 @@ export default {
    padding: 10px;
  }
  .heading {
-   color: rgb(184, 224, 220);
+   color: rgb(255, 255, 255);
    padding-top: 100px;
  }
  .label {
@@ -138,7 +152,7 @@ export default {
    border-radius: 10px;
  }
  .form-container {
-   background: rgb(54, 49, 49, 0.5);
+   background: rgba(10, 10, 10, 0.5);
    padding: 5px;
  }
  .overlay {
@@ -157,16 +171,16 @@ export default {
   margin-top: 1em;
   margin-right: 0;
   padding:5px;
-  background-color: turquoise;
-  color: black;
+  background-color: rgb(22, 49, 47);
+  color: rgb(255, 255, 255);
   float: right;
-  border-radius: 50px;
+  border:none;
+  border-radius: 5px;
 }
 .submit-button {
   margin-left: 20px;
   margin-top: 3em;
   font-size: 2em;
   height: 50px;
-  color: yellow;
 }
 </style>

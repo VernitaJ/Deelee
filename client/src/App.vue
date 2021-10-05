@@ -21,7 +21,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: rgb(68, 61, 61);
+  background-color: rgb(255, 255, 255);
 }
 #nav a {
   font-weight: bold;

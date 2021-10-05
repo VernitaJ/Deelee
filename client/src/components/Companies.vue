@@ -3,19 +3,12 @@
   <h1>New company</h1>
 
 <form @submit.prevent="createCompany">
-
+{{position}}
   <div class ="form">
     <label> Name </label>
     <input type="text" class="form-control" v-model="name" placeholder="name"/>
   </div>
 
-<div class ="form">
-    <label> Address </label>
-    <input type="text" class="form-control" v-model="address.street" placeholder="street"/>
-     <input type="text" class="form-control" v-model="address.number" placeholder="number"/>
-      <input type="text" class="form-control" v-model="address.postcode" placeholder="postcode"/>
-       <input type="text" class="form-control" v-model="address.city" placeholder="city"/>
-  </div>
 <div class ="form">
     <label> Contact </label>
     <input type="text" class="form-control" v-model="contact.email" placeholder="email"/>
@@ -35,6 +28,10 @@ import { Api } from '@/Api'
 
 export default {
   name: 'company',
+  props: {
+    position: Object,
+    show: Boolean
+  },
   data() {
     return {
       name: '',
@@ -49,25 +46,23 @@ export default {
         phone: ''
       },
       category: '',
-      deals: ''
+      deals: '',
+      company_id: ''
     }
   },
   methods: {
     createCompany() {
       const newCompany = {
         name: this.name,
-        street: this.address.street,
-        number: this.address.number,
-        postcode: this.address.postcode,
-        city: this.address.city,
         email: this.contact.email,
         phone: this.contact.phone,
         category: this.category,
-        deals: this.deals
+        position: this.position
       }
       Api.post('/companies', newCompany)
         .then(response => {
-          console.log(response)
+          this.company_id = response.data._id
+          this.$emit('setChanges', this.company_id)
         })
         .catch(error => {
           console.log(error)

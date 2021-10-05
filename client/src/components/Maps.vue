@@ -1,7 +1,6 @@
 <template>
   <div>
     <div>
-      <h2>Search</h2>
       <label>
         <gmap-autocomplete @place_changed="initMarker"></gmap-autocomplete>
         <button @click="panTo">Go to</button>
