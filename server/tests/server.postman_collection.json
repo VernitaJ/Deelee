@@ -43,7 +43,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Company A\",\r\n    \"address\" : {\"street\" : \"A street\",\r\n                \"number\" : 22,\r\n                \"postcode\":\"21214\",\r\n                \"city\" : \"Stockholm\"\r\n                },\r\n    \"category\" : \"pub\"\r\n}",
+					"raw": "{\r\n    \"name\" : \"Company A\",\r\n    \"position\" : { \"lat\": 57.72522833874753, \"lng\": 11.943609274058389 },\r\n    \"category\" : \"pub\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -99,7 +99,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Company B\",\r\n    \"address\" : {\"street\" : \"A street\",\r\n                \"number\" : 22,\r\n                \"postcode\":\"21214\",\r\n                \"city\" : \"Malmö\"\r\n                },\r\n    \"category\" : \"restaurant\"\r\n}",
+					"raw": "{\r\n    \"name\" : \"Company B\",\r\n    \"position\" : { \"lat\": 57.71301017059749, \"lng\": 11.914426839976358 },\r\n    \"category\" : \"restaurant\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -155,7 +155,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Company C\",\r\n    \"address\" : {\"street\" : \"A street\",\r\n                \"number\" : 22,\r\n                \"postcode\":\"21214\",\r\n                \"city\" : \"Gothenburg\"\r\n                },\r\n    \"category\" : \"clothing\"\r\n}",
+					"raw": "{\r\n    \"name\" : \"Company C\",\r\n    \"position\" : { \"lat\": 57.73001017059749, \"lng\": 11.914426839976358 },\r\n    \"category\" : \"clothing\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -366,7 +366,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Pizza deal\",\r\n    \"tag\": [\"restaurant\", \"piza\", \"backaplan\"],\r\n    \"support\": 24,\r\n    \"company\": \"{{company_id}}\",\r\n    \"position\": { \"lat\": 57.71301017059749, \"lng\": 11.914426839976358 },\r\n    \"user\": \"6154a234234a994080bd3ec8\"\r\n}",
+					"raw": "{\r\n    \"name\": \"50% sale\",\r\n    \"tag\": [\"clothing\", \"50%\", \"backaplan\"],\r\n    \"support\": 24,\r\n    \"company\": \"{{company_id}}\",\r\n    \"position\": { \"lat\": 57.71301017059749, \"lng\": 11.914426839976358 },\r\n    \"user\": \"6154a234234a994080bd3ec8\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1335,12 +1335,11 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "localhost:3001"
+			"value": "localhost:3000"
 		},
 		{
 			"key": "port",
-			"value": "3000",
-			"disabled": true
+			"value": "3000"
 		}
 	]
 }

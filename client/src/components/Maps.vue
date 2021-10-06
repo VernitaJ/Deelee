@@ -1,7 +1,6 @@
 <template>
   <div>
     <div>
-      <h2>Search</h2>
       <label>
         <gmap-autocomplete @place_changed="initMarker"></gmap-autocomplete>
         <button @click="panTo">Go to</button>
@@ -15,7 +14,7 @@
         :center="center"
         :clickable="true"
         map-type-id= "roadmap"
-        style="width:80%;  height: 500px;"
+        style="width:80%;  height: 900px; margin-left: 5em;"
       >
       <gmap-marker
         icon="https://img.icons8.com/color/48/000000/map-pin.png"
@@ -38,7 +37,6 @@
       </gmap-marker>
     </GmapMap>
     <div v-if="adding">
-      <button @click="handleCancel()">Cancel</button>
       <add-deal v-bind:position="position" v-bind:adding="adding" @toggle="toggle()"/>
     </div>
   </div>
@@ -60,7 +58,6 @@ export default {
   props: ['deals'],
   data: function () {
     return {
-      string: '<div><button @click="this.addAMarker()"></button></div>',
       map: null,
       center: {
         lat: 39.7837304,
@@ -113,7 +110,6 @@ export default {
           lat: this.existingPlace.geometry.location.lat(),
           lng: this.existingPlace.geometry.location.lng()
         }
-        this.locationMarkers.push({ position: marker })
         this.locPlaces.push(this.existingPlace)
         this.center = marker
         this.existingPlace = null
@@ -129,9 +125,6 @@ export default {
     },
     toggleWindow(index) {
       this.infoWindow.open = this.infoWindow.open === index ? null : index
-    },
-    panning() {
-      this.map.panTo({ lat: 1.38, lng: 103.80 })
     },
     toggle() {
       this.adding = false
@@ -149,25 +142,10 @@ export default {
       this.router.push({ name: 'user', params: { position: this.position } })
     },
     initMap() {
-      // info.open(this.map)
       // Configure the click listener.
       this.map.addListener('click', (mapsMouseEvent) => {
-        // Create a new InfoWindow.
         this.position = mapsMouseEvent.latLng
-        // const info = new this.google.maps.InfoWindow({
-        //   position: mapsMouseEvent.latLng
-        // })
-        // // const position = this.position.toString()
-        // info.setContent('<add-deal/>'
-        //   //         `<a href="newdeal/${position}">link</a>
-        //   //         <router-link :to="{name: 'newDeal'}">
-        //   //   <button id="myButton" class="foo bar">Go!</button>
-        //   // </router-link>
-        //   //         `
-        // )
-        // info.open(this.map)
         this.adding = !this.adding
-        // this.$router.push({ name: 'newDeal', params: { position: mapsMouseEvent.latLng } })
       })
     }
   }

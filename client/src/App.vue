@@ -6,10 +6,7 @@
       <router-link to="/users">Users</router-link>
       <router-link to="/signUp">SignUp</router-link>
       <router-link to="/logIn">LogIn</router-link>
-      <router-link to="/profilePage">ProfilePage</router-link>
-       <router-link to="/deal">Deals</router-link>
-       <router-link to="/deals/:id">Deal</router-link>
-        <router-link to="/company">Company</router-link>
+      <router-link to="/profilePage">Profile</router-link>
       </nav>
     </div>
     <!-- Render the content of the current page view -->
@@ -24,6 +21,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: rgb(255, 255, 255);
 }
 #nav a {
   font-weight: bold;

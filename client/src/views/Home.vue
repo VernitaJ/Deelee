@@ -1,7 +1,5 @@
 <template>
   <div>
-    <b-jumbotron header="Deelee" lead="Find or Share">
-    </b-jumbotron>
     <google-map v-bind:deals="deals" @toggle="toggle()"/>
   </div>
 </template>
