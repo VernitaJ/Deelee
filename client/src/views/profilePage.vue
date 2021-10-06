@@ -56,7 +56,7 @@ export default {
     }
   },
   mounted() {
-    Api.get('http://localhost:3000/api/user', { headers: { token: localStorage.getItem('token') } })
+    Api.get('/user', { headers: { token: localStorage.getItem('token') } })
       .then(res => {
         this.firstName = res.data.user.firstName
         this.lastName = res.data.user.lastName
@@ -73,7 +73,7 @@ export default {
       this.$router.push('/logIn')
     },
     deleteUser() {
-      Api.delete(`http://localhost:3000/api/users/${this.id}`)
+      Api.delete(`/users/${this.id}`)
         .then(res => {
           console.log(res)
           this.$router.push('/signUp')
@@ -89,7 +89,7 @@ export default {
         age: this.age,
         location: this.location
       }
-      Api.put(`http://localhost:3000/api/users/${this.id}`, updateUser)
+      Api.put(`/users/${this.id}`, updateUser)
         .then(res => {
           console.log(res)
           this.$router.push('/')

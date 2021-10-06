@@ -1,6 +1,11 @@
 <template>
+<div>
+
+<b-img src="/images/Deelee.png"></b-img>
 <form @submit.prevent="handleSubmit">
+  <div>
   <h1>Sign Up</h1>
+</div>
 
   <div class ="form-group">
     <label> First Name </label>
@@ -24,7 +29,7 @@
 
 <div class ="form-group">
     <label> Email </label>
-    <input type="text" class="form-control" v-model="email" placeholder="Email"/>
+    <input type="email" class="form-control" v-model="email" placeholder="Email"/>
   </div>
 
 <div class ="form-group">
@@ -34,6 +39,7 @@
 
  <button class="btn btn-primary btn-block">Sign Up</button>
 </form>
+</div>
 
 </template>
 
@@ -69,8 +75,24 @@ export default {
         }, err => {
           console.log(err.response)
           this.error = err.response.data.error
+          this.boxOne = ''
+          this.$bvModal.msgBoxOk('Invalid Email or Already In Use')
         })
     }
   }
 }
 </script>
+<style >
+img {
+ display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
+  height: 2%;
+
+}
+html
+body{
+  background-color: lightblue;
+}
+</style>

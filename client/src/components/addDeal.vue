@@ -8,8 +8,8 @@
   </div>
 
 <div class ="form">
-    <label class="label"> Tags </label>
-    <input type="text" class="input" v-model="tag" placeholder="tag"/>
+    <label class ="label"> TAG</label>
+      <b-form-tags input-id="tags-basic" v-model="tag"></b-form-tags>
   </div>
   <div class="form">
   <label class="label" for="example-datepicker">Choose a date</label>
