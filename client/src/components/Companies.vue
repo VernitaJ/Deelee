@@ -95,7 +95,6 @@ export default {
  form {
    max-width: 800px;
    margin: 30px auto;
-   background: rgb(198, 204, 204);
    text-align: left;
    padding: 40px;
    border-radius: 10px;
@@ -108,7 +107,7 @@ export default {
    text-transform: uppercase;
    box-sizing: border-box;
    border-bottom: 1px solid black;
-   color: #555;
+   color: white;
  }
  .input {
    display: block;
