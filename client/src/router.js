@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import User from './views/User.vue'
-import Review from './views/Review.vue'
 import signUp from './views/signUp.vue'
 import logIn from './views/logIn.vue'
 import Deal from './views/Deal.vue'
@@ -31,13 +30,8 @@ export default new Router({
       component: Deal
     },
     {
-      path: '/review',
-      name: 'review',
-      component: Review
-    },
-    {
-      path: '/company',
-      name: 'CompanyPage',
+      path: '/companies/:id',
+      name: 'company',
       component: Company
     },
     {

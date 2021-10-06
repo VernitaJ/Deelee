@@ -26,7 +26,7 @@
      </b-form-select>
     <button class="addnewbutton" type="button" @click="addCompany">{{ text }}</button>
     <div v-if="show">
-      <companies @setChanges="setChanges" v-bind:position="position"/>
+      <add-company @setChanges="setChanges" v-bind:position="position"/>
     </div>
   </div>
  <b-button v-if="!show" pill variant="info" type="submit" @click="createDeal" class="submit-button">Add this deal</b-button>
@@ -36,12 +36,12 @@
 
 <script>
 import { Api } from '@/Api'
-import Companies from './Companies.vue'
+import AddCompany from './AddCompany.vue'
 
 export default {
   name: 'addDeal',
   components: {
-    Companies
+    AddCompany
   },
   props: {
     adding: Boolean,
@@ -97,7 +97,7 @@ export default {
         company: this.selectedCompany,
         position: this.position
       }
-      Api.post('/deals', newDeal)
+      Api.post(`companies/${this.selectedCompany}/deals`, newDeal)
         .then(response => {
           console.log(response)
           this.$emit('toggle', false)
