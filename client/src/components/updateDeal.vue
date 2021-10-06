@@ -10,7 +10,7 @@
   </div>
 <div class ="form">
     <label> UPDATE DEAL TAGS </label>
-    <input type="text" class="form-control" v-model="tag" placeholder="tag"/>
+    <b-form-tags input-id="tags-basic" v-model="tag"></b-form-tags>
   </div>
 <div class ="form">
     <label> UPDATE DEAL COMPANY </label>
@@ -42,7 +42,7 @@ export default {
         support: this.support,
         company: this.company
       }
-      Api.put('/deals/' + this.$route.params.id, updDeal)
+      Api.patch('/deals/' + this.$route.params.id, updDeal)
         .then(response => {
           console.log(response)
           this.$router.push('/deal')

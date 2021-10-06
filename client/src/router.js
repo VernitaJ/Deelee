@@ -6,9 +6,8 @@ import Review from './views/Review.vue'
 import signUp from './views/signUp.vue'
 import logIn from './views/logIn.vue'
 import Deal from './views/Deal.vue'
-import ListOfDeals from './views/ListOfDeals.vue'
-import NewDeal from './views/NewDeal.vue'
 import profilePage from './views/profilePage.vue'
+import Company from './views/Company.vue'
 
 Vue.use(Router)
 
@@ -27,19 +26,19 @@ export default new Router({
       component: User
     },
     {
-      path: '/deal',
-      name: 'deal',
-      component: ListOfDeals
-    },
-    {
       path: '/deals/:id',
-      name: 'deals',
+      name: 'deal',
       component: Deal
     },
     {
       path: '/review',
       name: 'review',
       component: Review
+    },
+    {
+      path: '/company',
+      name: 'CompanyPage',
+      component: Company
     },
     {
       path: '/signUp',
@@ -51,26 +50,20 @@ export default new Router({
       name: 'logIn',
       component: logIn
     },
-    // {
-    //   path: '/signUp',
-    //   name: 'signUp',
-    //   component: signUp
-    // },
-    // {
-    //   path: '/logIn',
-    //   name: 'logIn',
-    //   component: Home
-    // },
+    {
+      path: '/signUp',
+      name: 'signUp',
+      component: signUp
+    },
+    {
+      path: '/logIn',
+      name: 'logIn',
+      component: Home
+    },
     {
       path: '/profilePage',
       name: 'profilePage',
       component: profilePage
-    },
-    {
-      path: '/newdeal/:position',
-      name: 'newDeal',
-      component: NewDeal,
-      props: true
     }
   ]
 })

@@ -5,15 +5,7 @@
      <li class="nav-item" v-if="isLoggedIn==null">
       <router-link to="/signUp">SignUp</router-link>
       <router-link to="/logIn">LogIn</router-link>
-     </li>
-     <li class="nav-item" v-else >
-      <router-link to="/">Home</router-link>
-      <router-link to="/users">Users</router-link>
-      <router-link to="/profilePage">ProfilePage</router-link>
-       <router-link to="/deal">Deals</router-link> |
-      <router-link to="/newdeal">AddDeals</router-link> |
-       <router-link to="/deals/:id">Deal</router-link>
-       </li>
+      <router-link to="/profilePage">Profile</router-link>
       </nav>
     </div>
     <!-- Render the content of the current page view -->

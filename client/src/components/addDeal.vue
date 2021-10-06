@@ -1,23 +1,21 @@
 <template>
-<div>
-  <h1>ADD DEAL</h1>
-
-<form @submit.prevent="createDeal">
-
+<div class="overlay">
+  <h1 class="heading">Add a deal</h1>
+<form class="form-container" @submit.prevent="createDeal">
   <div class ="form">
-    <label> DEAL NAME </label>
-    <input type="text" class="form-control" v-model="name" placeholder="name"/>
+    <label class="label"> TITLE </label>
+    <input type="text" class="input" v-model="name" placeholder="name"/>
   </div>
 
 <div class ="form">
-    <label> DEAL TAGS </label>
-    <input type="text" class="form-control" v-model="tag" placeholder="tag"/>
+    <label class ="label"> TAG</label>
+      <b-form-tags input-id="tags-basic" v-model="tag"></b-form-tags>
   </div>
 <div class ="form">
-    <label> DEAL COMPANY </label>
-    <input type="text" class="form-control" v-model="company" placeholder="company"/>
+    <label class="label"> COMPANY </label>
+    <input type="text" class="input" v-model="company" placeholder="company"/>
   </div>
- <button class="btn btn-primary btn-block">ADD</button>
+ <button class="btn btn-primary btn-block">Add this deal</button>
 </form>
 </div>
 </template>
@@ -28,28 +26,33 @@ import { Api } from '@/Api'
 export default {
   name: 'addDeal',
   props: {
-    exampleProp: Object
+    position: Object,
+    adding: Boolean
   },
   data() {
     return {
       name: '',
       tag: '',
       support: '0',
-      company: ''
+      company: '614c6aacb945f14c746f96fa'
     }
   },
   methods: {
+    handleToggle() {
+      this.$emit('toggle', false)
+    },
     createDeal() {
       const newDeal = {
         name: this.name,
         tag: this.tag,
         support: this.support,
-        company: this.company
+        company: this.company,
+        position: this.position
       }
       Api.post('/deals', newDeal)
         .then(response => {
           console.log(response)
-          this.$router.push('/deal')
+          this.$emit('toggle', false)
         })
         .catch(error => {
           console.log(error)
@@ -64,32 +67,54 @@ export default {
   margin-bottom: 1em;
   text-align: center;
 }
- form {
-   max-width: 800px;
-   margin: 30px auto;
-   background: rgb(198, 204, 204);
-   text-align: left;
-   padding: 40px;
-   border-radius: 10px;
+ .form {
+   max-width: 80%;
+   margin-left: 10px;
+   padding: 10px;
  }
- label {
-   color:black;
+ .heading {
+   color: rgb(168, 241, 234);
+   padding-top: 100px;
+ }
+ .label {
+   color:white;
    display: inline-block;
    margin: 25px 0 15px;
    font-size: 0.9em;
    text-transform: uppercase;
    box-sizing: border-box;
    border-bottom: 1px solid black;
-   color: #555;
  }
  .input {
    display: block;
    padding: 15px 10px;
-   width: 100%;
    box-sizing: border-box;
    border: none;
    border-bottom: 1px solid black;
-   color: #555;
+   text-align: left;
+   border-radius: 10px;
  }
-
+ .deal-container {
+   width: 80%;
+   margin: 30px auto;
+   background: rgb(33, 189, 189, 0.5);
+   text-align: left;
+   padding: 40px;
+   border-radius: 10px;
+ }
+ .form-container {
+   background: rgb(54, 49, 49, 0.5);
+   padding: 5px;
+ }
+ .overlay {
+  position: fixed;
+  width: 50%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.6);
+  cursor: pointer; /* Add a pointer on hover */
+}
 </style>
