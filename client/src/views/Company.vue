@@ -1,14 +1,14 @@
 <template>
     <div>
-    <companies/>
+    <view-company />
     </div>
 </template>
 
 <script>
-import companies from '../components/Companies.vue'
+import ViewCompany from '../components/ViewCompany.vue'
 
 export default {
-  components: { companies },
+  components: { ViewCompany },
   name: 'Company',
   data() {
     return {

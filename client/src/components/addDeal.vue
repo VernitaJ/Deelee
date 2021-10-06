@@ -1,55 +1,103 @@
 <template>
 <div class="overlay">
   <h1 class="heading">Add a deal</h1>
-<form class="form-container" @submit.prevent="createDeal">
+<form class="form-container" >
   <div class ="form">
-    <label class="label"> TITLE </label>
+    <label class="label">Title </label>
     <input type="text" class="input" v-model="name" placeholder="name"/>
   </div>
 
 <div class ="form">
-    <label class ="label"> TAG</label>
+    <label class ="label">Tags</label>
       <b-form-tags input-id="tags-basic" v-model="tag"></b-form-tags>
   </div>
-<div class ="form">
-    <label class="label"> COMPANY </label>
-    <input type="text" class="input" v-model="company" placeholder="company"/>
+  <div class="form">
+  <label class="label" for="example-datepicker">Choose a date</label>
+    <b-form-datepicker id="example-datepicker" class="input" v-model="date"></b-form-datepicker>
   </div>
- <button class="btn btn-primary btn-block">Add this deal</button>
+<div class ="form">
+    <label class="label">Company </label>
+    <div class="input">
+    {{selectedCompany}}
+    </div>
+    <b-form-select  v-model="selectedCompany" >
+      <option>Manual Option</option>
+      <option v-for="company in companies"  :value="company._id" :key="company._id">{{ company.name }}</option>
+     </b-form-select>
+    <button class="addnewbutton" type="button" @click="addCompany">{{ text }}</button>
+    <div v-if="show">
+      <add-company @setChanges="setChanges" v-bind:position="position"/>
+    </div>
+  </div>
+ <b-button v-if="!show" pill variant="info" type="submit" @click="createDeal" class="submit-button">Add this deal</b-button>
 </form>
 </div>
 </template>
 
 <script>
 import { Api } from '@/Api'
+import AddCompany from './AddCompany.vue'
 
 export default {
   name: 'addDeal',
+  components: {
+    AddCompany
+  },
   props: {
-    position: Object,
-    adding: Boolean
+    adding: Boolean,
+    position: Object
   },
   data() {
     return {
+      text: 'New Company',
       name: '',
       tag: '',
       support: '0',
-      company: '614c6aacb945f14c746f96fa'
+      companies: [],
+      show: false,
+      date: '',
+      selectedCompany: {}
     }
+  },
+  mounted() {
+    this.getCompanies()
   },
   methods: {
     handleToggle() {
       this.$emit('toggle', false)
+    },
+    getCompanies() {
+      Api.get('/companies')
+        .then(response => {
+          this.companies = response.data.companies
+        })
+        .catch(error => {
+          this.message = error
+        })
+    },
+    setCompany(selected) {
+      this.selectedCompany = selected
+      console.log(this.selectedCompany)
+    },
+    addCompany() {
+      this.text === 'New Company' ? this.text = 'Cancel' : this.text = 'New Company'
+      this.show = !this.show
+    },
+    setChanges(value) {
+      this.company = value
+      console.log(this.company)
+      this.addCompany()
+      this.getCompanies()
     },
     createDeal() {
       const newDeal = {
         name: this.name,
         tag: this.tag,
         support: this.support,
-        company: this.company,
+        company: this.selectedCompany,
         position: this.position
       }
-      Api.post('/deals', newDeal)
+      Api.post(`companies/${this.selectedCompany}/deals`, newDeal)
         .then(response => {
           console.log(response)
           this.$emit('toggle', false)
@@ -73,13 +121,13 @@ export default {
    padding: 10px;
  }
  .heading {
-   color: rgb(168, 241, 234);
+   color: rgb(255, 255, 255);
    padding-top: 100px;
  }
  .label {
    color:white;
    display: inline-block;
-   margin: 25px 0 15px;
+   margin: 25px 15px 5px;
    font-size: 0.9em;
    text-transform: uppercase;
    box-sizing: border-box;
@@ -88,11 +136,12 @@ export default {
  .input {
    display: block;
    padding: 15px 10px;
+   height: 40px;
    box-sizing: border-box;
    border: none;
    border-bottom: 1px solid black;
    text-align: left;
-   border-radius: 10px;
+   border-radius: 50px;
  }
  .deal-container {
    width: 80%;
@@ -103,11 +152,12 @@ export default {
    border-radius: 10px;
  }
  .form-container {
-   background: rgb(54, 49, 49, 0.5);
+   background: rgba(10, 10, 10, 0.5);
    padding: 5px;
  }
  .overlay {
   position: fixed;
+  overflow: scroll;
   width: 50%;
   height: 100%;
   top: 0;
@@ -116,5 +166,21 @@ export default {
   bottom: 0;
   background-color: rgba(0,0,0,0.6);
   cursor: pointer; /* Add a pointer on hover */
+}
+.addnewbutton {
+  margin-top: 1em;
+  margin-right: 0;
+  padding:5px;
+  background-color: rgb(22, 49, 47);
+  color: rgb(255, 255, 255);
+  float: right;
+  border:none;
+  border-radius: 5px;
+}
+.submit-button {
+  margin-left: 20px;
+  margin-top: 3em;
+  font-size: 2em;
+  height: 50px;
 }
 </style>

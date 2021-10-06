@@ -1,39 +1,24 @@
 <template>
 <div>
-  <h1>ADD COMPANY</h1>
+  <h1>New company</h1>
 
 <form @submit.prevent="createCompany">
-
+{{position}}
   <div class ="form">
-    <label> COMPANY NAME </label>
+    <label> Name </label>
     <input type="text" class="form-control" v-model="name" placeholder="name"/>
   </div>
 
 <div class ="form">
-    <label> COMPANY ADDRESS </label>
-    <input type="text" class="form-control" v-model="address.street" placeholder="street"/>
-     <input type="text" class="form-control" v-model="address.number" placeholder="number"/>
-      <input type="text" class="form-control" v-model="address.postcode" placeholder="postcode"/>
-       <input type="text" class="form-control" v-model="address.city" placeholder="city"/>
-  </div>
-<div class ="form">
-    <label> COMPANY COMTACT </label>
+    <label> Contact </label>
     <input type="text" class="form-control" v-model="contact.email" placeholder="email"/>
         <input type="text" class="form-control" v-model="contact.phone" placeholder="phone"/>
   </div>
   <div class ="form">
-    <label> COMPANY CATEGORY </label>
+    <label> Category </label>
     <input type="text" class="form-control" v-model="category" placeholder="category"/>
   </div>
-  <div class ="form">
-    <label> COMPANY DEAL </label>
-    <input type="text" class="form-control" v-model="deals" placeholder="deals"/>
-  </div>
-  <div class ="form">
-    <label> COMPANY REVIEWS </label>
-    <input type="text" class="form-control" v-model="reviews" placeholder="reviews"/>
-  </div>
- <button class="btn btn-primary btn-block">ADD</button>
+  <button class="btn btn-primary btn-block">ADD</button>
 </form>
 </div>
 </template>
@@ -43,6 +28,10 @@ import { Api } from '@/Api'
 
 export default {
   name: 'company',
+  props: {
+    position: Object,
+    show: Boolean
+  },
   data() {
     return {
       name: '',
@@ -58,26 +47,22 @@ export default {
       },
       category: '',
       deals: '',
-      reviews: ''
+      company_id: ''
     }
   },
   methods: {
     createCompany() {
       const newCompany = {
         name: this.name,
-        street: this.address.street,
-        number: this.address.number,
-        postcode: this.address.postcode,
-        city: this.address.city,
         email: this.contact.email,
         phone: this.contact.phone,
         category: this.category,
-        deals: this.deals,
-        reviews: this.reviews
+        position: this.position
       }
       Api.post('/companies', newCompany)
         .then(response => {
-          console.log(response)
+          this.company_id = response.data._id
+          this.$emit('setChanges', this.company_id)
         })
         .catch(error => {
           console.log(error)

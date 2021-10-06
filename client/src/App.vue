@@ -31,7 +31,8 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #106877;
+  background-color: rgb(255, 255, 255);
 }
 #nav a {
   font-weight: bold;

@@ -30,13 +30,8 @@ export default new Router({
       component: Deal
     },
     {
-      path: '/review',
-      name: 'review',
-      component: Review
-    },
-    {
-      path: '/company',
-      name: 'CompanyPage',
+      path: '/companies/:id',
+      name: 'company',
       component: Company
     },
     {

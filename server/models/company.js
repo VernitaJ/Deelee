@@ -4,11 +4,19 @@ var Schema = mongoose.Schema;
 var companySchema = new Schema(
   {
     name: { type: String },
-    address: {
-      street: { type: String },
-      number: { type: Number },
-      postcode: { type: Number },
-      city: { type: String },
+    position: {
+      lat: {
+        type: Number,
+        min: 30,
+        max: 70,
+        required: true,
+      },
+      lng: {
+        type: Number,
+        min: 5,
+        max: 15,
+        required: true,
+      },
     },
     contact: {
       email: { type: String },
@@ -21,7 +29,6 @@ var companySchema = new Schema(
     deals: [{ type: Schema.Types.ObjectId, ref: "deals" }],
     reviews: [{ type: Schema.Types.ObjectId, ref: "reviews" }],
   },
-
   { timestamps: true }
 );
 
