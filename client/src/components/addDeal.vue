@@ -3,12 +3,12 @@
   <h1 class="heading">Add a deal</h1>
 <form class="form-container" >
   <div class ="form">
-    <label class="label"> Title </label>
+    <label class="label">Title </label>
     <input type="text" class="input" v-model="name" placeholder="name"/>
   </div>
 
 <div class ="form">
-    <label class ="label"> TAG</label>
+    <label class ="label">Tags</label>
       <b-form-tags input-id="tags-basic" v-model="tag"></b-form-tags>
   </div>
   <div class="form">
@@ -16,7 +16,7 @@
     <b-form-datepicker id="example-datepicker" class="input" v-model="date"></b-form-datepicker>
   </div>
 <div class ="form">
-    <label class="label"> Company </label>
+    <label class="label">Company </label>
     <div class="input">
     {{selectedCompany}}
     </div>
