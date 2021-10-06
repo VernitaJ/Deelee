@@ -4,7 +4,6 @@ const bcrypt = require("bcryptjs")
 const user = require("../models/user")
 const jwt = require('jsonwebtoken');
 
-
 //Registeration
 router.post("/api/users", function (req, res, next) {
     const newUser = new user({
