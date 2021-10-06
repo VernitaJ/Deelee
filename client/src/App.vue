@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <nav class="navbar navbar-expand navbar-dark bg-dark">
-     <li class="nav-item" v-if="isLoggedIn==null">
+     <li class="nav-item" v-if="isLoggedIn==null"/>
       <router-link to="/signUp">SignUp</router-link>
       <router-link to="/logIn">LogIn</router-link>
       <router-link to="/profilePage">Profile</router-link>
@@ -28,7 +28,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #106877;
   background-color: rgb(255, 255, 255);
 }
 #nav a {
