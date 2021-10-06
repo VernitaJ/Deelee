@@ -1,7 +1,7 @@
 <template>
 <div class="overlay">
   <h1 class="heading">Add a deal</h1>
-<form class="form-container">
+<form class="form-container" >
   <div class ="form">
     <label class="label"> Title </label>
     <input type="text" class="input" v-model="name" placeholder="name"/>
@@ -18,29 +18,29 @@
 <div class ="form">
     <label class="label"> Company </label>
     <div class="input">
-    <autocomplete  :source="companies" :selected="setCompany">
-    </autocomplete>
-    {{this.selectedCompany}}
+    {{selectedCompany}}
     </div>
+    <b-form-select  v-model="selectedCompany" >
+      <option>Manual Option</option>
+      <option v-for="company in companies"  :value="company._id" :key="company._id">{{ company.name }}</option>
+     </b-form-select>
     <button class="addnewbutton" type="button" @click="addCompany">{{ text }}</button>
     <div v-if="show">
       <companies @setChanges="setChanges" v-bind:position="position"/>
     </div>
   </div>
- <b-button v-if="!show" pill variant="info" type="submit" class="submit-button">Add this deal</b-button>
+ <b-button v-if="!show" pill variant="info" type="submit" @click="createDeal" class="submit-button">Add this deal</b-button>
 </form>
 </div>
 </template>
 
 <script>
 import { Api } from '@/Api'
-import Autocomplete from 'vuejs-auto-complete'
 import Companies from './Companies.vue'
 
 export default {
   name: 'addDeal',
   components: {
-    Autocomplete,
     Companies
   },
   props: {
@@ -53,11 +53,10 @@ export default {
       name: '',
       tag: '',
       support: '0',
-      company: '615b09f54a3eaa3a08c869da',
-      companies: {},
+      companies: [],
       show: false,
       date: '',
-      selectedCompany: ''
+      selectedCompany: {}
     }
   },
   mounted() {
@@ -76,8 +75,9 @@ export default {
           this.message = error
         })
     },
-    setCompany(value) {
-      this.selectedCompany = value
+    setCompany(selected) {
+      this.selectedCompany = selected
+      console.log(this.selectedCompany)
     },
     addCompany() {
       this.text === 'New Company' ? this.text = 'Cancel' : this.text = 'New Company'
@@ -94,7 +94,7 @@ export default {
         name: this.name,
         tag: this.tag,
         support: this.support,
-        company: this.company,
+        company: this.selectedCompany,
         position: this.position
       }
       Api.post('/deals', newDeal)
