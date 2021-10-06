@@ -30,7 +30,7 @@ export default {
         email: this.email,
         password: this.password
       }
-      Api.post('http://localhost:3000/api/users/login', user)
+      Api.post('/users/login', user)
         .then(res => {
           // if successfull
           if (res.status === 200) {
@@ -40,6 +40,8 @@ export default {
         }, err => {
           console.log(err.response)
           this.error = err.response.data.error
+          this.boxOne = ''
+          this.$bvModal.msgBoxOk('Invalid Credentials')
         })
     }
   }
