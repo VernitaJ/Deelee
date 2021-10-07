@@ -32,7 +32,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #106877;
-  background-color: rgb(255, 255, 255);
 }
 #nav a {
   font-weight: bold;
