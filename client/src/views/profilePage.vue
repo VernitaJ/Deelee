@@ -3,8 +3,8 @@
    <h1> Profile Page </h1>
        <h2> FirstName: {{firstName}}</h2>
        <h2> LastName: {{lastName}}</h2>
-         <h2> Age: {{age}}</h2>
-          <h2> Location: {{location}}</h2>
+         <h2> A{{age}}</h2>
+          <h2> Location: ge: {{location}}</h2>
            <h2> Email: {{email}}</h2>
            <button @click="deleteUser()">Delete</button>
            <button @click="logout()">Logout</button>

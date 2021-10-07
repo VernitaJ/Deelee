@@ -1,7 +1,6 @@
 <template>
 <div>
 
-<b-img src="/images/Deelee.png"></b-img>
 <form @submit.prevent="handleSubmit">
   <div>
   <h1>Sign Up</h1>
@@ -37,7 +36,7 @@
     <input type="password" class="form-control" v-model="password" placeholder="Password"/>
   </div>
 
- <button class="btn btn-primary btn-block">Sign Up</button>
+ <button class="btn btn-primary btn-block">Submit</button>
 </form>
 </div>
 
@@ -82,17 +81,3 @@ export default {
   }
 }
 </script>
-<style >
-img {
- display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 25%;
-  height: 2%;
-
-}
-html
-body{
-  background-color: lightblue;
-}
-</style>

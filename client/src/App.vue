@@ -44,7 +44,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #106877;
-  background-color: rgb(255, 255, 255);
 }
 
 #nav a {
@@ -61,5 +60,9 @@ export default {
 #nav a.router-link-exact-active {
   color: white;
   background: crimson;
+}
+html
+body {
+  background-color:#F7FFF1 ;
 }
 </style>

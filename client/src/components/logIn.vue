@@ -1,49 +1,72 @@
 <template>
-    <form @submit.prevent="handleSubmit">
-        <h1>logIn</h1>
-        <div class="form-group">
-            <label>Email</label>
-            <input type="email" class="form-control" v-model="email" placeholder="Email"/>
-        </div>
+<div>
+<div class="Logo">
+<b-img src="/images/Deelee.png"></b-img>
+</div>
+<div class="main">
+  <div class="button">
+  <button v-on:click="component = 'sign-in'">LogIn</button>
+  </div>
+  <div class="button1">
+<button v-on:click="component = 'sign-up'">SignUp</button>
+  </div>
+<component v-bind:is="component"></component>
 
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" v-model="password" placeholder="Password"/>
-        </div>
-        <button class="btn btn-primary btn-block">Log in</button>
-    </form>
+</div>
+</div>
 </template>
 <script>
-import { Api } from '@/Api'
+import signIn from '../components/signIn.vue'
+import signUp from '../components/signUp.vue'
 export default {
-  name: 'logIn',
+  components: {
+    'sign-in': signIn,
+    'sign-up': signUp
+  },
   data() {
     return {
-      email: '',
-      password: '',
-      error: ''
+      component: 'sign-in'
     }
   },
   methods: {
-    handleSubmit() {
-      const user = {
-        email: this.email,
-        password: this.password
-      }
-      Api.post('/users/login', user)
-        .then(res => {
-          // if successfull
-          if (res.status === 200) {
-            localStorage.setItem('token', res.data.token)
-            this.$emit('handleLogin', true)
-          }
-        }, err => {
-          console.log(err.response)
-          this.error = err.response.data.error
-          this.boxOne = ''
-          this.$bvModal.msgBoxOk('Invalid Credentials')
-        })
-    }
   }
+
 }
 </script>
+<style>
+.main {
+ max-width: 800px;
+   margin: 30px auto;
+   background: #343633;
+   padding: 40px;
+   border-radius: 10px;
+   margin-top: 10px;
+}
+.button button {
+color: white;
+background-color: #248C86;
+padding: 5px 32px;
+text-align: center;
+margin: 5px 80px;
+border: none;
+float:left;
+}
+.button1 button {
+color: white;
+background-color: #35A6BE;
+padding: 5px 32px;
+text-align: center;
+margin: 5px 80px;
+border: none;
+float:right
+}
+.Logo img {
+ display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 15%;
+  height: 2%;
+
+}
+
+</style>
