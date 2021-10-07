@@ -10,7 +10,7 @@
             <label>Password</label>
             <input type="password" class="form-control" v-model="password" placeholder="Password"/>
         </div>
-        <button class="btn btn-primary btn-block">logIn</button>
+        <button class="btn btn-primary btn-block">Log in</button>
     </form>
 </template>
 <script>
@@ -35,7 +35,7 @@ export default {
           // if successfull
           if (res.status === 200) {
             localStorage.setItem('token', res.data.token)
-            this.$router.push('/')
+            this.$emit('handleLogin', true)
           }
         }, err => {
           console.log(err.response)
