@@ -2,9 +2,11 @@
   <div id="app">
     <div id="nav" v-if="isLoggedIn">
       <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <router-link to="/">Home</router-link>
-        <router-link to="/profilePage">Profile</router-link>
-        <button class="logout" @click="logout">Log out</button>
+        <li class="nav-item">
+          <router-link to="/">Home</router-link>
+          <router-link to="/profilePage">Profile</router-link>
+        </li>
+        <a href="/login" @click="handleLogin(false)">Logout</a>
       </nav>
       <router-view />
     </div>
@@ -16,7 +18,6 @@
 </template>
 <script>
 import logIn from './components/logIn.vue'
-
 export default {
   components: { logIn },
   data() {
