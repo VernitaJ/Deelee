@@ -46,7 +46,6 @@ export default {
           if (res.status === 200) {
             localStorage.setItem('token', res.data.token)
             this.$emit('handleLogin', true)
-            console.log('handling emit in sign in ')
             this.$router.push('/')
           }
         },

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <google-map v-bind:deals="deals" @toggle="toggle()"/>
+    <google-map v-bind:deals="deals" @toggle="toggle()" />
   </div>
 </template>
 
@@ -20,28 +20,28 @@ export default {
   mounted() {
     this.getDeals()
   },
-  created() {
-    // user is not authorized
-    if (localStorage.getItem('token') === null) {
-      this.$router.push('/login')
-    }
-  },
+  // created() {
+  //   // user is not authorized
+  //   if (localStorage.getItem('token') === null) {
+  //     this.$router.push('/login')
+  //   }
+  // },
   methods: {
     getMessage() {
       Api.get('/')
-        .then(response => {
+        .then((response) => {
           this.message = response.data.message
         })
-        .catch(error => {
+        .catch((error) => {
           this.message = error
         })
     },
     getDeals() {
       Api.get('/deals')
-        .then(response => {
+        .then((response) => {
           this.deals = response.data.deals
         })
-        .catch(error => {
+        .catch((error) => {
           this.message = error
         })
       console.log(this.deals)

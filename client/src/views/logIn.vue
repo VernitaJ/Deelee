@@ -39,7 +39,7 @@ export default {
       this.signIn = value
     },
     handleLogin(value) {
-      this.$emit('handleLogin', value)
+      this.$emit('handleLogin', true)
     }
   }
 }

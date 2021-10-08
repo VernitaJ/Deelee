@@ -2,15 +2,14 @@
   <div id="app">
     <div id="nav" v-if="isLoggedIn">
       <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <li class="nav-item">
-          <router-link to="/">Home</router-link>
-          <router-link to="/profilePage">Profile</router-link>
-        </li>
-        <a href="/login" @click="handleLogin(false)">Logout</a>
+        <img class="icon" src="../public/images/Icon.png" />
+        <router-link to="/">Home</router-link>
+        <router-link to="/profilePage">Profile</router-link>
+        <a href="/login" @click="logout">Logout</a>
       </nav>
       <router-view />
     </div>
-    <div v-else>
+    <div v-if="!isLoggedIn">
       <log-in @handleLogin="handleLogin()" />
     </div>
     <!-- Render the content of the current page view -->
@@ -26,18 +25,19 @@ export default {
     }
   },
   mounted() {
-    if (this.isLoggedIn === false) {
+    if (localStorage.getItem('token') === null) {
+      this.isLoggedIn = false
       this.$router.push('/login')
-    }
+    } else this.isLoggedIn = true
   },
   methods: {
-    handleLogin() {
-      this.isLoggedIn = true
-    },
     logout() {
+      localStorage.setItem('token', null)
       this.isLoggedIn = false
       localStorage.clear()
-      this.$router.push('/login')
+    },
+    handleLogin() {
+      this.isLoggedIn = true
     }
   }
 }
@@ -56,14 +56,20 @@ export default {
   font-weight: bold;
   color: white;
   text-decoration: none;
-  padding: 10px;
+  padding: 0 15px 0;
   border-radius: 4px;
+}
+
+.icon {
+  width: 70px;
+  padding: 0;
 }
 
 #nav a.router-link-exact-active {
   color: white;
-  background: crimson;
+  background: rgb(148, 65, 82);
 }
+
 html body {
   background-color: #f7fff1;
 }

@@ -34,8 +34,7 @@ export default {
     handleToggle(value) {
       this.signIn = value
     },
-    handleLogin(value) {
-      console.log('handling in login view' + value)
+    handleLogin() {
       this.$emit('handleLogin', true)
     }
   }
