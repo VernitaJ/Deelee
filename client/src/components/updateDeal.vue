@@ -60,7 +60,7 @@ export default {
   margin-bottom: 1em;
   text-align: center;
 }
- form {
+ .form {
    max-width: 800px;
    margin: 30px auto;
    background: rgb(197, 207, 207);

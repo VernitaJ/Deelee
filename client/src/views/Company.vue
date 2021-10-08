@@ -1,11 +1,11 @@
 <template>
-      <div>
-      <b-img src="/images/Deelee.png" class="center"> </b-img>
-    <companies/>
+  <div>
+    <b-img src="/images/Deelee.png" class="center"> </b-img>
+    <companies />
     <div class="reviews">
-    <reviews/>
+      <reviews />
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -20,8 +20,7 @@ export default {
       message: 'none'
     }
   },
-  methods: {
-  }
+  methods: {}
 }
 </script>
 <style>
@@ -33,12 +32,12 @@ export default {
   width: 15%;
 }
 .reviews {
-   max-width: 80%;
-   margin: 30px auto;
-   background: rgb(221, 215, 215);
-   text-align: left;
-   padding: 20px;
-   border-radius: 10px;
-   color:rgb(0, 0, 0);
+  max-width: 93%;
+  margin: 30px auto;
+  background: #343633;
+  text-align: left;
+  padding: 20px;
+  border-radius: 5px;
+  color: white;
 }
 </style>

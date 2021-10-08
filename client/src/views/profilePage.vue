@@ -103,5 +103,22 @@ export default {
 </script>
 
 <style>
-
+form {
+   max-width: 800px;
+   margin: 30px auto;
+   background: #343633;
+   text-align: left;
+   padding: 40px;
+   border-radius: 10px;
+ }
+ label {
+   color:black;
+   display: inline-block;
+   margin: 25px 0 15px;
+   font-size: 0.9em;
+   text-transform: uppercase;
+   box-sizing: border-box;
+   border-bottom: 1px solid black;
+   color: rgb(255, 250, 250);
+ }
 </style>
