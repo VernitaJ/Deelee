@@ -2,17 +2,16 @@
   <div id="app">
     <div id="nav" v-if="isLoggedIn">
       <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <router-link to="/">Home</router-link>
-      <router-link to="/profilePage">Profile</router-link>
-      <button class="logout" @click="logout" >Log out</button>
+        <router-link to="/">Home</router-link>
+        <router-link to="/profilePage">Profile</router-link>
+        <button class="logout" @click="logout">Log out</button>
       </nav>
-          <router-view/>
+      <router-view />
     </div>
-  <div v-else>
-    <log-in @handleLogin="handleLogin"/>
-  </div>
+    <div v-else>
+      <log-in @handleLogin="handleLogin()" />
+    </div>
     <!-- Render the content of the current page view -->
-
   </div>
 </template>
 <script>
@@ -25,11 +24,17 @@ export default {
       isLoggedIn: false
     }
   },
+  mounted() {
+    if (this.isLoggedIn === false) {
+      this.$router.push('/login')
+    }
+  },
   methods: {
-    handleLogin(value) {
-      this.isLoggedIn = value
+    handleLogin() {
+      this.isLoggedIn = true
     },
     logout() {
+      this.isLoggedIn = false
       localStorage.clear()
       this.$router.push('/login')
     }
@@ -54,15 +59,11 @@ export default {
   border-radius: 4px;
 }
 
-.logout {
-}
-
 #nav a.router-link-exact-active {
   color: white;
   background: crimson;
 }
-html
-body {
-  background-color:#F7FFF1 ;
+html body {
+  background-color: #f7fff1;
 }
 </style>
