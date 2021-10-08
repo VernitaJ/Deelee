@@ -1,30 +1,35 @@
 <template>
   <div>
     <b-card
-    img-src="https://picsum.photos/600/300/?image=25"
-    img-alt="Image"
-    style="max-width: 35rem;"
-    class="mb-2"
-  >
-    <b-card-body>
-      <b-card-title>{{deal.name}}</b-card-title>
-      <b-card-sub-title class="mb-2">Offered by
-      <a v-bind:href="'/companies/' + deal.company._id">{{deal.company.name}}</a></b-card-sub-title>
-      <div v-for="(tag, index) in deal.tag" v-bind:key="index">
-        {{tag}}
-      </div>
-    <button  v-if="unclicked" class="like-button" @click="addSupport()">
-    <b-icon icon="check2-circle" scale="2" variant="success"></b-icon>
-    </button>
-    <button  v-else class="like-button">
-    <b-icon icon="check2-circle" scale="2" variant="success"></b-icon>
-    </button>
-    {{deal.support}}
-    </b-card-body>
-  </b-card>
-      <button @click="delDeal()">DELETE</button>
-      <div>
-      </div>
+      img-src="https://picsum.photos/600/300/?image=25"
+      img-alt="Image"
+      style="max-width: 35rem"
+      class="mb-2"
+    >
+      <b-card-body>
+        <b-card-title>{{ deal.name }}</b-card-title>
+        <b-card-sub-title class="mb-2"
+          >Offered by
+          <a
+            class="company-name"
+            v-bind:href="'/companies/' + deal.company._id"
+            >{{ deal.company.name }}</a
+          ></b-card-sub-title
+        >
+        <div v-for="(tag, index) in deal.tag" v-bind:key="index">
+          {{ tag }}
+        </div>
+        <button v-if="unclicked" class="like-button" @click="addSupport()">
+          <b-icon icon="check2-circle" scale="2" variant="success"></b-icon>
+        </button>
+        <button v-else class="like-button">
+          <b-icon icon="check2-circle" scale="2" variant="success"></b-icon>
+        </button>
+        {{ deal.support }}
+      </b-card-body>
+    </b-card>
+    <button @click="delDeal()">DELETE</button>
+    <div></div>
   </div>
 </template>
 
@@ -45,23 +50,23 @@ export default {
   methods: {
     getDeal() {
       Api.get('deals/' + this.$route.params.id)
-        .then(response => {
+        .then((response) => {
           console.log(response.data)
           console.log(localStorage)
           this.deal = response.data
         })
-        .catch(error => {
+        .catch((error) => {
           this.deal = {}
           console.log(error)
         })
     },
     delDeal() {
       Api.delete('deals/' + this.$route.params.id)
-        .then(response => {
+        .then((response) => {
           console.log(response.data)
           this.$router.push('/deal')
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error)
         })
     },
@@ -69,10 +74,10 @@ export default {
       this.unclicked = false
       const updateSupport = { support: this.deal.support + 1 }
       Api.patch('/deals/' + this.$route.params.id, updateSupport)
-        .then(response => {
+        .then((response) => {
           this.getDeal()
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error)
         })
     },
