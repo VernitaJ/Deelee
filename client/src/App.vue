@@ -2,23 +2,21 @@
   <div id="app">
     <div id="nav" v-if="isLoggedIn">
       <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <li class="nav-item">
-          <router-link to="/">Home</router-link>
-          <router-link to="/profilePage">Profile</router-link>
-        </li>
-        <a href="/login" @click="handleLogin(false)">Logout</a>
+        <router-link to="/">Home</router-link>
+        <router-link to="/profilePage">Profile</router-link>
+        <button class="logout" @click="logout">Log out</button>
       </nav>
       <router-view />
     </div>
     <div v-else>
-      {{ isLoggedIn }}
-      <log-in @handleLogin="handleLogin" />
+      <log-in @handleLogin="handleLogin()" />
     </div>
     <!-- Render the content of the current page view -->
   </div>
 </template>
 <script>
-import logIn from './views/logIn.vue'
+import logIn from './components/logIn.vue'
+
 export default {
   components: { logIn },
   data() {
@@ -26,10 +24,19 @@ export default {
       isLoggedIn: false
     }
   },
+  mounted() {
+    if (this.isLoggedIn === false) {
+      this.$router.push('/login')
+    }
+  },
   methods: {
-    handleLogin(value) {
-      this.isLoggedIn = value
-      // this.$router.push('/')
+    handleLogin() {
+      this.isLoggedIn = true
+    },
+    logout() {
+      this.isLoggedIn = false
+      localStorage.clear()
+      this.$router.push('/login')
     }
   }
 }
@@ -43,6 +50,7 @@ export default {
   text-align: center;
   color: #106877;
 }
+
 #nav a {
   font-weight: bold;
   color: white;

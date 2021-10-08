@@ -10,8 +10,8 @@
       <div class="button1">
         <button v-on:click="handleToggle(false)">SignUp</button>
       </div>
-      <div v-if="signIn == true">
-        <sign-in @handleLogin="handleLogin" />
+      <div v-if="signIn">
+        <sign-in @handleLogin="handleLogin()" :v-bind="signIn" />
       </div>
       <div v-else>
         <sign-up />
@@ -19,16 +19,12 @@
     </div>
   </div>
 </template>
-
 <script>
 import signIn from '../components/signIn.vue'
 import signUp from '../components/signUp.vue'
 
 export default {
-  components: {
-    'sign-in': signIn,
-    'sign-up': signUp
-  },
+  components: { signIn, signUp },
   data() {
     return {
       signIn: true
@@ -39,7 +35,8 @@ export default {
       this.signIn = value
     },
     handleLogin(value) {
-      this.$emit('handleLogin', value)
+      console.log('handling in login view' + value)
+      this.$emit('handleLogin', true)
     }
   }
 }

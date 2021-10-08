@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="handleSubmit">
     <h1>Log In</h1>
-    <div>
+    <div class="form-group">
       <label>Email</label>
       <input
         type="email"
@@ -10,7 +10,8 @@
         placeholder="Email"
       />
     </div>
-    <div>
+
+    <div class="form-group">
       <label>Password</label>
       <input
         type="password"
@@ -45,6 +46,8 @@ export default {
           if (res.status === 200) {
             localStorage.setItem('token', res.data.token)
             this.$emit('handleLogin', true)
+            console.log('handling emit in sign in ')
+            this.$router.push('/')
           }
         },
         (err) => {
