@@ -2,17 +2,18 @@
   <div id="app">
     <div id="nav" v-if="isLoggedIn">
       <nav class="navbar navbar-expand navbar-dark bg-dark">
-     <li class="nav-item">
-       <router-link to="/">Home</router-link>
-      <router-link to="/profilePage">Profile</router-link>
-     </li>
+        <li class="nav-item">
+          <router-link to="/">Home</router-link>
+          <router-link to="/profilePage">Profile</router-link>
+        </li>
+        <a href="/login" @click="handleLogin(false)">Logout</a>
       </nav>
-          <router-view/>
+      <router-view />
     </div>
-  <div v-else>
-    {{isLoggedIn}}
-  <log-in @handleLogin="handleLogin"/>
-  </div>
+    <div v-else>
+      {{ isLoggedIn }}
+      <log-in @handleLogin="handleLogin" />
+    </div>
     <!-- Render the content of the current page view -->
   </div>
 </template>
@@ -28,7 +29,7 @@ export default {
   methods: {
     handleLogin(value) {
       this.isLoggedIn = value
-      this.$router.push('/')
+      // this.$router.push('/')
     }
   }
 }
@@ -54,8 +55,7 @@ export default {
   color: white;
   background: crimson;
 }
-html
-body {
-  background-color:#F7FFF1 ;
+html body {
+  background-color: #f7fff1;
 }
 </style>
