@@ -1,25 +1,34 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <div id="nav" v-if="isLoggedIn">
       <nav class="navbar navbar-expand navbar-dark bg-dark">
-     <li class="nav-item" v-if="isLoggedIn==null">
-      <router-link to="/logIn">LogIn</router-link>
-     </li>
-     <li class="nav-item" v-else>
+     <li class="nav-item">
        <router-link to="/">Home</router-link>
       <router-link to="/profilePage">Profile</router-link>
      </li>
       </nav>
+          <router-view/>
     </div>
+  <div v-else>
+    {{isLoggedIn}}
+  <log-in @handleLogin="handleLogin"/>
+  </div>
     <!-- Render the content of the current page view -->
-    <router-view/>
   </div>
 </template>
 <script>
+import logIn from './views/logIn.vue'
 export default {
-  computed: {
-    isLoggedIn() {
-      return window.localStorage.getItem('token')
+  components: { logIn },
+  data() {
+    return {
+      isLoggedIn: false
+    }
+  },
+  methods: {
+    handleLogin(value) {
+      this.isLoggedIn = value
+      this.$router.push('/')
     }
   }
 }
