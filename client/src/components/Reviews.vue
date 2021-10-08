@@ -12,10 +12,13 @@
                 <img src="https://source.unsplash.com/random/80x50/?img=1" class="picture"/>
                 <p>{{review.title}}</p>
                 <p>{{review.description}}</p>
+    <div>
+       <b-form-rating v-model="value"></b-form-rating>
+       <p class="mt-2">Value: {{ value }}</p>
+    </div>
              </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -36,7 +39,8 @@ export default {
       loading: false,
       loaded: false,
       preview: false,
-      reviews: []
+      reviews: [],
+      value: null
     }
   },
   methods: {
@@ -70,13 +74,14 @@ width: 60%;
   text-align: left;
 }
 .card {
-box-shadow: 0 10px 8px 0 rgba(0,0,0,0.2);
+box-shadow: 0 10px 8px 0 rgba(255, 255, 255, 0.178);
 transition: 0.3s;
 padding: 2%;
-border: 5px solid green;
+border: 2px solid green;
+color: black;
 }
 .card:hover {
-   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+   box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2);
 }
 .picture {
   display: block;

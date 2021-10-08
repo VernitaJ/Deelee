@@ -1,35 +1,44 @@
 <template>
   <div>
-    <b-card
-      img-src="https://picsum.photos/600/300/?image=25"
-      img-alt="Image"
-      style="max-width: 35rem"
-      class="mb-2"
-    >
-      <b-card-body>
-        <b-card-title>{{ deal.name }}</b-card-title>
-        <b-card-sub-title class="mb-2"
-          >Offered by
-          <a
-            class="company-name"
-            v-bind:href="'/companies/' + deal.company._id"
-            >{{ deal.company.name }}</a
-          ></b-card-sub-title
-        >
-        <div v-for="(tag, index) in deal.tag" v-bind:key="index">
-          {{ tag }}
+    <b-img src="/images/Deelee.png" class="center"> </b-img>
+    <div class="card-group-deal">
+      <div class="card">
+        <img
+          class="card-imp-top"
+          src="https://picsum.photos/600/300/?image=25"
+          alt="Crad image"
+        />
+        <div class="card-body-deal">
+          <h1 class="card-title">{{ deal.name }}</h1>
+          <b-card-sub-title class="mb-2"
+            >Offered by
+            <a v-bind:href="'/companies/' + deal.company._id">{{
+              deal.company.name
+            }}</a></b-card-sub-title
+          >
+          <div v-for="(tag, index) in deal.tag" v-bind:key="index">
+            {{ tag }}
+          </div>
+          <button v-if="unclicked" class="like-button" @click="addSupport()">
+            <b-icon
+              icon="hand-thumbs-up"
+              font-scale="2"
+              variant="success"
+            ></b-icon>
+          </button>
+          <button v-else class="like-button" @click="removeSupport()">
+            <b-icon
+              icon="hand-thumbs-up"
+              font-scale="2"
+              variant="success"
+            ></b-icon>
+          </button>
+          {{ deal.support }}
         </div>
-        <button v-if="unclicked" class="like-button" @click="addSupport()">
-          <b-icon icon="check2-circle" scale="2" variant="success"></b-icon>
-        </button>
-        <button v-else class="like-button">
-          <b-icon icon="check2-circle" scale="2" variant="success"></b-icon>
-        </button>
-        {{ deal.support }}
-      </b-card-body>
-    </b-card>
-    <button @click="delDeal()">DELETE</button>
-    <div></div>
+        <button @click="delDeal()">DELETE</button>
+      </div>
+      <div></div>
+    </div>
   </div>
 </template>
 
@@ -83,6 +92,17 @@ export default {
     },
     update() {
       this.$router.push('/updatedeals')
+    },
+    removeSupport() {
+      this.unclicked = true
+      const updateSupport = { support: this.deal.support - 1 }
+      Api.patch('/deals/' + this.$route.params.id, updateSupport)
+        .then((response) => {
+          this.getDeal()
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   },
   created() {
@@ -94,11 +114,19 @@ export default {
 }
 </script>
 <style>
-.btn_message {
-  margin-bottom: 1em;
-}
 .like-button {
-  background-color: white;
+  background-color: #085c4d;
   border: none;
+}
+.card-body-deal {
+  background-color: #085c4d;
+  color: white;
+}
+.card-group-deal {
+  max-width: 800px;
+  margin: 5px auto;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
 }
 </style>

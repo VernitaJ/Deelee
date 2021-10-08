@@ -5,11 +5,11 @@
         <img class="icon" src="../public/images/Icon.png" />
         <router-link to="/">Home</router-link>
         <router-link to="/profilePage">Profile</router-link>
-        <a href="/login" @click="logout">Logout</a>
+        <button class="logout" @click="logout">Log out</button>
       </nav>
       <router-view />
     </div>
-    <div v-if="!isLoggedIn">
+    <div v-else>
       <log-in @handleLogin="handleLogin()" />
     </div>
     <!-- Render the content of the current page view -->
@@ -38,6 +38,7 @@ export default {
     },
     handleLogin() {
       this.isLoggedIn = true
+      this.$router.push('/login')
     }
   }
 }
