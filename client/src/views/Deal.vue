@@ -28,14 +28,22 @@
           </button>
           <button v-else class="like-button" @click="removeSupport()">
             <b-icon
+              v-if="isHovered"
               icon="hand-thumbs-up"
+              font-scale="2"
+              variant="success"
+            ></b-icon>
+            <b-icon
+              icon="hand-thumbs-down"
               font-scale="2"
               variant="success"
             ></b-icon>
           </button>
           {{ deal.support }}
+          <button class="add-button" @click="toggle(!adding)">
+            {{ text }}
+          </button>
         </div>
-        <button @click="toggle(!adding)">{{ text }}</button>
         <div v-if="adding">
           <add-review v-bind:adding="adding" @toggle="toggle()" />
         </div>
@@ -68,8 +76,6 @@ export default {
     getDeal() {
       Api.get('deals/' + this.$route.params.id)
         .then((response) => {
-          console.log(response.data)
-          console.log(localStorage)
           this.deal = response.data
         })
         .catch((error) => {
@@ -81,7 +87,7 @@ export default {
       Api.delete('deals/' + this.$route.params.id)
         .then((response) => {
           console.log(response.data)
-          this.$router.push('/deal')
+          this.$router.push('/')
         })
         .catch((error) => {
           console.log(error)
@@ -136,11 +142,37 @@ export default {
   background-color: #085c4d;
   color: white;
 }
+.title {
+  margin: 30px 0;
+  color: white;
+}
 .card-group-deal {
   max-width: 800px;
   margin: 5px auto;
   text-align: center;
   padding: 10px;
   border-radius: 10px;
+}
+.container {
+  position: fixed;
+  width: 50%;
+  height: 70%;
+  top: 10vh;
+  padding: 10px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  cursor: pointer; /* Add a pointer on hover */
+  overflow: auto;
+}
+.add-button {
+  float: right;
+  margin: 1em;
+  padding: 5px;
+  background-color: rgb(80, 138, 134);
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 5px;
 }
 </style>

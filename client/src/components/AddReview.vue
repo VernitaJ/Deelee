@@ -1,21 +1,15 @@
 <template>
   <div id="container" class="container">
-    <h4>Add Review</h4>
-    <button type="button" class="close" @click="dealReviewed()">X</button>
+    <h4 class="title">Add Review</h4>
+    <button type="button" class="close" @click="cancelReview()">Cancel</button>
     <b-container fluid>
-      <b-row class="my-5">
-        <b-col sm="2">
-          <label for="input-medium"></label>
-        </b-col>
+      <b-row class="my-3">
         <b-form-rating
-          no
-          border
           no-border
           v-model="input.stars"
           variant="warning"
-          class="mb-2"
+          class="mb-4 bg-transparent"
         ></b-form-rating>
-        {{ input.stars }}
       </b-row>
 
       <b-row class="my-3">
@@ -56,7 +50,7 @@
         </b-col>
       </b-row>
     </b-container>
-    <button @click="togglePreview()"></button>
+    <button class="preview-button" @click="togglePreview()">Preview</button>
     <div v-show="preview">
       <b-card
         no-body
@@ -116,7 +110,9 @@ export default {
   },
   methods: {
     togglePreview() {
-      this.preview ? (this.preview = false) : (this.preview = true)
+      if (this.input.title.length > 8 && this.input.description.length > 15) {
+        this.preview ? (this.preview = false) : (this.preview = true)
+      } else alert('Please complete all the fields')
     },
     createReview() {
       const newReview = {
@@ -137,6 +133,9 @@ export default {
         .catch((error) => {
           console.log(error)
         })
+    },
+    cancelReview() {
+      this.$emit('toggle', false)
     },
     dealReviewed() {
       Api.get(`/deals/${this.id}`)
@@ -159,5 +158,20 @@ export default {
 .aform {
   margin-left: auto;
   width: 60%;
+}
+.close {
+  color: rgb(255, 255, 255);
+  font-weight: 200;
+  margin-right: 20px;
+  font-style: normal;
+}
+.preview-button {
+  border: none;
+  border-radius: 10px;
+  background-color: aqua;
+  color: white;
+}
+.close:hover {
+  color: white;
 }
 </style>
