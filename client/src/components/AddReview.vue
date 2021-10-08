@@ -7,8 +7,15 @@
         <b-col sm="2">
           <label for="input-medium"></label>
         </b-col>
-          <b-form-rating no border no-border v-model="input.stars" variant="warning" class="mb-2"></b-form-rating>
-          {{input.stars}}
+        <b-form-rating
+          no
+          border
+          no-border
+          v-model="input.stars"
+          variant="warning"
+          class="mb-2"
+        ></b-form-rating>
+        {{ input.stars }}
       </b-row>
 
       <b-row class="my-3">
@@ -48,32 +55,32 @@
           </b-form-invalid-feedback>
         </b-col>
       </b-row>
-
     </b-container>
-    <button @click="togglePreview()" ></button>
-    <div v-show='preview' >
-     <b-card
-    no-body
-    style="max-width: 20rem;"
-    img-src="https://cdn.winsightmedia.com/platform/files/public/600x450/culinary-competition-winner-food-rb-slide.jpg"
-    img-alt="Image"
-    img-top
-  >
-    <b-card-body>
-      <b-card-title>{{input.title}}</b-card-title>
-      <b-card-sub-title class="mb-2">{{reviewer}}</b-card-sub-title>
-      <b-card-text>
-        {{input.description}}
-      </b-card-text>
-    </b-card-body>
-    <b-button href="#" variant="primary" @click="createReview()">Post Review</b-button>
-  </b-card>
+    <button @click="togglePreview()"></button>
+    <div v-show="preview">
+      <b-card
+        no-body
+        style="max-width: 20rem"
+        img-src="https://cdn.winsightmedia.com/platform/files/public/600x450/culinary-competition-winner-food-rb-slide.jpg"
+        img-alt="Image"
+        img-top
+      >
+        <b-card-body>
+          <b-card-title>{{ input.title }}</b-card-title>
+          <b-card-sub-title class="mb-2">{{ reviewer }}</b-card-sub-title>
+          <b-card-text>
+            {{ input.description }}
+          </b-card-text>
+        </b-card-body>
+        <b-button href="#" variant="primary" @click="createReview()"
+          >Post Review</b-button
+        >
+      </b-card>
     </div>
   </div>
 </template>
 
 <script>
-
 import { Api } from '@/Api'
 
 export default {
@@ -89,8 +96,7 @@ export default {
   props: {
     user: String
   },
-  components: {
-  },
+  components: {},
   data() {
     return {
       id: ['61547c299aeda447b87cbf11'],
@@ -110,7 +116,7 @@ export default {
   },
   methods: {
     togglePreview() {
-      this.preview ? this.preview = false : this.preview = true
+      this.preview ? (this.preview = false) : (this.preview = true)
     },
     createReview() {
       const newReview = {
@@ -124,19 +130,20 @@ export default {
         stars: this.input.stars
       }
       Api.post('/reviews', newReview)
-        .then(response => {
+        .then((response) => {
           console.log(response)
+          this.$emit('toggle', false)
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error)
         })
     },
     dealReviewed() {
       Api.get(`/deals/${this.id}`)
-        .then(response => {
+        .then((response) => {
           this.deal = response.data
         })
-        .catch(error => {
+        .catch((error) => {
           this.message = error
         })
       console.log(this.deal)
@@ -146,12 +153,11 @@ export default {
     }
   }
 }
-
 </script>
 
 <style scoped>
-.aform{
-margin-left: auto;
-width: 60%;
+.aform {
+  margin-left: auto;
+  width: 60%;
 }
 </style>

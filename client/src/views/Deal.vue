@@ -35,6 +35,10 @@
           </button>
           {{ deal.support }}
         </div>
+        <button @click="toggle(!adding)">{{ text }}</button>
+        <div v-if="adding">
+          <add-review v-bind:adding="adding" @toggle="toggle()" />
+        </div>
         <button @click="delDeal()">DELETE</button>
       </div>
       <div></div>
@@ -44,11 +48,15 @@
 
 <script>
 import { Api } from '@/Api'
+import AddReview from '../components/AddReview.vue'
 
 export default {
+  components: { AddReview },
   name: 'deal',
   data() {
     return {
+      text: 'Add Review',
+      adding: false,
       deal: {},
       unclicked: true
     }
@@ -92,6 +100,12 @@ export default {
     },
     update() {
       this.$router.push('/updatedeals')
+    },
+    toggle(value) {
+      this.text === 'Add Review'
+        ? (this.text = 'Cancel')
+        : (this.text = 'Add Review')
+      this.adding = value
     },
     removeSupport() {
       this.unclicked = true
