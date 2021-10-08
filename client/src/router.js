@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import User from './views/User.vue'
-import logIn from './views/logIn.vue'
+import logIn from './components/logIn.vue'
 import Deal from './views/Deal.vue'
 import profilePage from './views/profilePage.vue'
 import Company from './views/Company.vue'
@@ -37,11 +37,6 @@ export default new Router({
       path: '/logIn',
       name: 'logIn',
       component: logIn
-    },
-    {
-      path: '/logIn',
-      name: 'logIn',
-      component: Home
     },
     {
       path: '/profilePage',
