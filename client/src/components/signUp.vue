@@ -1,7 +1,7 @@
 <template>
 <div>
 
-<form @submit.prevent="handleSubmit">
+<form @submit="handleSubmit">
   <div>
   <h1>Sign Up</h1>
 </div>
