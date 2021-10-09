@@ -53,7 +53,7 @@
             >
 
             <div class="form-group-user">
-              <label class="label-user">First Name:-</label>
+              <label class="label-user">First Name:</label>
               <input
                 type="text"
                 class="form-control"
@@ -62,7 +62,7 @@
               />
             </div>
             <div class="form-group-user">
-              <label class="label-user">Last Name:-</label>
+              <label class="label-user">Last Name:</label>
               <input
                 type="text"
                 class="form-control"
@@ -72,7 +72,7 @@
             </div>
 
             <div class="form-group-user">
-              <label class="label-user">Age:-</label>
+              <label class="label-user">Age:</label>
               <input
                 type="number"
                 class="form-control"
@@ -82,7 +82,7 @@
             </div>
 
             <div class="form-group-user">
-              <label class="label-user">Location:-</label>
+              <label class="label-user">Location:</label>
               <input
                 type="text"
                 class="form-control"
@@ -105,13 +105,25 @@ export default {
   props: {
     user: Object
   },
+  data() {
+    return {
+      firstName: '',
+      lastName: '',
+      age: '',
+      location: ''
+    }
+  },
   created() {
     // user is not authorized
     if (localStorage.getItem('token') === null) {
       this.$router.push('/login')
     }
   },
-  mounted() {},
+  mounted() {
+    if (localStorage.getItem('user')) {
+      console.log('true if statment')
+    }
+  },
   methods: {
     deleteUser() {
       Api.delete(`/users/${this.id}`)
@@ -133,7 +145,7 @@ export default {
       Api.put(`/users/${this.id}`, updateUser).then(
         (res) => {
           console.log(res)
-          this.$router.push('/profilePage')
+          this.$router.push('/profile')
         },
         (err) => {
           console.log(err.response)

@@ -11,7 +11,7 @@
     <br />
     <GmapMap
       ref="mapRef"
-      :zoom="14"
+      :zoom="15"
       :center="center"
       :clickable="true"
       map-type-id="roadmap"
