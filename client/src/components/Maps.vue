@@ -137,7 +137,6 @@ export default {
       this.$emit('toggle', {})
     },
     setContent(deal) {
-      console.log('setting content', deal)
       this.content = `<div class="info-content">
                       <a href="deals/${deal._id}">${deal.name}</a>
                       <img src="https://picsum.photos/200">

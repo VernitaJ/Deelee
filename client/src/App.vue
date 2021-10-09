@@ -7,7 +7,7 @@
         <router-link to="/profilePage">Profile</router-link>
         <button class="logout" @click="logout">Log out</button>
       </nav>
-      <router-view />
+      <router-view :user="user" />
     </div>
     <div v-else>
       <log-in @handleLogin="handleLogin()" />
@@ -17,11 +17,14 @@
 </template>
 <script>
 import logIn from './components/logIn.vue'
+import { Api } from '@/Api'
+
 export default {
   components: { logIn },
   data() {
     return {
-      isLoggedIn: false
+      isLoggedIn: false,
+      user: {}
     }
   },
   mounted() {
@@ -38,7 +41,15 @@ export default {
     },
     handleLogin() {
       this.isLoggedIn = true
+      this.getUser()
       this.$router.push('/login')
+    },
+    getUser() {
+      Api.get('/user', {
+        headers: { token: localStorage.getItem('token') }
+      }).then((res) => {
+        this.user = res.data.user
+      })
     }
   }
 }

@@ -14,8 +14,7 @@ export default {
   name: 'home',
   data: () => ({
     message: 'this is working',
-    deals: [],
-    user: {}
+    deals: []
   }),
   mounted() {
     this.getDeals()

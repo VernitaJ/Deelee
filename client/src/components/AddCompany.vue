@@ -1,39 +1,41 @@
 <template>
   <div>
-    <h4 class="company-heading">New company</h4>
+    <h4 class="heading">New company</h4>
 
-    <!-- <form @submit.prevent="createCompany" class="form"> -->
-    <div class="form-item">
-      <label class="label"> Name </label>
-      <input class="input" type="text" v-model="name" placeholder="name" />
-    </div>
+    <div class="addcompanycontainer">
+      <div class="form-item">
+        <label class="label"> Name </label>
+        <input class="input" type="text" v-model="name" placeholder="name" />
+      </div>
 
-    <div class="form-item">
-      <label class="label"> Contact </label>
-      <input
-        class="input"
-        type="text"
-        v-model="contact.email"
-        placeholder="email"
-      />
-      <input
-        class="input"
-        type="text"
-        v-model="contact.phone"
-        placeholder="phone"
-      />
+      <div class="form-item">
+        <label class="label"> Contact </label>
+        <input
+          class="input"
+          type="text"
+          v-model="contact.email"
+          placeholder="email"
+        />
+        <input
+          class="input"
+          type="text"
+          v-model="contact.phone"
+          placeholder="phone"
+        />
+      </div>
+      <div class="form-item">
+        <label class="label"> Category </label>
+        <input
+          class="input"
+          type="text"
+          v-model="category"
+          placeholder="category"
+        />
+      </div>
+      <button @click.prevent="createCompany" class="btn btn-primary btn-block">
+        ADD
+      </button>
     </div>
-    <div class="form-item">
-      <label class="label"> Category </label>
-      <input
-        class="input"
-        type="text"
-        v-model="category"
-        placeholder="category"
-      />
-    </div>
-    <button class="btn btn-primary btn-block">ADD</button>
-    <!-- </form> -->
   </div>
 </template>
 

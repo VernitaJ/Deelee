@@ -136,9 +136,9 @@ export default {
   text-align: center;
 }
 .form-item {
-  max-width: 90%;
-  margin-left: 10px;
-  padding: 10px;
+  max-width: 100%;
+  margin-left: 5px;
+  padding: 0px 0 15px 0;
 }
 .heading {
   color: rgb(255, 255, 255);
@@ -154,13 +154,13 @@ export default {
 }
 .input {
   display: block;
-  padding: 15px 10px;
+  margin: 15px 10px;
   height: 40px;
+  width: 300px;
   box-sizing: border-box;
   border: none;
-  border-bottom: 1px solid black;
   text-align: left;
-  border-radius: 50px;
+  border-radius: 5px;
 }
 .deal-container {
   width: 80%;
@@ -179,6 +179,7 @@ export default {
   overflow: scroll;
   width: 50%;
   height: 100%;
+  padding-left: 10px;
   top: 0;
   left: 0;
   right: 0;

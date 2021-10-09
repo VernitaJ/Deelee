@@ -26,17 +26,11 @@
               variant="success"
             ></b-icon>
           </button>
-          <button v-else class="like-button" @click="removeSupport()">
+          <button v-else class="liked-button" @click="removeSupport()">
             <b-icon
-              v-if="isHovered"
               icon="hand-thumbs-up"
               font-scale="2"
-              variant="success"
-            ></b-icon>
-            <b-icon
-              icon="hand-thumbs-down"
-              font-scale="2"
-              variant="success"
+              variant="light"
             ></b-icon>
           </button>
           {{ deal.support }}
@@ -135,6 +129,13 @@ export default {
 </script>
 <style>
 .like-button {
+  background-color: transparent;
+  border: none;
+}
+.like-button:hover {
+  font-size: 1rem;
+}
+.liked-button {
   background-color: #085c4d;
   border: none;
 }
