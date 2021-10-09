@@ -36,24 +36,28 @@ export default {
     if (localStorage.getItem('token') === null) {
       this.isLoggedIn = false
       this.$router.push('/login')
-    } else this.isLoggedIn = true
+    } else {
+      this.isLoggedIn = true
+      this.getUser()
+    }
   },
   methods: {
     logout() {
       localStorage.setItem('token', null)
       this.isLoggedIn = false
+      this.user = {}
       localStorage.clear()
     },
     handleLogin() {
       this.isLoggedIn = true
       this.getUser()
-      this.$router.push('/login')
     },
     getUser() {
       Api.get('/user', {
         headers: { token: localStorage.getItem('token') }
       }).then((res) => {
         this.user = res.data.user
+        console.log(res.data.user)
       })
     }
   }
