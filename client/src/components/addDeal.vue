@@ -171,20 +171,20 @@ export default {
   border-radius: 10px;
 }
 .form-container {
-  background: rgba(10, 10, 10, 0.5);
+  background: rgba(10, 10, 10, 0);
   padding: 5px;
 }
 .overlay {
   position: fixed;
   overflow: scroll;
-  width: 50%;
+  width: 35%;
   height: 100%;
   padding-left: 10px;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.8);
   cursor: pointer; /* Add a pointer on hover */
 }
 .addbutton-container {

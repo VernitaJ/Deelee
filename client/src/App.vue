@@ -1,11 +1,16 @@
 <template>
   <div id="app">
     <div id="nav" v-if="isLoggedIn">
-      <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <img class="icon" src="../public/images/Icon.png" />
-        <router-link to="/">Home</router-link>
-        <router-link to="/profilePage">Profile</router-link>
-        <button class="logout" @click="logout">Log out</button>
+      <nav class="navigation">
+        <div class="home-link">
+          <router-link class="item" to="/"
+            ><img class="icon" src="../public/images/Icon.png"
+          /></router-link>
+        </div>
+        <div class="profile-link">
+          <router-link class="item" to="/profile">Profile</router-link>
+          <button class="item" @click="logout">Log out</button>
+        </div>
       </nav>
       <router-view :user="user" />
     </div>
@@ -63,7 +68,24 @@ export default {
   text-align: center;
   color: #106877;
 }
-
+.navigation {
+  background-color: rgb(1, 1, 1, 0.82);
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  top: 0;
+  width: 100%;
+  overflow: auto;
+  height: 90px;
+}
+.home-link {
+  align-self: flex-start;
+}
+.profile-link {
+  align-self: center;
+  margin-left: auto;
+  margin-right: 200px;
+}
 #nav a {
   font-weight: bold;
   color: white;
@@ -71,15 +93,21 @@ export default {
   padding: 0 15px 0;
   border-radius: 4px;
 }
-
 .icon {
-  width: 70px;
-  padding: 0;
+  width: 100px;
+  padding-top: 0;
+  margin: 0 0 0 40px;
 }
-
-#nav a.router-link-exact-active {
+.item {
+  display: inline-block;
+  text-align: center;
+  padding: 14px;
+  background-color: transparent;
+  border: none;
   color: white;
-  background: rgb(148, 65, 82);
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: bolder;
 }
 
 html body {
