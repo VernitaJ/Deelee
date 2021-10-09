@@ -1,37 +1,56 @@
 <template>
-<div class="overlay">
-  <h1 class="heading">Add a deal</h1>
-<form class="form-container" >
-  <div class ="form">
-    <label class="label">Title </label>
-    <input type="text" class="input" v-model="name" placeholder="name"/>
-  </div>
+  <div class="overlay">
+    <h1 class="heading">Add a deal</h1>
+    <form class="form-container">
+      <div class="form-item">
+        <label class="label">Title </label>
+        <input type="text" class="input" v-model="name" placeholder="name" />
+      </div>
 
-<div class ="form">
-    <label class ="label">Tags</label>
-      <b-form-tags input-id="tags-basic" v-model="tag"></b-form-tags>
+      <div class="form-item">
+        <label class="label">Tags</label>
+        <b-form-tags input-id="tags-basic" v-model="tag"></b-form-tags>
+      </div>
+      <div class="form-item">
+        <label class="label" for="example-datepicker">Choose a date</label>
+        <b-form-datepicker
+          id="example-datepicker"
+          class="input"
+          v-model="date"
+        ></b-form-datepicker>
+      </div>
+      <div class="form-item">
+        <label class="label">Company </label>
+        <b-form-select v-model="selectedCompany">
+          <option>Manual Option</option>
+          <option
+            v-for="company in companies"
+            :value="company._id"
+            :key="company._id"
+          >
+            {{ company.name }}
+          </option>
+        </b-form-select>
+        <div class="addbutton-container">
+          <button class="addnewbutton" type="button" @click="addCompany">
+            {{ text }}
+          </button>
+        </div>
+        <div v-if="show">
+          <add-company @setChanges="setChanges" v-bind:position="position" />
+        </div>
+      </div>
+      <b-button
+        v-if="!show"
+        pill
+        variant="info"
+        type="submit"
+        @click="createDeal"
+        class="submit-button"
+        >Add this deal</b-button
+      >
+    </form>
   </div>
-  <div class="form">
-  <label class="label" for="example-datepicker">Choose a date</label>
-    <b-form-datepicker id="example-datepicker" class="input" v-model="date"></b-form-datepicker>
-  </div>
-<div class ="form">
-    <label class="label">Company </label>
-    <div class="input">
-    {{selectedCompany}}
-    </div>
-    <b-form-select  v-model="selectedCompany" >
-      <option>Manual Option</option>
-      <option v-for="company in companies"  :value="company._id" :key="company._id">{{ company.name }}</option>
-     </b-form-select>
-    <button class="addnewbutton" type="button" @click="addCompany">{{ text }}</button>
-    <div v-if="show">
-      <add-company @setChanges="setChanges" v-bind:position="position"/>
-    </div>
-  </div>
- <b-button v-if="!show" pill variant="info" type="submit" @click="createDeal" class="submit-button">Add this deal</b-button>
-</form>
-</div>
 </template>
 
 <script>
@@ -51,7 +70,7 @@ export default {
     return {
       text: 'New Company',
       name: '',
-      tag: '',
+      tags: [],
       support: '0',
       companies: [],
       show: false,
@@ -68,10 +87,10 @@ export default {
     },
     getCompanies() {
       Api.get('/companies')
-        .then(response => {
+        .then((response) => {
           this.companies = response.data.companies
         })
-        .catch(error => {
+        .catch((error) => {
           this.message = error
         })
     },
@@ -80,7 +99,9 @@ export default {
       console.log(this.selectedCompany)
     },
     addCompany() {
-      this.text === 'New Company' ? this.text = 'Cancel' : this.text = 'New Company'
+      this.text === 'New Company'
+        ? (this.text = 'Cancel')
+        : (this.text = 'New Company')
       this.show = !this.show
     },
     setChanges(value) {
@@ -98,83 +119,85 @@ export default {
         position: this.position
       }
       Api.post(`companies/${this.selectedCompany}/deals`, newDeal)
-        .then(response => {
+        .then((response) => {
           console.log(response)
           this.$emit('toggle', false)
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error)
         })
     }
   }
 }
-
 </script>
 <style>
- .btn-primary {
+.btn-primary {
   margin-bottom: 1em;
   text-align: center;
 }
- .form {
-   max-width: 80%;
-   margin-left: 10px;
-   padding: 10px;
- }
- .heading {
-   color: rgb(255, 255, 255);
-   padding-top: 100px;
- }
- .label {
-   color:white;
-   display: inline-block;
-   margin: 25px 15px 5px;
-   font-size: 0.9em;
-   text-transform: uppercase;
-   box-sizing: border-box;
-   border-bottom: 1px solid black;
- }
- .input {
-   display: block;
-   padding: 15px 10px;
-   height: 40px;
-   box-sizing: border-box;
-   border: none;
-   border-bottom: 1px solid black;
-   text-align: left;
-   border-radius: 50px;
- }
- .deal-container {
-   width: 80%;
-   margin: 30px auto;
-   background: rgb(33, 189, 189, 0.5);
-   text-align: left;
-   padding: 40px;
-   border-radius: 10px;
- }
- .form-container {
-   background: rgba(10, 10, 10, 0.5);
-   padding: 5px;
- }
- .overlay {
+.form-item {
+  max-width: 100%;
+  margin-left: 5px;
+  padding: 0px 0 15px 0;
+}
+.heading {
+  color: rgb(255, 255, 255);
+  padding-top: 100px;
+}
+.label {
+  color: rgb(255, 255, 255);
+  display: inline-block;
+  margin: 25px 15px 5px;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  box-sizing: border-box;
+}
+.input {
+  display: block;
+  margin: 15px 10px;
+  height: 40px;
+  width: 300px;
+  box-sizing: border-box;
+  border: none;
+  text-align: left;
+  border-radius: 5px;
+}
+.deal-container {
+  width: 80%;
+  margin: 30px auto;
+  background: rgb(33, 189, 189, 0.5);
+  text-align: left;
+  padding: 40px;
+  border-radius: 10px;
+}
+.form-container {
+  background: rgba(10, 10, 10, 0);
+  padding: 5px;
+}
+.overlay {
   position: fixed;
   overflow: scroll;
-  width: 50%;
+  width: 35%;
   height: 100%;
+  padding-left: 10px;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0, 0, 0, 0.8);
   cursor: pointer; /* Add a pointer on hover */
 }
+.addbutton-container {
+  margin-top: 2em;
+  width: 100%;
+}
 .addnewbutton {
-  margin-top: 1em;
-  margin-right: 0;
-  padding:5px;
-  background-color: rgb(22, 49, 47);
-  color: rgb(255, 255, 255);
   float: right;
-  border:none;
+  margin-top: 1em;
+  padding: 5px;
+  background-color: rgb(80, 138, 134);
+  color: rgb(255, 255, 255);
+  border: none;
   border-radius: 5px;
 }
 .submit-button {
