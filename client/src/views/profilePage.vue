@@ -126,7 +126,7 @@ export default {
   },
   methods: {
     deleteUser() {
-      Api.delete(`/users/${this.id}`)
+      Api.delete(`/users/${this.user.id}`)
         .then((res) => {
           console.log(res)
           this.$router.push('/login')
@@ -137,12 +137,12 @@ export default {
     },
     updatingUser() {
       const updateUser = {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        age: this.age,
-        location: this.location
+        firstName: this.firstName || this.user.firstName,
+        lastName: this.lastName || this.user.lastName,
+        age: this.age || this.user.age,
+        location: this.location || this.user.location
       }
-      Api.put(`/users/${this.id}`, updateUser).then(
+      Api.patch(`/users/${this.user.id}`, updateUser).then(
         (res) => {
           console.log(res)
           this.$router.push('/profile')
