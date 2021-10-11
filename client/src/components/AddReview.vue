@@ -66,7 +66,7 @@
             {{ input.description }}
           </b-card-text>
         </b-card-body>
-        <b-button href="#" variant="primary" @click="createReview()"
+        <b-button  class = "button-reviews" href="#"  @click="createReview()"
           >Post Review</b-button
         >
       </b-card>
@@ -97,7 +97,7 @@ export default {
       review: {},
       deal: {},
       preview: false,
-      reviewer: 'Jenny',
+      reviewer: 'Malik G',
       input: {
         title: '',
         description: '',
@@ -173,5 +173,18 @@ export default {
 }
 .close:hover {
   color: white;
+}
+.card{
+  margin: 30px auto;
+  text-align: center;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #343633;
+  border-color: green;
+  opacity: 95%;
+  margin-left: 1%;
+}
+.button-reviews {
+ background-color:#258a74;
 }
 </style>

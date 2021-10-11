@@ -8,7 +8,7 @@
           /></router-link>
         </div>
         <div class="profile-link">
-          <router-link class="item" to="/profile">Profile</router-link>
+          <router-link class="item-profile" to="/profile">Profile</router-link>
           <button class="item" @click="logout">Log out</button>
         </div>
       </nav>
@@ -59,6 +59,9 @@ export default {
         this.user = res.data.user
         console.log(res.data.user)
       })
+    },
+    home() {
+      this.$router.push('/')
     }
   }
 }
@@ -78,9 +81,7 @@ export default {
   position: relative;
   flex-direction: row;
   top: 0;
-  width: 100%;
   overflow: auto;
-  height: 90px;
 }
 .home-link {
   align-self: flex-start;
@@ -105,7 +106,7 @@ export default {
 .item {
   display: inline-block;
   text-align: center;
-  padding: 14px;
+  padding: 10px;
   background-color: transparent;
   border: none;
   color: white;
@@ -113,7 +114,10 @@ export default {
   font-size: 17px;
   font-weight: bolder;
 }
-
+#nav a.item-profile{
+  background:#258a74;
+  padding: 10px;
+}
 html body {
   background-color: #f7fff1;
 }
