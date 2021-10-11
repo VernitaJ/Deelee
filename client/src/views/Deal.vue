@@ -12,7 +12,7 @@
           <h1 class="card-title">{{ deal.name }}</h1>
           <b-card-sub-title class="mb-2"
             >Offered by
-            <a v-bind:href="'/companies/' + deal.company">{{
+            <a v-bind:href="'/companies/' + deal.company._id ">{{
               deal.company.name
             }}</a></b-card-sub-title
           >
@@ -45,9 +45,9 @@
           </button>
         </div>
         <div v-if="adding">
-          <add-review v-bind:adding="adding" v-bind:deal="deal" @toggle="toggle()" />
+          <add-review v-bind:adding="adding" v-bind:user="user" v-bind:deal="deal" @toggle="toggle()" />
         </div>
-        <button @click="delDeal()">DELETE</button>
+        <button v-if="user.id === deal.user._id" @click="delDeal()">DELETE</button>
       </div>
       <div></div>
     </div>

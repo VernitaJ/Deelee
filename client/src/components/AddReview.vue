@@ -61,7 +61,7 @@
       >
         <b-card-body>
           <b-card-title>{{ input.title }}</b-card-title>
-          <b-card-sub-title class="mb-2">{{ reviewer }}</b-card-sub-title>
+          <b-card-sub-title class="mb-2">{{ user.firstName }}</b-card-sub-title>
           <b-card-text>
             {{ input.description }}
           </b-card-text>
@@ -88,7 +88,7 @@ export default {
   },
   name: 'AddReview',
   props: {
-    user: String,
+    user: Object,
     deal: Object
   },
   components: {},
@@ -97,16 +97,12 @@ export default {
       company: this.$route.params.id,
       review: {},
       preview: false,
-      reviewer: 'Jenny',
       input: {
         title: '',
         description: '',
         stars: ''
       }
     }
-  },
-  mounted() {
-    this.dealReviewed()
   },
   methods: {
     togglePreview() {
@@ -115,10 +111,9 @@ export default {
       } else alert('Please complete all the fields')
     },
     createReview() {
-      console.log(this.deal)
       const newReview = {
         purchase: {
-          user: this.reviewer,
+          user: this.user.id,
           item: this.deal.name,
           company: this.deal.company.name
         },

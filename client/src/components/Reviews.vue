@@ -8,10 +8,11 @@
 
     <div v-if="loaded" class="success">
       <div class="card">
-            <div v-for="review in reviews" v-bind:key="review._id">
+            <div v-for="review in reviews" v-bind:key="review.id">
                 <img src="https://source.unsplash.com/random/80x50/?img=1" class="picture"/>
                 <p>{{review.title}}</p>
                 <p>{{review.description}}</p>
+                <button v-if="review.user === user">Update</button>
     <div>
        <b-form-rating v-model="value"></b-form-rating>
        <p class="mt-2">Value: {{ value }}</p>
@@ -28,32 +29,31 @@ import { Api } from '@/Api'
 
 export default {
   name: 'Reviews',
-  // props: 'company',
-  mounted() {
+  props: {
+    user: String
+  },
+  beforeMount() {
     this.getReviews()
   },
   data() {
     return {
-      id: ['61547c299aeda447b87cbf11'],
-      deal: {},
-      loading: false,
+      loading: true,
       loaded: false,
-      preview: false,
       reviews: [],
       value: null
     }
   },
   methods: {
     getReviews() {
-      this.loading = true
-      Api.get('/reviews')
+      Api.get('companies/' + this.$route.params.id + '/reviews')
         .then(response => {
-          this.reviews = response.data.reviews
+          console.log(this.$route.params.id)
+          this.reviews = response.data
         })
         .catch(error => {
           this.message = error
+          console.log(error)
         })
-      console.log(this.reviews)
       this.loading = false
       this.loaded = true
     }

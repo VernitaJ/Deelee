@@ -1,23 +1,26 @@
 <template>
   <div>
     <b-img src="/images/Deelee.png" class="center"> </b-img>
-    <companies />
+    <!-- <show-company /> -->
     <div class="reviews">
-      <reviews />
+      <reviews v-bind:user="user.id"/>
     </div>
   </div>
 </template>
 
 <script>
-import companies from '../components/getCompany.vue'
-import reviews from '../components/Reviews.vue'
+// import ShowCompany from '../components/getCompany.vue'
+import Reviews from '../components/Reviews.vue'
 
 export default {
-  components: { companies, reviews },
+  components: { Reviews },
   name: 'Company',
+  props: {
+    user: Object
+  },
   data() {
     return {
-      message: 'none'
+      message: ''
     }
   },
   methods: {}

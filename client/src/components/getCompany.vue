@@ -6,6 +6,7 @@
         <h3 class="card-title">{{ company.name }}</h3>
       </div>
     </div>
+    {{company.name}}
     <div class="card">
       <div class="card-body">
         <b-icon icon="envelope-fill" font-scale="2"></b-icon>
@@ -18,7 +19,7 @@
     </div>
     <div class="card">
       <div class="card-body">
-        <span @mouseover="hover = true" @mouseleave="hover = false">
+        <!-- <span @mouseover="hover = true" @mouseleave="hover = false">
           <b-icon icon="geo-alt-fill" font-scale="2"></b-icon>
         </span>
         <span v-if="hover">
@@ -32,7 +33,7 @@
         </span>
         <span v-if="hover">
           <h3>{{ company.address.city }}</h3>
-        </span>
+        </span> -->
       </div>
     </div>
   </div>
@@ -45,7 +46,18 @@ export default {
   name: 'getcompany',
   data() {
     return {
-      company: {},
+      company: {
+        contact: {
+          email: '',
+          phone: ''
+        },
+        address: {
+          street: '',
+          number: '',
+          city: '',
+          postcode: ''
+        }
+      },
       hover: false
     }
   },

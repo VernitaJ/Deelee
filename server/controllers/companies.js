@@ -61,7 +61,7 @@ router.post("/api/companies", function (req, res, next) {
       return next(err);
     }
     console.log("New Company ", company.name, "created");
-    res.status(201).json(company);
+    return res.status(201).json(company);
   });
 });
 
@@ -77,6 +77,26 @@ router.get("/api/companies/category/:category", function (req, res, next) {
     console.log("success");
     return res.status(200).json(company);
   });
+});
+
+
+router.get("/api/companies/:id/reviews", function (req, res, next) {
+  Company.findOne({ _id: req.params.id })
+    .populate({
+      path: 'reviews',
+      model: 'reviews',
+      populate: {
+          path: 'user',
+          model: 'users'
+      }
+    })
+    .exec(function (err, company) {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      console.log(company.reviews);
+      return res.status(200).send(company.reviews);
+    });
 });
 
 router.post("/api/companies/:id/deals", function (req, res, next) {
@@ -112,9 +132,11 @@ router.post("/api/companies/:id/reviews", function (req, res, next) {
     var review = new Review(req.body);
     review.save(function (err) {
       if (err) {
+        console.log(err)
         return res.status(500).send(err);
       }
       console.log("Review " + review.title + " created.");
+      // res.status(201).json(review);
     });
     company.reviews.push(review);
     company.save();
