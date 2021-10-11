@@ -10,7 +10,7 @@ var reviewSchema = new Schema(
     purchase: {
       user: { type: String },
       item: { type: String },
-      company: { type: Schema.Types.ObjectId, ref: "company" },
+      company: { type: String},
       date: { type: Date, default: moment().add(2, "hours") },
     },
   },

@@ -45,33 +45,17 @@ export default {
   name: 'getcompany',
   data() {
     return {
-      company: {
-        name: '',
-        address: {
-          street: '',
-          number: '',
-          postcode: '',
-          city: ''
-        },
-        contact: {
-          email: '',
-          phone: ''
-        },
-        category: '',
-        deals: '',
-        reviews: ''
-      },
+      company: {},
       hover: false
     }
   },
   mounted() {
     Api.get('companies/' + this.$route.params.id)
       .then((response) => {
-        console.log(response.data.company)
+        console.log(response.data)
         this.company = response.data
       })
       .catch((error) => {
-        this.company = []
         console.log(error)
       })
   }

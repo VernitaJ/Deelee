@@ -20,6 +20,7 @@ var dealSchema = new Schema(
         required: true,
       },
     },
+    category: { type: String },
     company: { type: Schema.Types.ObjectId, ref: "companies" },
     user: { type: Schema.Types.ObjectId, ref: "users" },
   },

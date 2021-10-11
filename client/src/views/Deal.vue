@@ -6,19 +6,25 @@
         <img
           class="card-imp-top"
           src="https://picsum.photos/600/300/?image=25"
-          alt="Crad image"
+          alt="Card image"
         />
         <div class="card-body-deal">
           <h1 class="card-title">{{ deal.name }}</h1>
           <b-card-sub-title class="mb-2"
             >Offered by
-            <a v-bind:href="'/companies/' + deal.company._id">{{
+            <a v-bind:href="'/companies/' + deal.company">{{
               deal.company.name
             }}</a></b-card-sub-title
           >
           <div v-for="(tag, index) in deal.tag" v-bind:key="index">
             {{ tag }}
           </div>
+          <b-card-sub-title class="mb-2"
+            >Added by
+            {{
+              deal.user.firstName
+            }}</b-card-sub-title
+          >
           <button v-if="unclicked" class="like-button" @click="addSupport()">
             <b-icon
               icon="hand-thumbs-up"
@@ -39,7 +45,7 @@
           </button>
         </div>
         <div v-if="adding">
-          <add-review v-bind:adding="adding" @toggle="toggle()" />
+          <add-review v-bind:adding="adding" v-bind:deal="deal" @toggle="toggle()" />
         </div>
         <button @click="delDeal()">DELETE</button>
       </div>
@@ -55,6 +61,9 @@ import AddReview from '../components/AddReview.vue'
 export default {
   components: { AddReview },
   name: 'deal',
+  props: {
+    user: Object
+  },
   data() {
     return {
       text: 'Add Review',
@@ -63,14 +72,16 @@ export default {
       unclicked: true
     }
   },
-  mounted() {
+  beforeMount() {
     this.getDeal()
+    console.log(this.deal)
   },
   methods: {
     getDeal() {
       Api.get('deals/' + this.$route.params.id)
         .then((response) => {
           this.deal = response.data
+          console.log('USER', this.deal)
         })
         .catch((error) => {
           this.deal = {}

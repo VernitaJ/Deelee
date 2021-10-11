@@ -88,14 +88,14 @@ export default {
   },
   name: 'AddReview',
   props: {
-    user: String
+    user: String,
+    deal: Object
   },
   components: {},
   data() {
     return {
-      id: ['61547c299aeda447b87cbf11'],
+      company: this.$route.params.id,
       review: {},
-      deal: {},
       preview: false,
       reviewer: 'Jenny',
       input: {
@@ -115,17 +115,18 @@ export default {
       } else alert('Please complete all the fields')
     },
     createReview() {
+      console.log(this.deal)
       const newReview = {
         purchase: {
           user: this.reviewer,
           item: this.deal.name,
-          company: this.deal.company
+          company: this.deal.company.name
         },
         title: this.input.title,
         description: this.input.description,
         stars: this.input.stars
       }
-      Api.post('/reviews', newReview)
+      Api.post('/companies/' + this.deal.company._id + '/reviews', newReview)
         .then((response) => {
           console.log(response)
           this.$emit('toggle', false)
@@ -136,16 +137,6 @@ export default {
     },
     cancelReview() {
       this.$emit('toggle', false)
-    },
-    dealReviewed() {
-      Api.get(`/deals/${this.id}`)
-        .then((response) => {
-          this.deal = response.data
-        })
-        .catch((error) => {
-          this.message = error
-        })
-      console.log(this.deal)
     },
     getTitle() {
       console.log(this.input.title)

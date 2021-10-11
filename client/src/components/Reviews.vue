@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4>Reviews {{company}}</h4>
+    <h4>Reviews</h4>
 
      <div v-if="loading" class="loading">
       Loading...
@@ -28,7 +28,7 @@ import { Api } from '@/Api'
 
 export default {
   name: 'Reviews',
-  props: 'company',
+  // props: 'company',
   mounted() {
     this.getReviews()
   },

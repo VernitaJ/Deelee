@@ -9,7 +9,7 @@
 
       <div class="form-item">
         <label class="label">Tags</label>
-        <b-form-tags input-id="tags-basic" v-model="tag"></b-form-tags>
+        <b-form-tags input-id="tags-basic" v-model="tags"></b-form-tags>
       </div>
       <div class="form-item">
         <label class="label" for="example-datepicker">Choose a date</label>
@@ -19,6 +19,10 @@
           v-model="date"
         ></b-form-datepicker>
       </div>
+      <div>
+    <b-form-select v-model="category" :options="categoryList" size="sm" class="mt-3"></b-form-select>
+    <div class="mt-3">Selected: <strong>{{ selected }}</strong></div>
+  </div>
       <div class="form-item">
         <label class="label">Company </label>
         <b-form-select v-model="selectedCompany">
@@ -64,10 +68,18 @@ export default {
   },
   props: {
     adding: Boolean,
-    position: Object
+    position: Object,
+    user: String
   },
   data() {
     return {
+      categoryList: [
+        { value: null, text: 'Please select an option' },
+        { value: 'Food', text: 'Food' },
+        { value: 'Drinks', text: 'Drinks' },
+        { value: 'Clothes', text: 'Clothing' },
+        { value: 'Groceries', text: 'Groceries' }
+      ],
       text: 'New Company',
       name: '',
       tags: [],
@@ -89,6 +101,7 @@ export default {
       Api.get('/companies')
         .then((response) => {
           this.companies = response.data.companies
+          console.log(this.user)
         })
         .catch((error) => {
           this.message = error
@@ -116,7 +129,9 @@ export default {
         tag: this.tag,
         support: this.support,
         company: this.selectedCompany,
-        position: this.position
+        position: this.position,
+        category: this.category,
+        user: this.user
       }
       Api.post(`companies/${this.selectedCompany}/deals`, newDeal)
         .then((response) => {

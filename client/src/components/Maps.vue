@@ -2,7 +2,7 @@
   <div>
     <div>
       <gmap-autocomplete
-        class="input-panto"
+        class="input-pan-to"
         @place_changed="initMarker"
       ></gmap-autocomplete>
       <button @click="panTo">Go to</button>
@@ -17,12 +17,12 @@
       map-type-id="roadmap"
       style="width: 80%; height: 900px; margin-left: 5em; margin-top: 0"
     >
-      <gmap-marker
-        icon="https://img.icons8.com/color/48/000000/map-pin.png"
+      <GmapMarker
         :key="index"
         v-for="(deal, index) in deals"
         :position="deal.position"
         @click="toggleWindow(index)"
+       :icon="findIcon(deal)"
       >
         <gmap-info-window
           :options="{
@@ -35,12 +35,13 @@
         >
           <div v-html="infoWindow.template"></div>
         </gmap-info-window>
-      </gmap-marker>
+      </GmapMarker>
     </GmapMap>
     <div v-if="adding">
       <add-deal
         v-bind:position="position"
         v-bind:adding="adding"
+        v-bind:user="user"
         @toggle="toggle()"
       />
     </div>
@@ -59,7 +60,10 @@ export default {
     google: gmapApi
   },
   name: 'GoogleMap',
-  props: ['deals'],
+  props: {
+    deals: Array,
+    user: String
+  },
   data: function () {
     return {
       map: null,
@@ -97,6 +101,14 @@ export default {
     this.locateGeoLocation()
   },
   methods: {
+    findIcon(deal) {
+      if (deal.category === 'Clothes') {
+        return '/images/icon-purple.png'
+      } else {
+        console.log(deal.category)
+        return '/images/icon-orange.png'
+      }
+    },
     initMarker(loc) {
       this.existingPlace = loc
     },
@@ -139,7 +151,8 @@ export default {
     setContent(deal) {
       this.content = `<div class="info-content">
                       <a href="deals/${deal._id}">${deal.name}</a>
-                      <img src="https://picsum.photos/200">
+                      <div>${deal.category}</div>
+                      <img src="https://picsum.photos/200" class="infowindow-img">
                       </div>`
       return this.content
     },
@@ -162,13 +175,18 @@ export default {
 .info-content {
   margin: 5px;
   padding: 2px;
-  background-color: darkolivegreen;
+  color: whitesmoke;
+  background-color: rgb(25, 131, 145);
+  border-radius: 5px;
 }
-.input-panto {
+.input-pan-to {
   width: 200px;
   border-radius: 10px;
   margin-top: 5px;
   margin-bottom: 0;
+}
+.infowindow-img {
+  width: 30%;
 }
 .logo {
   width: 35vh;
