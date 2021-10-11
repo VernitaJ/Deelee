@@ -59,6 +59,23 @@ router.put("/api/users/:id", async (req, res) => {
       });
 });
 
+router.patch("/api/users/:id", (req, res) => {
+  user
+    .findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      useFindAndModify: false,
+    })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send();
+      }
+      res.status(201).send(user);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
+
 // Delete a user by Id
 router.delete("/api/users/:id", function (req, res) {
   const id = req.params.id;
