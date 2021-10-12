@@ -1,7 +1,7 @@
 <template>
 <div>
 
-<form @submit="handleSubmit">
+<form @submit.prevent="handleSubmit">
   <div>
   <h1>Sign Up</h1>
 </div>
@@ -70,12 +70,12 @@ export default {
       Api.post('/users', newUser)
         .then(res => {
           console.log(res)
-          this.$router.push('/login')
+          this.$bvModal.msgBoxOk('SignUp Successful', this.$router.go(0))
         }, err => {
           console.log(err.response)
-          this.error = err.response.data.error
           this.boxOne = ''
           this.$bvModal.msgBoxOk('Invalid Email or Already In Use')
+          this.error = err.response.data.error
         })
     }
   }
