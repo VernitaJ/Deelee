@@ -12,7 +12,7 @@
           <button class="item" @click="logout">Log out</button>
         </div>
       </nav>
-      <router-view :user="user" />
+      <router-view v-bind:user="user" />
     </div>
     <div v-else>
       <log-in @handleLogin="handleLogin()" />

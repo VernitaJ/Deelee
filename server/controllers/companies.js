@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var Company = require("../models/company");
 var Deal = require("../models/deal");
+var Review = require("../models/review");
 
 // Companies - database functions
 router.get("/api/companies", function (req, res, next) {
@@ -17,6 +18,7 @@ router.get("/api/companies", function (req, res, next) {
 router.get("/api/companies/:id", function (req, res, next) {
   Company.findOne({ _id: req.params.id })
     .populate("deals")
+    .populate("reviews")
     .exec(function (err, company) {
       if (err) {
         return res.status(500).send(err);
@@ -59,7 +61,7 @@ router.post("/api/companies", function (req, res, next) {
       return next(err);
     }
     console.log("New Company ", company.name, "created");
-    res.status(201).json(company);
+    return res.status(201).json(company);
   });
 });
 
@@ -75,6 +77,26 @@ router.get("/api/companies/category/:category", function (req, res, next) {
     console.log("success");
     return res.status(200).json(company);
   });
+});
+
+
+router.get("/api/companies/:id/reviews", function (req, res, next) {
+  Company.findOne({ _id: req.params.id })
+    .populate({
+      path: 'reviews',
+      model: 'reviews',
+      populate: {
+          path: 'user',
+          model: 'users'
+      }
+    })
+    .exec(function (err, company) {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      console.log(company.reviews);
+      return res.status(200).send(company.reviews);
+    });
 });
 
 router.post("/api/companies/:id/deals", function (req, res, next) {
@@ -95,6 +117,30 @@ router.post("/api/companies/:id/deals", function (req, res, next) {
     company.deals.push(deal);
     company.save();
     console.log("Deals added to ", company.name, " ", deal.name);
+    return res.status(201).json(company);
+  });
+});
+
+router.post("/api/companies/:id/reviews", function (req, res, next) {
+  Company.findById(req.params.id, function (err, company) {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    if (company == null) {
+      return res.status(404).json({ message: "Company not found" });
+    }
+    var review = new Review(req.body);
+    review.save(function (err) {
+      if (err) {
+        console.log(err)
+        return res.status(500).send(err);
+      }
+      console.log("Review " + review.title + " created.");
+      // res.status(201).json(review);
+    });
+    company.reviews.push(review);
+    company.save();
+    console.log("Review added to ", company.name, " ", review.title);
     return res.status(201).json(company);
   });
 });

@@ -3,7 +3,7 @@
     <b-img src="/images/Deelee.png" class="center"> </b-img>
     <companies v-bind:company="company" />
     <div class="reviews">
-      <reviews />
+      <reviews v-bind:user="user.id"/>
     </div>
   </div>
 </template>

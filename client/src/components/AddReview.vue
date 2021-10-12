@@ -61,7 +61,7 @@
       >
         <b-card-body>
           <b-card-title>{{ input.title }}</b-card-title>
-          <b-card-sub-title class="mb-2">{{ reviewer }}</b-card-sub-title>
+          <b-card-sub-title class="mb-2">{{ user.firstName }}</b-card-sub-title>
           <b-card-text>
             {{ input.description }}
           </b-card-text>
@@ -88,25 +88,21 @@ export default {
   },
   name: 'AddReview',
   props: {
-    user: String
+    user: Object,
+    deal: Object
   },
   components: {},
   data() {
     return {
-      id: ['61547c299aeda447b87cbf11'],
+      company: this.$route.params.id,
       review: {},
-      deal: {},
       preview: false,
-      reviewer: 'Malik G',
       input: {
         title: '',
         description: '',
         stars: ''
       }
     }
-  },
-  mounted() {
-    this.dealReviewed()
   },
   methods: {
     togglePreview() {
@@ -117,15 +113,15 @@ export default {
     createReview() {
       const newReview = {
         purchase: {
-          user: this.reviewer,
+          user: this.user.id,
           item: this.deal.name,
-          company: this.deal.company
+          company: this.deal.company.name
         },
         title: this.input.title,
         description: this.input.description,
         stars: this.input.stars
       }
-      Api.post('/reviews', newReview)
+      Api.post('/companies/' + this.deal.company._id + '/reviews', newReview)
         .then((response) => {
           console.log(response)
           this.$emit('toggle', false)
@@ -136,16 +132,6 @@ export default {
     },
     cancelReview() {
       this.$emit('toggle', false)
-    },
-    dealReviewed() {
-      Api.get(`/deals/${this.id}`)
-        .then((response) => {
-          this.deal = response.data
-        })
-        .catch((error) => {
-          this.message = error
-        })
-      console.log(this.deal)
     },
     getTitle() {
       console.log(this.input.title)

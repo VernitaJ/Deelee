@@ -121,7 +121,7 @@ export default {
   },
   mounted() {
     if (localStorage.getItem('user')) {
-      console.log('true if statment')
+      console.log(this.user)
     }
   },
   methods: {
