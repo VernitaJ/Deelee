@@ -21,9 +21,7 @@ router.post("/api/users", function (req, res, next) {
             error: 'email in use'
           })
         }
-        return res.status(200).json({
-          title: 'signup success'
-        })
+        return res.status(200).send(newUser);
       })
     })
 //Login

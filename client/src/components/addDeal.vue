@@ -12,7 +12,9 @@
         <b-form-tags input-id="tags-basic" v-model="tags"></b-form-tags>
       </div>
       <div class="form-item">
-        <label class="label" for="example-datepicker">Choose a date</label>
+        <label class="label" for="example-datepicker"
+          >Offer end date (optional)</label
+        >
         <b-form-datepicker
           id="example-datepicker"
           class="input"
@@ -20,9 +22,14 @@
         ></b-form-datepicker>
       </div>
       <div>
-    <b-form-select v-model="category" :options="categoryList" size="sm" class="mt-3"></b-form-select>
-    <div class="mt-3">Selected: <strong>{{ selected }}</strong></div>
-  </div>
+        <label class="label" for="example-datepicker">Category</label>
+        <b-form-select
+          v-model="category"
+          :options="categoryList"
+          size="sm"
+          class="mt-3"
+        ></b-form-select>
+      </div>
       <div class="form-item">
         <label class="label">Company </label>
         <b-form-select v-model="selectedCompany">
@@ -87,6 +94,7 @@ export default {
       companies: [],
       show: false,
       date: '',
+      category: '',
       selectedCompany: {}
     }
   },
