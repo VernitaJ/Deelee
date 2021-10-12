@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-img src="/images/Deelee.png" class="center"> </b-img>
-    <!-- <show-company /> -->
+    <companies v-bind:company="company" />
     <div class="reviews">
       <reviews v-bind:user="user.id"/>
     </div>
@@ -9,21 +9,35 @@
 </template>
 
 <script>
-// import ShowCompany from '../components/getCompany.vue'
-import Reviews from '../components/Reviews.vue'
+import { Api } from '@/Api'
+import companies from '../components/getCompany.vue'
+import reviews from '../components/Reviews.vue'
 
 export default {
-  components: { Reviews },
-  name: 'Company',
-  props: {
-    user: Object
-  },
+  components: { companies, reviews },
+  name: 'CompanyPage',
   data() {
     return {
-      message: ''
+      message: 'none',
+      company: []
     }
   },
-  methods: {}
+  mounted() {
+    this.getcompany()
+  },
+  methods: {
+    getcompany() {
+      Api.get('companies/' + this.$route.params.id)
+        .then((response) => {
+          console.log(response.data.company)
+          this.company = response.data
+        })
+        .catch((error) => {
+          this.company = []
+          console.log(error)
+        })
+    }
+  }
 }
 </script>
 <style>

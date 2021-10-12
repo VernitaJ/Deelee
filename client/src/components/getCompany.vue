@@ -40,36 +40,14 @@
 </template>
 
 <script>
-import { Api } from '@/Api'
 
 export default {
-  name: 'getcompany',
+  name: 'company',
+  props: ['company'],
   data() {
     return {
-      company: {
-        contact: {
-          email: '',
-          phone: ''
-        },
-        address: {
-          street: '',
-          number: '',
-          city: '',
-          postcode: ''
-        }
-      },
       hover: false
     }
-  },
-  mounted() {
-    Api.get('companies/' + this.$route.params.id)
-      .then((response) => {
-        console.log(response.data)
-        this.company = response.data
-      })
-      .catch((error) => {
-        console.log(error)
-      })
   }
 }
 </script>
