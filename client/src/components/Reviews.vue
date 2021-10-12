@@ -3,7 +3,7 @@
     <h4>Reviews</h4>
 
      <div v-if="loading" class="loading">
-      Loading...
+      {{text}}
     </div>
 
     <div v-if="loaded" class="success">
@@ -37,6 +37,7 @@ export default {
   },
   data() {
     return {
+      text: 'Loading',
       loading: true,
       loaded: false,
       reviews: [],
@@ -50,12 +51,16 @@ export default {
           console.log(this.$route.params.id)
           this.reviews = response.data
         })
+        .then(response => {
+          if (this.reviews.length > 0) {
+            this.loading = false
+            this.loaded = true
+          } else this.text = 'No reviews have been added yet. Be the first!'
+        })
         .catch(error => {
           this.message = error
           console.log(error)
         })
-      this.loading = false
-      this.loaded = true
     }
   }
 }

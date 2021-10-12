@@ -14,7 +14,8 @@
       :zoom="15"
       :center="center"
       :clickable="true"
-      map-type-id="roadmap"
+      mapId="3b1d35be461c3ce8"
+      feature-type="poi.attraction"
       style="width: 80%; height: 900px; margin-left: 5em; margin-top: 0"
     >
       <GmapMarker
@@ -102,12 +103,13 @@ export default {
   },
   methods: {
     findIcon(deal) {
-      if (deal.category === 'Clothes') {
+      if (deal.category === 'Drinks') {
         return '/images/icon-purple.png'
-      } else {
-        console.log(deal.category)
+      } else if (deal.category === 'Food') {
         return '/images/icon-orange.png'
-      }
+      } else if (deal.category === 'Clothes') {
+        return '/images/icon-blue.png'
+      } else return 'images/icon-yellow.png'
     },
     initMarker(loc) {
       this.existingPlace = loc
