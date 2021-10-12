@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4 class="heading">New company</h4>
+    <h4 class="company-heading">New company</h4>
 
     <div class="addcompanycontainer">
       <div class="form-item">
@@ -24,13 +24,14 @@
         />
       </div>
       <div class="form-item">
-        <label class="label"> Category </label>
-        <input
-          class="input"
-          type="text"
+        <label class="label">Category</label>
+        <b-form-select
           v-model="category"
-          placeholder="category"
-        />
+          :options="categoryList"
+          size="sm"
+          class="input"
+          placeholder="Category"
+        ></b-form-select>
       </div>
       <button @click.prevent="createCompany" class="btn btn-primary btn-block">
         ADD
@@ -63,7 +64,14 @@ export default {
       },
       category: '',
       deals: '',
-      company_id: ''
+      company_id: '',
+      categoryList: [
+        { value: null, text: 'Please select an option' },
+        { value: 'Restaurant', text: 'Restaurant' },
+        { value: 'Pub', text: 'Pub' },
+        { value: 'Clothing store', text: 'Clothing store' },
+        { value: 'Grocery store', text: 'Grocery store' }
+      ]
     }
   },
   methods: {
@@ -89,8 +97,8 @@ export default {
 </script>
 <style>
 .company-heading {
-  margin-top: 20px;
-  color: white;
+  margin: 20px 0 0 20px;
+  color: rgb(57, 171, 175);
 }
 .btn-primary {
   margin-bottom: 1em;

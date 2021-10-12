@@ -16,14 +16,14 @@
       :clickable="true"
       mapId="3b1d35be461c3ce8"
       feature-type="poi.attraction"
-      style="width: 80%; height: 900px; margin-left: 5em; margin-top: 0"
+      class="map"
     >
       <GmapMarker
         :key="index"
         v-for="(deal, index) in deals"
         :position="deal.position"
         @click="toggleWindow(index)"
-       :icon="findIcon(deal)"
+        :icon="findIcon(deal)"
       >
         <gmap-info-window
           :options="{
@@ -193,5 +193,20 @@ export default {
 .logo {
   width: 35vh;
   height: 35vh;
+}
+.map {
+  width: 80%;
+  height: 900px;
+  margin-left: 5em;
+  margin-top: 0;
+}
+
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (-webkit-device-pixel-ratio: 3) {
+  .map {
+    width: 100%;
+    height: 100vh;
+    margin-left: 0;
+    margin-top: 0;
+  }
 }
 </style>

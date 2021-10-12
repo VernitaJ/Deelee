@@ -24,7 +24,7 @@ var companySchema = new Schema(
     },
     category: {
       type: String,
-      allowedValues: ["restaurant", "groceries", "clothing", "pub"],
+      allowedValues: ["Restaurant", "Pub", "Clothing store", "Grocery store"],
     },
     deals: [{ type: Schema.Types.ObjectId, ref: "deals" }],
     reviews: [{ type: Schema.Types.ObjectId, ref: "reviews" }],
