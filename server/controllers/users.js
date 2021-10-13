@@ -60,8 +60,7 @@ router.put("/api/users/:id", async (req, res) => {
 });
 
 router.patch("/api/users/:id", (req, res) => {
-  user
-    .findByIdAndUpdate(req.params.id, req.body, {
+  user.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       useFindAndModify: false,
     })
@@ -81,7 +80,7 @@ router.delete("/api/users/:id", function (req, res) {
   const id = req.params.id;
   user.findByIdAndDelete(id, function (err, user) {
     if (err) {
-      return next(err);
+      return res.status(500).send(err);
     }
     if (user == null) {
       return res.status(404).json({ message: "User not found" });

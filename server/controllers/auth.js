@@ -17,7 +17,7 @@ router.post("/api/users", async (req, res, next) => {
     try {
       var savedUser = await newUser.save();
       res.status(200).json({
-        savedUser, 
+        savedUser,
         title: 'Signup Success' })
     } 
     catch (err) {
