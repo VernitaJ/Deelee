@@ -9,9 +9,9 @@ router.get("/api/deals", function (req, res, next) {
   .populate("company")
   .exec(function (err, deals){
     if (err) {
-      return next(err);
+      return res.status(500).send(err);
     }
-    res.json({ deals: deals });
+    res.status(200).json({ deals: deals });
   });
 });
 
@@ -26,7 +26,7 @@ router.get("/api/deals/:id", function (req, res) {
       if (deal == null) {
         return res.status(404).json({ message: "Deal not found" });
       }
-      res.json(deal);
+      res.status(200).json(deal);
     });
 });
 
@@ -34,7 +34,7 @@ router.post("/api/deals", function (req, res, next) {
   var deal = new Deal(req.body);
   deal.save(function (err) {
     if (err) {
-      return next(err);
+      return res.status(500).send(err);
     }
     res.status(201).json(deal);
   });
@@ -43,7 +43,7 @@ router.post("/api/deals", function (req, res, next) {
 router.delete("/api/deals", function (req, res) {
   Deal.deleteMany(function (err, deal) {
     if (err) {
-      return next(err);
+      return res.status(500).send(err);
     }
     res.status(200).json(deal);
   });
@@ -53,13 +53,13 @@ router.delete("/api/deals/:id", function (req, res, next) {
   var id = req.params.id;
   Deal.findByIdAndDelete(id, function (err, deal) {
     if (err) {
-      return next(err);
+      return res.status(500).send(err);
     }
     if (deal == null) {
       return res.status(404).json({ message: "Deal not found" });
     }
     console.log("Deal successfully deleted :", deal.name);
-    res.json(deal);
+    res.status(200).json(deal);
   });
 });
 
@@ -67,7 +67,7 @@ router.put("/api/deals/:id", (req, res, next) => {
   var id = req.params.id;
   Deal.findById(id, function (err, deal) {
     if (err) {
-      return next(err);
+      return res.status(500).send(err);
     }
     if (deal == null) {
       return res.status(404).json({ message: "Deal not found" });
