@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="card-deck">
     <div class="card">
       <div class="card-body">
@@ -6,41 +7,30 @@
         <h3 class="card-title">{{ company.name }}</h3>
       </div>
     </div>
-    {{company.name}}
-    <!-- <div class="card">
+    <div class="card">
       <div class="card-body">
-        <b-icon icon="envelope-fill" font-scale="2"></b-icon>
-        <h3 class="card-title">{{ company.contact.email }}</h3>
-        <b-icon icon="telephone-fill" font-scale="2"></b-icon>
-        <h3 class="card-title">{{ company.contact.phone }}</h3>
         <b-icon icon="tag-fill" font-scale="2"></b-icon>
         <h3 class="card-title">{{ company.category }}</h3>
       </div>
-    </div> -->
+    </div>
     <div class="card">
       <div class="card-body">
-        <!-- <span @mouseover="hover = true" @mouseleave="hover = false">
+        <span @mouseover="hover = true" @mouseleave="hover = false">
           <b-icon icon="geo-alt-fill" font-scale="2"></b-icon>
         </span>
         <span v-if="hover">
-          <h3>{{ company.address.street }}</h3>
+          <h3>{{ company.position.lat }}</h3>
         </span>
         <span v-if="hover">
-          <h3>{{ company.address.number }}</h3>
+          <h3>{{ company.position.lng }}</h3>
         </span>
-        <span v-if="hover">
-          <h3>{{ company.address.postcode }}</h3>
-        </span>
-        <span v-if="hover">
-          <h3>{{ company.address.city }}</h3>
-        </span> -->
       </div>
     </div>
   </div>
+   </div>
 </template>
 
 <script>
-
 export default {
   name: 'company',
   props: ['company'],
@@ -52,24 +42,6 @@ export default {
 }
 </script>
 <style>
-form {
-  max-width: 800px;
-  margin: 30px auto;
-  background: #343633;
-  text-align: left;
-  padding: 40px;
-  border-radius: 10px;
-}
-label {
-  color: black;
-  display: inline-block;
-  margin: 25px 0 15px;
-  font-size: 0.9em;
-  text-transform: uppercase;
-  box-sizing: border-box;
-  border-bottom: 1px solid black;
-  color: rgb(255, 250, 250);
-}
 .card-body {
   background: #343633;
   color: white;
