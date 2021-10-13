@@ -12,9 +12,9 @@
     <div class="card">
       <div class="card-body">
         <b-icon icon="envelope-fill" font-scale="2"></b-icon>
-        <h3 class="card-title">{{ company.category }}</h3>
+        <h3 class="card-title">{{ company.contact.email }}</h3>
          <b-icon icon="telephone-fill" font-scale="2"></b-icon>
-        <h3 class="card-title">{{ company.category }}</h3>
+        <h3 class="card-title">{{ company.contact.phone }}</h3>
       </div>
     </div>
     <div class="card">
