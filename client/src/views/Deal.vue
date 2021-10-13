@@ -47,9 +47,8 @@
         <div v-if="adding">
           <add-review v-bind:adding="adding" v-bind:user="user" v-bind:deal="deal" @toggle="toggle()" />
         </div>
-        <button v-if="user.id === deal.user._id" @click="delDeal()">DELETE</button>
+        <button class="delete-button" v-if="user.id === deal.user._id" @click="delDeal()">DELETE</button>
       </div>
-      <div></div>
     </div>
   </div>
 </template>
@@ -144,7 +143,7 @@ export default {
   border: none;
 }
 .like-button:hover {
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 .liked-button {
   background-color: #085c4d;
@@ -154,12 +153,8 @@ export default {
   background-color: #085c4d;
   color: white;
 }
-.title {
-  margin: 30px 0;
-  color: white;
-}
 .card-group-deal {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 5px auto;
   text-align: center;
   padding: 10px;
@@ -180,6 +175,14 @@ export default {
 }
 .add-button {
   float: right;
+  margin: 1em;
+  padding: 5px;
+  background-color: rgb(80, 138, 134);
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 5px;
+}
+.delete-button {
   margin: 1em;
   padding: 5px;
   background-color: rgb(80, 138, 134);
