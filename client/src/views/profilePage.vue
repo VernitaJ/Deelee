@@ -8,10 +8,7 @@
       <button
         class="button-update"
         onclick="document.getElementById('id01').style.display='block'"
-        style="width: auto"
-      >
-        Update
-      </button>
+        style="width: auto">Update</button>
       <div class="text-container">
         <div class="text">
           <div style="display: flex">
@@ -43,56 +40,40 @@
 
     <div id="id01" class="modal">
       <form class="modal-contents" @submit="updatingUser">
-        <div class="form">
-          <div class="form-group-user">
+        <div class="container">
+        <div class="form-update">
             <span
               onclick="document.getElementById('id01').style.display='none'"
               class="close"
               title="Close Modal"
               >&times;</span
             >
-
-            <div class="form-group-user">
-              <label class="label-user">First Name:</label>
               <input
                 type="text"
                 class="form-control"
-                v-model.lazy="firstName"
-                placeholder="First Name"
+                v-model.lazy="firstName" placeholder="First Name"
               />
-            </div>
-            <div class="form-group-user">
-              <label class="label-user">Last Name:</label>
               <input
                 type="text"
                 class="form-control"
                 v-model.lazy="lastName"
                 placeholder="Last Name"
               />
-            </div>
-
-            <div class="form-group-user">
-              <label class="label-user">Age:</label>
               <input
                 type="number"
                 class="form-control"
                 v-model.lazy="age"
                 placeholder="Age"
               />
-            </div>
-
-            <div class="form-group-user">
-              <label class="label-user">Location:</label>
               <input
                 type="text"
                 class="form-control"
                 v-model.lazy="location"
                 placeholder="Location"
               />
-            </div>
-            <button class="button-update2">Update</button>
+            <button class="btn btn-primary btn-block">Update</button>
           </div>
-        </div>
+          </div>
       </form>
     </div>
   </div>
@@ -188,27 +169,6 @@ export default {
 .button-delete:hover {
   color: black;
 }
-.button-logout button {
-  background-color: #1273e5;
-  color: black;
-  padding: 1px 30px;
-  border: none;
-  text-align: center;
-  cursor: pointer;
-  margin: 30px 120px;
-  float: left;
-}
-.button-update2 {
-  background-color: #1273e5;
-  color: black;
-  padding: 5px 1px;
-  width: 300px;
-  border-radius: 5px;
-  border: none;
-  text-align: center;
-  cursor: pointer;
-  margin: 30px 10px;
-}
 .form-data {
   background-color: #258a74;
   color: rgb(255, 255, 255);
@@ -237,11 +197,6 @@ export default {
 .modal-contents {
   background: none;
   border: none;
-  max-width: 500px;
-  max-height: 650px;
-  margin-left: 900px;
-  margin-top: 50px;
-  position: fixed;
 }
 .close {
   background-color: #d3e7f9;
@@ -251,12 +206,12 @@ export default {
   padding: 1px 1px;
 }
 
-.form {
-  max-width: 100%;
-  max-height: 100%;
+.form-update {
+  max-width: 60%;
+  max-height: 1000px;
   margin: 30px auto;
   text-align: left;
-  padding: 40px;
+  padding: 20px;
   border-radius: 10px;
   background-color: #343633;
   opacity: 95%;
@@ -264,5 +219,19 @@ export default {
 .h1 {
   color: black;
   font-style: bold;
+}
+
+.container {
+ background: none;
+ margin-top: auto;
+ margin-bottom: auto;
+}
+.form-update input {
+  padding:10px;
+  margin-top: 10px;
+
+}
+.form-update button {
+  margin-top: 10px;
 }
 </style>
