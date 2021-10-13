@@ -2,7 +2,6 @@
   <form @submit.prevent="handleSubmit">
     <h1>Log In</h1>
     <div class="form-group">
-      <label>Email</label>
       <input
         type="email"
         class="form-control"
@@ -12,7 +11,6 @@
     </div>
 
     <div class="form-group">
-      <label>Password</label>
       <input
         type="password"
         class="form-control"
@@ -20,7 +18,7 @@
         placeholder="Password"
       />
     </div>
-    <button class="btn btn-primary btn-block">logIn</button>
+    <button class="btn btn-primary btn-block">Submit</button>
   </form>
 </template>
 <script>
