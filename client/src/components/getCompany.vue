@@ -7,7 +7,7 @@
       </div>
     </div>
     {{company.name}}
-    <div class="card">
+    <!-- <div class="card">
       <div class="card-body">
         <b-icon icon="envelope-fill" font-scale="2"></b-icon>
         <h3 class="card-title">{{ company.contact.email }}</h3>
@@ -16,7 +16,7 @@
         <b-icon icon="tag-fill" font-scale="2"></b-icon>
         <h3 class="card-title">{{ company.category }}</h3>
       </div>
-    </div>
+    </div> -->
     <div class="card">
       <div class="card-body">
         <!-- <span @mouseover="hover = true" @mouseleave="hover = false">

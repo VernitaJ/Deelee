@@ -1,32 +1,56 @@
 <template>
   <div class="overlay">
     <h1 class="heading">Add a deal</h1>
+    <button class="cancel" @click="handleToggle">Cancel</button>
     <form class="form-container">
       <div class="form-item">
-        <label class="label">Title </label>
-        <input type="text" class="input" v-model="name" placeholder="name" />
-      </div>
-
-      <div class="form-item">
-        <label class="label">Tags</label>
-        <b-form-tags input-id="tags-basic" v-model="tags"></b-form-tags>
+        <input type="input" class="input" v-model="name" placeholder="Title" />
       </div>
       <div class="form-item">
-        <label class="label" for="example-datepicker">Choose a date</label>
+        <textarea
+          class="input"
+          placeholder="Describe the deal"
+          id="floatingTextarea"
+        ></textarea>
+      </div>
+      <div class="form-item">
+        <b-form-tags
+          input-id="tags-basic"
+          v-model="tags"
+          class="input"
+          placeholder="Tags"
+        ></b-form-tags>
+      </div>
+      <div class="form-item">
+        <label class="label" for="example-datepicker"
+          >Offer end date (optional)</label
+        >
         <b-form-datepicker
           id="example-datepicker"
           class="input"
           v-model="date"
         ></b-form-datepicker>
       </div>
-      <div>
-    <b-form-select v-model="category" :options="categoryList" size="sm" class="mt-3"></b-form-select>
-    <div class="mt-3">Selected: <strong>{{ selected }}</strong></div>
-  </div>
       <div class="form-item">
-        <label class="label">Company </label>
-        <b-form-select v-model="selectedCompany">
-          <option>Manual Option</option>
+        <label class="label">Category</label>
+        <b-form-select
+          v-model="category"
+          :options="categoryList"
+          size="sm"
+          class="input"
+          placeholder="Category"
+        ></b-form-select>
+      </div>
+      <div class="form-item">
+        <button class="addnewbutton" type="button" @click="addCompany">
+          {{ text }}
+        </button>
+        <label class="label" for="example-datepicker">Company</label>
+        <b-form-select
+          class="input"
+          placeholder="Company"
+          v-model="selectedCompany"
+        >
           <option
             v-for="company in companies"
             :value="company._id"
@@ -35,14 +59,9 @@
             {{ company.name }}
           </option>
         </b-form-select>
-        <div class="addbutton-container">
-          <button class="addnewbutton" type="button" @click="addCompany">
-            {{ text }}
-          </button>
-        </div>
-        <div v-if="show">
-          <add-company @setChanges="setChanges" v-bind:position="position" />
-        </div>
+      </div>
+      <div v-if="show">
+        <add-company @setChanges="setChanges" v-bind:position="position" />
       </div>
       <b-button
         v-if="!show"
@@ -87,6 +106,7 @@ export default {
       companies: [],
       show: false,
       date: '',
+      category: '',
       selectedCompany: {}
     }
   },
@@ -151,48 +171,42 @@ export default {
   text-align: center;
 }
 .form-item {
-  max-width: 100%;
-  margin-left: 5px;
-  padding: 0px 0 15px 0;
+  max-width: 80%;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 .heading {
   color: rgb(255, 255, 255);
-  padding-top: 100px;
+  padding-top: 30px;
 }
 .label {
   color: rgb(255, 255, 255);
   display: inline-block;
-  margin: 25px 15px 5px;
-  font-size: 0.9em;
-  text-transform: uppercase;
+  margin: 0px 15px 2px;
+  font-size: 1em;
+  text-transform: none;
   box-sizing: border-box;
 }
 .input {
   display: block;
   margin: 15px 10px;
+  padding-left: 10px;
   height: 40px;
   width: 300px;
   box-sizing: border-box;
   border: none;
   text-align: left;
   border-radius: 5px;
-}
-.deal-container {
-  width: 80%;
-  margin: 30px auto;
-  background: rgb(33, 189, 189, 0.5);
-  text-align: left;
-  padding: 40px;
-  border-radius: 10px;
+  border-bottom: 0ch;
 }
 .form-container {
   background: rgba(10, 10, 10, 0);
-  padding: 5px;
+  padding: 2px;
 }
 .overlay {
   position: fixed;
-  overflow: scroll;
-  width: 35%;
+  overflow-y: auto;
+  max-width: 35%;
   height: 100%;
   padding-left: 10px;
   top: 0;
@@ -202,14 +216,11 @@ export default {
   background-color: rgba(0, 0, 0, 0.8);
   cursor: pointer; /* Add a pointer on hover */
 }
-.addbutton-container {
-  margin-top: 2em;
-  width: 100%;
-}
 .addnewbutton {
   float: right;
-  margin-top: 1em;
+  margin-right: 0;
   padding: 5px;
+  font-size: 0.8em;
   background-color: rgb(80, 138, 134);
   color: rgb(255, 255, 255);
   border: none;
@@ -220,5 +231,24 @@ export default {
   margin-top: 3em;
   font-size: 2em;
   height: 50px;
+}
+.cancel {
+  display: none;
+}
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (-webkit-device-pixel-ratio: 3) {
+  .heading {
+    font-size: 40px;
+  }
+  .overlay {
+    max-width: 90%;
+  }
+  .cancel {
+    display: inline-block;
+    margin-right: 10px;
+    background-color: rgb(27, 118, 146);
+    border-radius: 5px;
+    border: none;
+    color: white;
+  }
 }
 </style>

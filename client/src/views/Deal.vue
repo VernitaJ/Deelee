@@ -22,7 +22,7 @@
           <b-card-sub-title class="mb-2"
             >Added by
             {{
-              deal.user.firstName
+              deal.user.firstName || ""
             }}</b-card-sub-title
           >
           <button v-if="unclicked" class="like-button" @click="addSupport()">

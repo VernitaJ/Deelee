@@ -48,7 +48,7 @@ export default {
     getReviews() {
       Api.get('companies/' + this.$route.params.id + '/reviews')
         .then(response => {
-          console.log(this.$route.params.id)
+          console.log(response.data)
           this.reviews = response.data
         })
         .then(response => {

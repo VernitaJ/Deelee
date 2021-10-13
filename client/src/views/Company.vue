@@ -16,10 +16,13 @@ import reviews from '../components/Reviews.vue'
 export default {
   components: { companies, reviews },
   name: 'CompanyPage',
+  props: {
+    user: Object
+  },
   data() {
     return {
       message: 'none',
-      company: []
+      company: {}
     }
   },
   mounted() {
@@ -29,11 +32,9 @@ export default {
     getcompany() {
       Api.get('companies/' + this.$route.params.id)
         .then((response) => {
-          console.log(response.data.company)
           this.company = response.data
         })
         .catch((error) => {
-          this.company = []
           console.log(error)
         })
     }

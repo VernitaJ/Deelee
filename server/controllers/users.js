@@ -8,8 +8,8 @@ router.get("/api/users", function (req, res, next) {
   user
     .find()
     .then((response) => {
-      res.json({
-        response,
+      res.status(200).json({
+        response
       });
     })
     .catch((error) => {
