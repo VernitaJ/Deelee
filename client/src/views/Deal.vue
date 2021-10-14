@@ -9,7 +9,7 @@
           alt="Card image"
         />
         <div class="card-body-deal">
-          <h1 class="card-title">{{ deal.name }}</h1>
+          <h3 class="card-title">{{ deal.name }}</h3>
           <b-card-sub-title class="mb-2"
             >Offered by
             <a v-bind:href="'/companies/' + deal.company._id ">{{

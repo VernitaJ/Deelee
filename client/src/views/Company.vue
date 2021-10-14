@@ -3,7 +3,14 @@
     <b-img src="/images/Deelee.png" class="center"> </b-img>
     <companies v-bind:company="company" />
     <div class="reviews">
+      <div class="card-deck">
+       <div class="card-body">
       <reviews v-bind:user="user.id"/>
+       </div>
+        <div class="card-body">
+      <deals/>
+        </div>
+    </div>
     </div>
   </div>
 </template>
@@ -12,9 +19,10 @@
 import { Api } from '@/Api'
 import companies from '../components/getCompany.vue'
 import reviews from '../components/Reviews.vue'
+import deals from '../views/ListOfDeals.vue'
 
 export default {
-  components: { companies, reviews },
+  components: { companies, reviews, deals },
   name: 'CompanyPage',
   props: {
     user: Object
@@ -67,10 +75,7 @@ export default {
 .reviews {
   max-width: 93%;
   margin: 10px auto;
-  background: #343633;
   text-align: center;
-  padding: 5px;
   border-radius: 5px;
-  color: white;
 }
 </style>
