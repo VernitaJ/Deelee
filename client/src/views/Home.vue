@@ -22,12 +22,12 @@ export default {
   mounted() {
     this.getDeals()
   },
-  created() {
-    // user is not authorized
-    if (localStorage.getItem('token') === null) {
-      this.$router.push('/login')
-    } else console.log('there is a user token')
-  },
+  // created() {
+  //   // user is not authorized
+  //   if (localStorage.getItem('token') === null) {
+  //     this.$router.push('/login')
+  //   } else console.log('there is a user token')
+  // },
   methods: {
     getMessage() {
       Api.get('/')
