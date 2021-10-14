@@ -4,12 +4,8 @@
       <b-img src="/images/Deelee.png"></b-img>
     </div>
     <div class="main">
-      <div class="button">
-        <button v-on:click="handleToggle(true)">LogIn</button>
-      </div>
-      <div class="button1">
-        <button v-on:click="handleToggle(false)">SignUp</button>
-      </div>
+        <button class="button-1" v-on:click="handleToggle(true)">LogIn</button>
+        <button class="button-2" v-on:click="handleToggle(false)">SignUp</button>
       <div v-if="signIn">
         <sign-in @handleLogin="handleLogin()" :v-bind="signIn" />
       </div>
@@ -49,21 +45,21 @@ export default {
   border-radius: 10px;
   margin-top: 10px;
 }
-.button button {
-  color: white;
+ .button-1 {
+   color: white;
   background-color: #248c86;
   padding: 5px 32px;
   text-align: center;
-  margin: 5px 80px;
+  margin: auto;
   border: none;
   float: left;
 }
-.button1 button {
+.button-2 {
   color: white;
   background-color: #35a6be;
   padding: 5px 32px;
   text-align: center;
-  margin: 5px 80px;
+  margin: auto;
   border: none;
   float: right;
 }

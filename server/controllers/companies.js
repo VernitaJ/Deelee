@@ -8,7 +8,7 @@ var Review = require("../models/review");
 router.get("/api/companies", function (req, res, next) {
   Company.find(function (err, companies) {
     if (err) {
-      return next(err);
+      return res.status(500).send(err);
     }
     res.json({ companies: companies });
     res.status(200);
@@ -58,7 +58,7 @@ router.post("/api/companies", function (req, res, next) {
   var company = new Company(req.body);
   company.save(function (err) {
     if (err) {
-      return next(err);
+      return res.status(500).send(err);;
     }
     console.log("New Company ", company.name, "created");
     return res.status(201).json(company);
@@ -72,7 +72,7 @@ router.get("/api/companies/category/:category", function (req, res, next) {
     company
   ) {
     if (err) {
-      return console.log(err);
+      return res.status(500).send(err);
     }
     console.log("success");
     return res.status(200).json(company);
@@ -148,7 +148,7 @@ router.post("/api/companies/:id/reviews", function (req, res, next) {
 router.delete("/api/companies", function (req, res) {
   Company.deleteMany(function (err, company) {
     if (err) {
-      return next(err);
+      return res.status(500).send(err);;
     }
     console.log("Deleted all instances of Company");
     res.status(200).json(company);
@@ -159,7 +159,7 @@ router.delete("/api/companies/:id", function (req, res, next) {
   var id = req.params.id;
   Company.findByIdAndDelete(id, function (err, company) {
     if (err) {
-      return next(err);
+      return res.status(500).send(err);
     }
     if (company == null) {
       return res.status(404).json({ message: "Company not found" });
@@ -177,7 +177,7 @@ router.delete(
       { $pull: { deals: { _id: req.params.deal_id } } },
       function (err, company) {
         if (err) {
-          return next(err);
+          return res.status(500).send(err);
         }
         if (company == null) {
           return res.status(404).json({ message: "Company not found" });
@@ -209,7 +209,7 @@ router.put("/api/companies/:id", (req, res) => {
   var id = req.params.id;
   Company.findById(id, function (err, company) {
     if (err) {
-      return next(err);
+      return res.status(500).send(err);
     }
     if (company == null) {
       return res.status(404).json({ message: "Company not found" });

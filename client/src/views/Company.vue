@@ -22,7 +22,22 @@ export default {
   data() {
     return {
       message: 'none',
-      company: {}
+      company: {
+        name: '',
+        address: {
+          street: '',
+          number: '',
+          postcode: '',
+          city: ''
+        },
+        contact: {
+          email: '',
+          phone: ''
+        },
+        category: '',
+        deals: '',
+        reviews: ''
+      }
     }
   },
   mounted() {
@@ -51,10 +66,10 @@ export default {
 }
 .reviews {
   max-width: 93%;
-  margin: 30px auto;
+  margin: 10px auto;
   background: #343633;
-  text-align: left;
-  padding: 20px;
+  text-align: center;
+  padding: 5px;
   border-radius: 5px;
   color: white;
 }

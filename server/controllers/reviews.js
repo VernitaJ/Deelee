@@ -14,7 +14,7 @@ router.post("/api/reviews", async (req, res, next) => {
     );
     res.status(200).json(savedReview);
   } catch (err) {
-    return next(err);
+    return res.status(500).send(err);
   }
 });
 
@@ -33,7 +33,7 @@ router.get("/api/reviews", async (req, res, next) => {
   try {
     await Review.find(function (err, reviews) {
       if (err) {
-        return next(err);
+        return res.status(500).send(err);
       }
       res.status(200).json({ reviews: reviews });
     });
@@ -47,7 +47,7 @@ router.delete("/api/reviews", async (req, res, next) => {
   try {
     await Review.deleteMany(function (err, review) {
       if (err) {
-        return next(err);
+        return res.status(500).send(err);
       }
       res.status(200).json(review);
     });

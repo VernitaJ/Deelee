@@ -5,25 +5,29 @@ const user = require("../models/user")
 const jwt = require('jsonwebtoken');
 
 //Registeration
-router.post("/api/users", function (req, res, next) {
+router.post("/api/users", async (req, res, next) => {
     const newUser = new user({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        age: req.body.age,
-        location: req.body.location,
-        email: req.body.email,
-        password: bcrypt.hashSync(req.body.password, 10)
-      })
-      newUser.save(err => {
-        if (err) {
-          return res.status(400).json({
-            title: 'error',
-            error: 'email in use'
-          })
-        }
-        return res.status(200).send(newUser);
-      })
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      age: req.body.age,
+      location: req.body.location,
+      email: req.body.email,
+      password: bcrypt.hashSync(req.body.password, 10)
     })
+    try {
+      var savedUser = await newUser.save();
+      res.status(200).json({
+        savedUser,
+        title: 'Signup Success' })
+    } 
+    catch (err) {
+      return res.status(400).json({
+        title: 'error',
+        error: 'email in use'
+      })
+    }
+    });
+
 //Login
 router.post('/api/users/login', (req, res, next) => {
     user.findOne({ email: req.body.email }, (err, user) => {
@@ -45,11 +49,19 @@ router.post('/api/users/login', (req, res, next) => {
         })
       }
       //IF ALL IS GOOD create a token and send to frontend
+      try {
       let token = jwt.sign({ userId: user._id}, 'secretkey');
       return res.status(200).json({
         title: 'login sucess',
         token: token
       })
+    } 
+    catch (err) {
+      return res.status(400).json({
+        title: 'error',
+        error: 'Unable To Login'
+      })
+    }
     })
   })
   

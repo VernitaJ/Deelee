@@ -1,30 +1,31 @@
 <template>
   <div>
-    <h4>Reviews</h4>
-
-     <div v-if="loading" class="loading">
-      {{text}}
+    <div v-if="loading" class="loading">
+      {{ text }}
     </div>
-
     <div v-if="loaded" class="success">
-      <div class="card">
-            <div v-for="review in reviews" v-bind:key="review.id">
-                <img src="https://source.unsplash.com/random/80x50/?img=1" class="picture"/>
-                <p>{{review.title}}</p>
-                <p>{{review.description}}</p>
-                <button v-if="review.user === user">Update</button>
-    <div>
-       <b-form-rating v-model="value"></b-form-rating>
-       <p class="mt-2">Value: {{ value }}</p>
-    </div>
-             </div>
+      <h4>Reviews</h4>
+      <div v-for="review in reviews" v-bind:key="review.id">
+        <div class="card">
+          <img
+            class="card-img-top"
+            src="https://source.unsplash.com/random/80x50/?img=1"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <b-form-rating id="rating-md-no-border" variant="warning" v-model="review.stars" no-border></b-form-rating>
+            <h5 class="card-title">{{ review.title }}</h5>
+            <p class="card-text">{{ review.description }}</p>
+          </div>
+          <button v-if="review.user === user">Update</button>
+          <div></div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
 import { Api } from '@/Api'
 
 export default {
@@ -47,51 +48,56 @@ export default {
   methods: {
     getReviews() {
       Api.get('companies/' + this.$route.params.id + '/reviews')
-        .then(response => {
+        .then((response) => {
           console.log(response.data)
           this.reviews = response.data
         })
-        .then(response => {
+        .then((response) => {
           if (this.reviews.length > 0) {
             this.loading = false
             this.loaded = true
           } else this.text = 'No reviews have been added yet. Be the first!'
         })
-        .catch(error => {
+        .catch((error) => {
           this.message = error
           console.log(error)
         })
     }
   }
 }
-
 </script>
 
 <style scoped>
-.aform{
-margin-left: auto;
-width: 60%;
-}
 .success {
- max-width: 80%;
- font-size: 1.5em;
+  max-width: 80%;
+  font-size: 1.5em;
   margin: 10px auto;
-  text-align: left;
+  text-align: center;
 }
 .card {
-box-shadow: 0 10px 8px 0 rgba(255, 255, 255, 0.178);
-transition: 0.3s;
-padding: 2%;
-border: 2px solid green;
-color: black;
+  box-shadow: 0 10px 8px 0 rgba(255, 255, 255, 0.178);
+  transition: 0.3s;
+  padding: 2%;
+  border: 2px solid green;
+  color: black;
+  margin: 20px;
 }
 .card:hover {
-   box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2);
 }
 .picture {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 20%;
+}
+.card-body {
+  background-color: white;
+  color: black;
+  text-align: left;
+}
+.card-img-top {
+  width: 25%;
+  margin: 10px auto;
 }
 </style>
