@@ -1,17 +1,15 @@
 <template>
   <div id="app">
-    <div id="nav" v-if="isLoggedIn">
-      <nav class="navigation">
-        <div class="home-link">
-          <router-link class="item" to="/"
-            ><img class="icon" src="../public/images/Icon.png"
-          /></router-link>
-        </div>
-        <div class="profile-link">
-          <router-link class="item-profile" to="/profile">Profile</router-link>
-          <button class="item" @click="logout">Log out</button>
-        </div>
-      </nav>
+    <div v-if="isLoggedIn">
+      <b-navbar type="dark" variant="dark" class="navigation">
+        <b-navbar-brand class="item" to="/"
+          ><img class="icon" src="../public/images/Icon.png"
+        /></b-navbar-brand>
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item class="nav-item" href="/profile">Profile</b-nav-item>
+          <b-nav-item class="nav-item" @click="logout">Log out</b-nav-item>
+        </b-navbar-nav>
+      </b-navbar>
       <router-view v-bind:user="user" />
     </div>
     <div v-else>
@@ -76,12 +74,9 @@ export default {
   color: #106877;
 }
 .navigation {
-  background-color: rgb(1, 1, 1, 0.82);
-  display: flex;
-  position: relative;
-  flex-direction: row;
-  top: 0;
-  overflow: auto;
+  padding: 0;
+  height: 80px;
+  font-size: 25px;
 }
 .home-link {
   align-self: flex-start;
@@ -103,6 +98,9 @@ export default {
   padding-top: 0;
   margin: 0 0 0 40px;
 }
+.ml-auto {
+  margin-right: 100px;
+}
 .item {
   display: inline-block;
   text-align: center;
@@ -114,8 +112,8 @@ export default {
   font-size: 17px;
   font-weight: bolder;
 }
-#nav a.item-profile{
-  background:#258a74;
+#nav a.item-profile {
+  background: #258a74;
   padding: 10px;
 }
 html body {

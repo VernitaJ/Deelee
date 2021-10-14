@@ -11,7 +11,7 @@
     <br />
     <GmapMap
       ref="mapRef"
-      :zoom="15"
+      :zoom="14"
       :center="center"
       :clickable="true"
       mapId="3b1d35be461c3ce8"
@@ -195,13 +195,13 @@ export default {
   height: 35vh;
 }
 .map {
-  width: 80%;
+  width: 90%;
   height: 900px;
-  margin-left: 5em;
+  margin-left: 3em;
   margin-top: 0;
 }
 
-@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (-webkit-device-pixel-ratio: 3) {
+@media only screen and (min-device-width: 360px) and (max-device-height: 736px) and (-webkit-device-pixel-ratio: 3) {
   .map {
     width: 100%;
     height: 100vh;
