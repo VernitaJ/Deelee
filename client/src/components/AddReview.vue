@@ -173,4 +173,8 @@ export default {
 .button-reviews {
  background-color:#258a74;
 }
+.container {
+  background-color: #343633;
+  opacity: 95%;
+}
 </style>
