@@ -76,10 +76,13 @@ export default {
   },
   methods: {
     createCompany() {
+      console.log(this.contact.email)
       const newCompany = {
         name: this.name,
-        email: this.contact.email,
-        phone: this.contact.phone,
+        contact: {
+          email: this.contact.email,
+          phone: this.contact.phone
+        },
         category: this.category,
         position: this.position
       }
