@@ -1,37 +1,35 @@
 <template>
-<div>
-  <div class="card-deck">
-    <div class="card">
-      <div class="card-body">
-        <b-icon icon="briefcase-fill" font-scale="2"></b-icon>
-        <h3 class="card-title">{{ company.name }}</h3>
-        <b-icon icon="tag-fill" font-scale="2"></b-icon>
-        <h3 class="card-title">{{ company.category }}</h3>
+  <div>
+    <div class="card-deck">
+      <div class="card">
+        <div class="card-body">
+          <b-icon icon="briefcase-fill" font-scale="2" id="icon"></b-icon>
+          <h1 class="card-title text-info">{{ company.name }}</h1>
+          <b-icon icon="tag-fill" font-scale="2" id="icon"></b-icon>
+          <h4 class="card-title">{{ company.category }}</h4>
+        </div>
       </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <b-icon icon="envelope-fill" font-scale="2"></b-icon>
-        <h3 class="card-title">{{ company.contact.email }}</h3>
-         <b-icon icon="telephone-fill" font-scale="2"></b-icon>
-        <h3 class="card-title">{{ company.contact.phone }}</h3>
+      <div class="card">
+        <div class="card-body">
+          <b-icon icon="envelope-fill" font-scale="2" id="icon"></b-icon>
+          <h3 class="card-title">{{ company.contact.email }}</h3>
+          <b-icon icon="telephone-fill" font-scale="2" id="icon"></b-icon>
+          <h3 class="card-title">{{ company.contact.phone }}</h3>
+        </div>
       </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <span @mouseover="hover = true" @mouseleave="hover = false">
-          <b-icon icon="geo-alt-fill" font-scale="2"></b-icon>
-        </span>
-        <span v-if="hover">
-          <h3>{{ company.position.lat }}</h3>
-        </span>
-        <span v-if="hover">
-          <h3>{{ company.position.lng }}</h3>
-        </span>
+      <div class="card">
+        <div class="card-body">
+          <span @mouseover="hover = true" @mouseleave="hover = false">
+            <b-icon icon="geo-alt-fill" font-scale="2" id="icon"></b-icon>
+          </span>
+          <span v-if="hover" id="hover-position">
+            <h5>{{ company.position.lat }}</h5>
+            <h5>{{ company.position.lng }}</h5>
+          </span>
+        </div>
       </div>
     </div>
   </div>
-   </div>
 </template>
 
 <script>
@@ -47,14 +45,18 @@ export default {
 </script>
 <style>
 .card-body {
-  background: #343633;
+  background: #2b3133;
   color: white;
 }
 .card-deck {
-  margin: 50px auto;
+  margin: 5px auto;
   background: #f7fff1;
   text-align: center;
-  padding: 40px;
+  padding: 10px;
   border-radius: 5px;
+}
+#icon {
+  margin-bottom: 10px;
+  height: 11%;
 }
 </style>

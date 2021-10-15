@@ -9,7 +9,12 @@
         />
         <div class="card-body-list">
           <h5 class="card-title">{{ deal.name }}</h5>
-          <p class="card-text">{{ deal.description }}</p>
+          <b-icon
+            icon="hand-thumbs-up"
+            font-scale="1"
+            variant="success"
+          ></b-icon>
+          {{ deal.support }}
         </div>
       </div>
     </div>
@@ -58,7 +63,7 @@ export default {
   text-decoration: none;
 }
 .deals {
-  max-width: 90%;
+  max-width: 70%;
   font-size: 1.5em;
   margin: 10px auto;
   text-align: center;
@@ -78,6 +83,7 @@ export default {
 }
 .card-body-list {
   color: white;
+  margin-left: 20%;
   text-align: left;
 }
 </style>

@@ -72,8 +72,8 @@ export default {
 
 <style scoped>
 .success {
-  max-width: 80%;
-  font-size: 1.5em;
+  max-width: 60%;
+  font-size: 1em;
   margin: 10px auto;
   text-align: center;
 }
@@ -88,12 +88,6 @@ export default {
 }
 .card:hover {
   box-shadow: 0 3px 3px 0 rgba(255, 255, 255, 0.2);
-}
-.picture {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 20%;
 }
 .card-body {
   background-color: rgba(255, 255, 255, 0.178);

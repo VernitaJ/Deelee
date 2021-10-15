@@ -181,6 +181,9 @@ export default {
   border: none;
   border-radius: 5px;
 }
+.mb-2 {
+  color: white;
+}
 .delete-button {
   margin: 1em;
   padding: 5px;

@@ -5,11 +5,11 @@
     <div class="data">
       <div class="card-deck">
         <div class="card-body">
-          <h4>Reviews</h4>
+          <h2>Reviews</h2>
           <reviews v-bind:user="user.id" />
         </div>
         <div class="card-body">
-          <h4>Deals</h4>
+          <h2>Deals</h2>
           <deals />
         </div>
       </div>
@@ -79,5 +79,9 @@ export default {
   margin: 10px auto;
   text-align: center;
   border-radius: 5px;
+}
+div h2 {
+  margin: 40px;
+  color: rgb(51, 221, 213);
 }
 </style>
