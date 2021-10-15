@@ -4,7 +4,7 @@
       <div class="card-deals">
         <img
           class="card-img-top-deal"
-          src="https://source.unsplash.com/random/80x50/?img=1"
+          src="https://source.unsplash.com/80x50/?food"
           alt="Card image cap"
         />
         <div class="card-body-list">
@@ -63,9 +63,8 @@ export default {
   text-decoration: none;
 }
 .deals {
-  max-width: 70%;
+  max-width: 75vh;
   font-size: 1.5em;
-  margin: 10px auto;
   text-align: center;
 }
 .card-img-top-deal {
@@ -74,9 +73,8 @@ export default {
 }
 .card-deals {
   box-shadow: 0 1px 1px 0 rgba(255, 255, 255, 0.178);
-  transition: 0.3s;
   padding: 4%;
-  border: 2px solid rgb(27, 167, 185);
+  border: 2px solid rgb(140, 231, 245);
   color: black;
   margin: 20px;
   background-color: rgba(1, 1, 1, 0.15);

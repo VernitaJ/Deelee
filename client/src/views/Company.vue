@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-img src="/images/Deelee.png" class="center"> </b-img>
+    <b-img src="/images/Deelee.png" class="logo"> </b-img>
     <companies v-bind:company="company" />
     <div class="data">
       <div class="card-deck">
