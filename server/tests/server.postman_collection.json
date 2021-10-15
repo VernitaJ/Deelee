@@ -17,7 +17,7 @@
 							"});\r",
 							"\r",
 							"var data = pm.response.json();\r",
-							"pm.environment.set(\"user_id\", data._id);"
+							"pm.environment.set(\"user_id\", data.id);"
 						],
 						"type": "text/javascript"
 					}
@@ -64,7 +64,7 @@
 			"response": []
 		},
 		{
-			"name": "POST / user A Copy",
+			"name": "POST / user B",
 			"event": [
 				{
 					"listen": "test",
@@ -75,7 +75,7 @@
 							"});\r",
 							"\r",
 							"var data = pm.response.json();\r",
-							"pm.environment.set(\"user_id\", data._id);"
+							"pm.environment.set(\"user_id\", data.savedUser._id);"
 						],
 						"type": "text/javascript"
 					}
@@ -101,7 +101,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"firstName\" : \"Barry\",\r\n    \"lastName\" : \"Ridge\",\r\n    \"age\" : 26,\r\n    \"location\" : \"Gothenburg\",\r\n    \"email\" : \"barry@sample.com\",\r\n    \"password\" : \"barry\"\r\n}",
+					"raw": "{\r\n    \"firstName\" : \"Jennifer\",\r\n    \"lastName\" : \"Bridge\",\r\n    \"age\" : 26,\r\n    \"location\" : \"Gothenburg\",\r\n    \"email\" : \"jenny@sample.com\",\r\n    \"password\" : \"jenny\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -274,7 +274,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Company B\",\r\n    \"position\" : { \"lat\": 57.71301017059749, \"lng\": 11.914426839976358 },\r\n    \"category\" : \"restaurant\"\r\n}",
+					"raw": "{\r\n    \"name\" : \"Firkins\",\r\n    \"position\" : { \"lat\": 57.71301017059749, \"lng\": 11.914426839976358 },\r\n    \"category\" : \"Pub\",\r\n    \"contact\": {\r\n        \"email\" : \"burgers@sample.com\",\r\n        \"phone\" : \"072-072-0722\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -386,7 +386,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Björka Secondhand\",\r\n    \"position\" : { \"lat\": 57.73001017059749, \"lng\": 11.914426839976358 },\r\n    \"category\" : \"Clothing Store\",\r\n    \"contact\": {\r\n        \"email\" : \"clothes@sample.com\",\r\n        \"phone\" : \"072-072-0722\"\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\" : \"H&M\",\r\n    \"position\" : { \"lat\": 57.76001017059749, \"lng\": 11.916426839976358 },\r\n    \"category\" : \"Clothing Store\",\r\n    \"contact\": {\r\n        \"email\" : \"clothes@sample.com\",\r\n        \"phone\" : \"072-072-0722\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -833,7 +833,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"title\":\"A title for a review\",\r\n   \"description\":\"This is a review\",\r\n   \"stars\":3,\r\n   \"user\": \"{{user_id}}\",\r\n   \"purchase\": {\r\n      \"item\": \"An item\",\r\n      \"company\": \"Company A\",\r\n      \"date\": \"{{date}}\"\r\n    }\r\n}",
+					"raw": "{\r\n   \"title\":\"A title for a review\",\r\n   \"description\":\"This is a review\",\r\n   \"stars\":3,\r\n   \"user\": \"{{user_id}}\",\r\n   \"purchase\": {\r\n      \"item\": \"An item\",\r\n      \"company\": \"Company A\",\r\n      \"date\": \"2021-10-09\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1197,7 +1197,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"title\":\"A title for a review\",\r\n   \"description\":\"This is a review\",\r\n   \"stars\":3,\r\n   \"purchase\": {\r\n      \"user\": \"Ken\",\r\n      \"item\": \"An item\",\r\n      \"company\": \"Company A\",\r\n      \"date\": \"{{date}}\"\r\n    }\r\n}",
+					"raw": "{\"title\":\"A title for a review\",\r\n   \"description\":\"This is a review from Ken\",\r\n   \"stars\":3,\r\n   \"user\": \"{{user_id}}\",\r\n   \"purchase\": {\r\n      \"item\": \"An item\",\r\n      \"company\": \"Company A\",\r\n      \"date\": \"2021-10-05\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
