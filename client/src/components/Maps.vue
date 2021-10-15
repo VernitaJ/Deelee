@@ -175,10 +175,10 @@ export default {
 
 <style>
 .info-content {
-  padding: 1px;
+  padding: 5px;
   color: rgb(255, 255, 255);
   font-size: 20px;
-  background-color: rgb(25, 131, 145);
+  background-color: rgba(24, 96, 104, 0.9);
   border-radius: 5px;
   text-decoration: none;
 }
@@ -189,7 +189,8 @@ export default {
   margin-bottom: 0;
 }
 .infowindow-img {
-  width: 30%;
+  width: 40%;
+  margin: 5px auto;
 }
 .logo {
   width: 35vh;
