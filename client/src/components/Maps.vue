@@ -175,11 +175,12 @@ export default {
 
 <style>
 .info-content {
-  margin: 5px;
-  padding: 2px;
-  color: whitesmoke;
+  padding: 1px;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
   background-color: rgb(25, 131, 145);
   border-radius: 5px;
+  text-decoration: none;
 }
 .input-pan-to {
   width: 200px;

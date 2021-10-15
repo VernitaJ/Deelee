@@ -1,20 +1,19 @@
 <template>
   <div>
-    <h4>Deals</h4>
-     <div v-for="deal in deals" v-bind:key="deal.id" class="deals">
-         <div class="card-deals">
-            <img
-            class="card-img-top-deal"
-            src="https://source.unsplash.com/random/80x50/?img=1"
-            alt="Card image cap"
-          />
-          <div class="card-body-list">
-            <h5 class="card-title">{{ deal.name }}</h5>
-            <p class="card-text">{{ deal.support }}</p>
-          </div>
-         </div>
-     </div>
-     </div>
+    <div v-for="deal in deals" v-bind:key="deal.id" class="deals">
+      <div class="card-deals">
+        <img
+          class="card-img-top-deal"
+          src="https://source.unsplash.com/random/80x50/?img=1"
+          alt="Card image cap"
+        />
+        <div class="card-body-list">
+          <h5 class="card-title">{{ deal.name }}</h5>
+          <p class="card-text">{{ deal.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -31,20 +30,19 @@ export default {
   mounted() {
     console.log('Page is loaded!')
     Api.get('companies/' + this.$route.params.id + '/deals')
-      .then(response => {
+      .then((response) => {
         console.log(response)
         this.deals = response.data
       })
-      .catch(error => {
+      .catch((error) => {
         this.deals = []
         console.log(error)
       })
   }
 }
-
 </script>
 <style>
-.deals h2{
+.deals h2 {
   background: #f4f4f4;
   padding: 20px;
   border-radius: 10px;
@@ -56,11 +54,11 @@ export default {
 .deals h2:hover {
   background: #ddd;
 }
-.deals a{
+.deals a {
   text-decoration: none;
 }
 .deals {
-  max-width: 80%;
+  max-width: 90%;
   font-size: 1.5em;
   margin: 10px auto;
   text-align: center;
@@ -70,17 +68,16 @@ export default {
   margin: 10px auto;
 }
 .card-deals {
-  box-shadow: 0 10px 8px 0 rgba(255, 255, 255, 0.178);
+  box-shadow: 0 1px 1px 0 rgba(255, 255, 255, 0.178);
   transition: 0.3s;
-  padding: 2%;
-  border: 2px solid green;
+  padding: 4%;
+  border: 2px solid rgb(27, 167, 185);
   color: black;
   margin: 20px;
-  background-color: white;
+  background-color: rgba(1, 1, 1, 0.15);
 }
 .card-body-list {
-  background-color: white;
-  color: black;
+  color: white;
   text-align: left;
 }
 </style>

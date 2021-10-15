@@ -2,15 +2,17 @@
   <div>
     <b-img src="/images/Deelee.png" class="center"> </b-img>
     <companies v-bind:company="company" />
-    <div class="reviews">
+    <div class="data">
       <div class="card-deck">
-       <div class="card-body">
-      <reviews v-bind:user="user.id"/>
-       </div>
         <div class="card-body">
-      <deals/>
+          <h4>Reviews</h4>
+          <reviews v-bind:user="user.id" />
         </div>
-    </div>
+        <div class="card-body">
+          <h4>Deals</h4>
+          <deals />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -72,7 +74,7 @@ export default {
   height: 20%;
   width: 15%;
 }
-.reviews {
+.data {
   max-width: 93%;
   margin: 10px auto;
   text-align: center;

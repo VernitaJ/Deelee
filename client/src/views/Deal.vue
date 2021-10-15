@@ -4,7 +4,7 @@
     <div class="card-group-deal">
       <div class="card">
         <img
-          class="card-imp-top"
+          class="card-img-top"
           src="https://picsum.photos/600/300/?image=25"
           alt="Card image"
         />
@@ -12,7 +12,7 @@
           <h3 class="card-title">{{ deal.name }}</h3>
           <b-card-sub-title class="mb-2"
             >Offered by
-            <a v-bind:href="'/companies/' + deal.company._id ">{{
+            <a v-bind:href="'/companies/' + deal.company._id">{{
               deal.company.name
             }}</a></b-card-sub-title
           >
@@ -20,10 +20,7 @@
             {{ tag }}
           </div>
           <b-card-sub-title class="mb-2"
-            >Added by
-            {{
-              deal.user.firstName || ""
-            }}</b-card-sub-title
+            >Added by {{ deal.user.firstName || '' }}</b-card-sub-title
           >
           <button v-if="unclicked" class="like-button" @click="addSupport()">
             <b-icon
@@ -45,11 +42,22 @@
           </button>
         </div>
         <div v-if="adding">
-          <add-review v-bind:adding="adding" v-bind:user="user" v-bind:deal="deal" @toggle="toggle()" />
+          <add-review
+            v-bind:adding="adding"
+            v-bind:user="user"
+            v-bind:deal="deal"
+            @toggle="toggle()"
+          />
         </div>
-        <button class="delete-button" v-if="user.id === deal.user._id" @click="delDeal()">DELETE</button>
       </div>
     </div>
+    <button
+      class="delete-button"
+      v-if="user.id === deal.user._id"
+      @click="delDeal()"
+    >
+      DELETE
+    </button>
   </div>
 </template>
 
@@ -152,26 +160,17 @@ export default {
 .card-body-deal {
   background-color: #085c4d;
   color: white;
-}
-.card-group-deal {
-  max-width: 1000px;
-  margin: 5px auto;
-  text-align: center;
-  padding: 10px;
   border-radius: 10px;
 }
-.container {
-  position: fixed;
-  width: 50%;
-  height: 70%;
-  top: 10vh;
+.card-img-top {
+  border-radius: 15px;
+}
+.card-group-deal {
+  max-width: 75vh;
+  margin: 0px auto;
+  text-align: center;
   padding: 10px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.75);
-  cursor: pointer; /* Add a pointer on hover */
-  overflow: auto;
+  border-radius: 30px;
 }
 .add-button {
   float: right;

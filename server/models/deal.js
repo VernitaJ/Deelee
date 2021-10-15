@@ -3,7 +3,8 @@ var Schema = mongoose.Schema;
 
 var dealSchema = new Schema(
   {
-    name: { type: String, required: true },
+    title: { type: String, required: true },
+    description: { type: String },
     tag: [{ type: String }],
     support: { type: Number },
     position: {
