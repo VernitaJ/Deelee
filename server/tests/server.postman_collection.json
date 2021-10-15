@@ -6,6 +6,181 @@
 	},
 	"item": [
 		{
+			"name": "POST / user A",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", () => {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var data = pm.response.json();\r",
+							"pm.environment.set(\"user_id\", data._id);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\" : \"Barry\",\r\n    \"lastName\" : \"Ridge\",\r\n    \"age\" : 26,\r\n    \"location\" : \"Gothenburg\",\r\n    \"email\" : \"barry@sample.com\",\r\n    \"password\" : \"barry\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/users",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST / user A Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", () => {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var data = pm.response.json();\r",
+							"pm.environment.set(\"user_id\", data._id);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\" : \"Barry\",\r\n    \"lastName\" : \"Ridge\",\r\n    \"age\" : 26,\r\n    \"location\" : \"Gothenburg\",\r\n    \"email\" : \"barry@sample.com\",\r\n    \"password\" : \"barry\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/users",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET / users/ :id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/users/{{user_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "POST / company A",
 			"event": [
 				{
@@ -43,7 +218,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Company A\",\r\n    \"position\" : { \"lat\": 57.72522833874753, \"lng\": 11.943609274058389 },\r\n    \"category\" : \"pub\"\r\n}",
+					"raw": "{\r\n    \"name\" : \"Burger Co Ltd\",\r\n    \"position\" : { \"lat\": 57.72522833874753, \"lng\": 11.943609274058389 },\r\n    \"category\" : \"Restaurant\",\r\n    \"contact\": {\r\n        \"email\" : \"burgers@sample.com\",\r\n        \"phone\" : \"072-072-0722\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -155,7 +330,63 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Company C\",\r\n    \"position\" : { \"lat\": 57.73001017059749, \"lng\": 11.914426839976358 },\r\n    \"category\" : \"clothing\"\r\n}",
+					"raw": "{\r\n    \"name\" : \"Björka Secondhand\",\r\n    \"position\" : { \"lat\": 57.73001017059749, \"lng\": 11.914426839976358 },\r\n    \"category\" : \"Clothing Store\",\r\n    \"contact\": {\r\n        \"email\" : \"clothes@sample.com\",\r\n        \"phone\" : \"072-072-0722\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/companies",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"companies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST / company C Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", () => {\r",
+							"  pm.response.to.have.status(201);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Björka Secondhand\",\r\n    \"position\" : { \"lat\": 57.73001017059749, \"lng\": 11.914426839976358 },\r\n    \"category\" : \"Clothing Store\",\r\n    \"contact\": {\r\n        \"email\" : \"clothes@sample.com\",\r\n        \"phone\" : \"072-072-0722\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -308,7 +539,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Dinner deal\",\r\n    \"tag\": [\"restaurant\", \"salad\", \"backaplan\"],\r\n    \"support\": 24,\r\n    \"company\": \"{{company_id}}\",\r\n    \"position\": { \"lat\": 57.72192829286142, \"lng\": 11.963178671031045 },\r\n    \"user\": \"6154a234234a994080bd3ec8\"\r\n}",
+					"raw": "{\r\n    \"title\": \"Sandwich - 3 for 2\",\r\n    \"description\": \"Hella lovely sandwiches here\",\r\n    \"tag\": [\"restaurant\", \"salad\", \"backaplan\"],\r\n    \"support\": 24,\r\n    \"category\": \"Food\",\r\n    \"company\": \"{{company_id}}\",\r\n    \"position\": { \"lat\": 57.72522833874753, \"lng\": 11.943609274058389 },\r\n    \"user\": \"6154a234234a994080bd3ec8\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -366,7 +597,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"50% sale\",\r\n    \"tag\": [\"clothing\", \"50%\", \"backaplan\"],\r\n    \"support\": 24,\r\n    \"company\": \"{{company_id}}\",\r\n    \"position\": { \"lat\": 57.71301017059749, \"lng\": 11.914426839976358 },\r\n    \"user\": \"6154a234234a994080bd3ec8\"\r\n}",
+					"raw": "{\r\n    \"title\": \"50% sale\",\r\n    \"description\": \"Hella lovely tshirts here\",\r\n    \"tag\": [\"clothing\", \"50%\", \"backaplan\"],\r\n    \"support\": 24,\r\n    \"category\": \"Clothing\",\r\n    \"company\": \"{{company_id}}\",\r\n    \"position\": { \"lat\": 57.71301017059749, \"lng\": 11.914426839976358 },\r\n    \"user\": \"6154a234234a994080bd3ec8\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -421,7 +652,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"name\": \"Sarmies - 3 for 2\",\r\n    \"tag\": [\"restaurant\", \"sandwich\", \"backaplan\"],\r\n    \"support\": 24,\r\n    \"company\": \"{{company_id}}\",\r\n    \"position\": { \"lat\": 57.72522833874753, \"lng\": 11.943609274058389 },\r\n    \"user\": \"6154a234234a994080bd3ec8\"\r\n}",
+					"raw": "{\r\n   \"title\": \"Sarmies - 3 for 2\",\r\n    \"description\": \"Hella lovely sandwiches here\",\r\n    \"tag\": [\"restaurant\", \"sandwich\", \"backaplan\"],\r\n    \"support\": 24,\r\n    \"category\": \"Food\",\r\n    \"company\": \"{{company_id}}\",\r\n    \"position\": { \"lat\": 57.72522833874753, \"lng\": 11.943609274058389 },\r\n    \"user\": \"6154a234234a994080bd3ec8\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -429,7 +660,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/api/companies/{{company_id}}/deals",
+					"raw": "{{host}}/api/companies/{{company_id}}/reviews",
 					"host": [
 						"{{host}}"
 					],
@@ -437,7 +668,7 @@
 						"api",
 						"companies",
 						"{{company_id}}",
-						"deals"
+						"reviews"
 					]
 				}
 			},
@@ -562,6 +793,125 @@
 						"{{company_id}}",
 						"deals",
 						"{{deal_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST / companies / :id / reviews",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", () => {\r",
+							"  pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"title\":\"A title for a review\",\r\n   \"description\":\"This is a review\",\r\n   \"stars\":3,\r\n   \"user\": \"{{user_id}}\",\r\n   \"purchase\": {\r\n      \"item\": \"An item\",\r\n      \"company\": \"Company A\",\r\n      \"date\": \"{{date}}\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/companies/{{company_id}}/reviews",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"companies",
+						"{{company_id}}",
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET / companies / :id / reviews",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Succesful response with json returned\", function () {\r",
+							"     pm.response.to.be.ok;\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/companies/{{company_id}}/deals",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"companies",
+						"{{company_id}}",
+						"deals"
 					]
 				}
 			},
@@ -847,7 +1197,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"title\":\"fsfasdasdasd\",\"description\":\"dsadsadasdasdadda\",\"stars\":3}",
+					"raw": "{\"title\":\"A title for a review\",\r\n   \"description\":\"This is a review\",\r\n   \"stars\":3,\r\n   \"purchase\": {\r\n      \"user\": \"Ken\",\r\n      \"item\": \"An item\",\r\n      \"company\": \"Company A\",\r\n      \"date\": \"{{date}}\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1221,6 +1571,37 @@
 		},
 		{
 			"name": "DELETE / companies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Succesful deletion with json returned\", function () {\r",
+							"     pm.response.to.be.ok;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/companies",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"companies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE / reviews",
 			"event": [
 				{
 					"listen": "test",
