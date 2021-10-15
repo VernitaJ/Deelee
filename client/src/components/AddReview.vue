@@ -58,6 +58,7 @@
         img-src="https://cdn.winsightmedia.com/platform/files/public/600x450/culinary-competition-winner-food-rb-slide.jpg"
         img-alt="Image"
         img-top
+        id="preview"
       >
         <b-card-body>
           <b-card-title>{{ input.title }}</b-card-title>
@@ -66,7 +67,7 @@
             {{ input.description }}
           </b-card-text>
         </b-card-body>
-        <b-button  class = "button-reviews" href="#"  @click="createReview()"
+        <b-button class="button-reviews" href="#" @click="createReview()"
           >Post Review</b-button
         >
       </b-card>
@@ -160,7 +161,7 @@ export default {
 .close:hover {
   color: white;
 }
-.card{
+.card {
   margin: 30px auto;
   text-align: center;
   padding: 15px;
@@ -171,10 +172,13 @@ export default {
   margin-left: 1%;
 }
 .button-reviews {
- background-color:#258a74;
+  background-color: #258a74;
 }
 .container {
   background-color: #343633;
   opacity: 95%;
+}
+#preview {
+  float: center;
 }
 </style>

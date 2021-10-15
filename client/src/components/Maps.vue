@@ -203,7 +203,7 @@ export default {
   margin-top: 0;
 }
 
-@media only screen and (min-device-width: 360px) and (max-device-height: 736px) and (-webkit-device-pixel-ratio: 3) {
+@media only screen and (min-device-width: 360px) and (max-device-height: 768px) and (-webkit-device-pixel-ratio: 3) {
   .map {
     width: 100%;
     height: 100vh;

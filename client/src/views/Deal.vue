@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-img src="/images/Deelee.png" class="center"> </b-img>
+    <b-img src="/images/Deelee.png" class="logo" alt="logo"> </b-img>
     <div class="card-group-deal">
       <div class="card">
         <img
@@ -146,6 +146,10 @@ export default {
 }
 </script>
 <style>
+.logo {
+  width: 10%;
+  height: auto;
+}
 .like-button {
   background-color: transparent;
   border: none;
