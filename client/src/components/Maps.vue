@@ -151,9 +151,9 @@ export default {
       this.$emit('toggle', {})
     },
     setContent(deal) {
-      this.content = `<div class="info-content">
-                      <a href="deals/${deal._id}">${deal.name}</a>
-                      <div>${deal.category}</div>
+      this.content = `<div class="card text-white bg-info mb-3" style="max-width: 10rem;">
+                      <a class="card-text" href="deals/${deal._id}">${deal.name}</a>
+                      <div class="card-text">${deal.company.name}</div>
                       <img src="https://picsum.photos/200" class="infowindow-img">
                       </div>`
       return this.content
@@ -175,11 +175,12 @@ export default {
 
 <style>
 .info-content {
-  margin: 5px;
-  padding: 2px;
-  color: whitesmoke;
-  background-color: rgb(25, 131, 145);
+  padding: 5px;
+  color: rgb(255, 255, 255);
+  font-size: 100%;
+  background-color: rgba(24, 96, 104, 0.9);
   border-radius: 5px;
+  text-decoration: none;
 }
 .input-pan-to {
   width: 200px;
@@ -188,7 +189,8 @@ export default {
   margin-bottom: 0;
 }
 .infowindow-img {
-  width: 30%;
+  width: 40%;
+  margin: 5px auto;
 }
 .logo {
   width: 35vh;

@@ -73,6 +73,11 @@ export default {
   text-align: center;
   color: #106877;
 }
+#app a {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+}
 .navigation {
   padding: 0;
   height: 80px;

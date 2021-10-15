@@ -4,21 +4,24 @@
       {{ text }}
     </div>
     <div v-if="loaded" class="success">
-      <h4>Reviews</h4>
       <div v-for="review in reviews" v-bind:key="review.id">
-        <div class="card">
+        <div class="card-reviews">
           <img
             class="card-img-top"
             src="https://source.unsplash.com/random/80x50/?img=1"
             alt="Card image cap"
           />
-          <div class="card-body">
-            <b-form-rating id="rating-md-no-border" variant="warning" v-model="review.stars" no-border></b-form-rating>
+          <div class="card-body-list">
+            <b-form-rating
+              id="rating-md-no-border"
+              variant="warning"
+              v-model="review.stars"
+              no-border
+            ></b-form-rating>
             <h5 class="card-title">{{ review.title }}</h5>
             <p class="card-text">{{ review.description }}</p>
           </div>
           <button v-if="review.user === user">Update</button>
-          <div></div>
         </div>
       </div>
     </div>
@@ -69,35 +72,30 @@ export default {
 
 <style scoped>
 .success {
-  max-width: 80%;
-  font-size: 1.5em;
+  max-width: 60%;
+  font-size: 1em;
   margin: 10px auto;
   text-align: center;
 }
-.card {
-  box-shadow: 0 10px 8px 0 rgba(255, 255, 255, 0.178);
+.card-reviews {
+  box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.178);
   transition: 0.3s;
   padding: 2%;
-  border: 2px solid green;
+  border: 2px solid rgb(27, 167, 185);
   color: black;
   margin: 20px;
+  background-color: rgba(1, 1, 1, 0.2);
 }
 .card:hover {
-  box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2);
-}
-.picture {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 20%;
+  box-shadow: 0 3px 3px 0 rgba(255, 255, 255, 0.2);
 }
 .card-body {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.178);
   color: black;
   text-align: left;
 }
 .card-img-top {
-  width: 25%;
+  width: 30%;
   margin: 10px auto;
 }
 </style>
