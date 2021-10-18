@@ -4,7 +4,7 @@
     <button class="cancel" @click="handleToggle">Cancel</button>
     <form class="form-container">
       <div class="form-item">
-        <input type="input" class="input" v-model="title" placeholder="Title" />
+        <input type="input" class="input" v-model="name" placeholder="Title" />
       </div>
       <div class="form-item">
         <textarea
@@ -103,7 +103,7 @@ export default {
       ],
       text: 'New Company',
       description: '',
-      title: '',
+      name: '',
       tags: [],
       support: '0',
       companies: [],
@@ -148,7 +148,7 @@ export default {
     },
     createDeal() {
       const newDeal = {
-        name: this.title,
+        name: this.name,
         description: this.description,
         tag: this.tag,
         support: this.support,
