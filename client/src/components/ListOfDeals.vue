@@ -15,6 +15,7 @@
             variant="success"
           ></b-icon>
           {{ deal.support }}
+          <a href="#" @click="getLink(deal)" />
         </div>
       </div>
     </div>
@@ -43,6 +44,11 @@ export default {
         this.deals = []
         console.log(error)
       })
+  },
+  methods: {
+    getLink(deal) {
+      return 'this'
+    }
   }
 }
 </script>

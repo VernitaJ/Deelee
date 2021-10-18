@@ -21,7 +21,7 @@
 import { Api } from '@/Api'
 import companies from '../components/getCompany.vue'
 import reviews from '../components/Reviews.vue'
-import deals from '../views/ListOfDeals.vue'
+import deals from '../components/ListOfDeals.vue'
 
 export default {
   components: { companies, reviews, deals },

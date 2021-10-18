@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="handleSubmit">
-    <h1>Log In</h1>
+    <h2 class="login">Log In</h2>
     <div class="form-group">
       <input
         type="email"
@@ -61,6 +61,10 @@ export default {
 <style>
 h1 {
   color: white;
+}
+.login {
+  color: white;
+  margin: 10px;
 }
 .label {
   color: white;
