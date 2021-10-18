@@ -13,7 +13,7 @@
             alt="Card image cap"
           />
           <div class="card-body">
-            <b-form-rating id="rating-md-no-border" variant="warning" v-model="review.stars" no-border></b-form-rating>
+            <b-form-rating class="rating" id="rating-readonly" variant="warning" v-model="review.stars" readonly></b-form-rating>
             <h5 class="card-title">{{ review.title }}</h5>
             <p class="card-text">{{ review.description }}</p>
           </div>
@@ -99,5 +99,9 @@ export default {
 .card-img-top {
   width: 25%;
   margin: 10px auto;
+}
+.rating {
+  border: none;
+  padding: 5%;
 }
 </style>
