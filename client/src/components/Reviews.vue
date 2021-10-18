@@ -99,4 +99,8 @@ export default {
   width: 30%;
   margin: 10px auto;
 }
+.rating {
+  border: none;
+  padding: 5%;
+}
 </style>
