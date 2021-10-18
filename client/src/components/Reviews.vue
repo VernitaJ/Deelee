@@ -16,9 +16,11 @@
         />
         <div class="card-body-list">
           <b-form-rating
-            id="rating-md-no-border"
+            class="mb-1 bg-transparent"
+            id="rating-readonly"
             variant="warning"
             v-model="review.stars"
+            readonly
             no-border
           ></b-form-rating>
           <h5 class="card-title">{{ review.title }}</h5>
@@ -98,9 +100,5 @@ export default {
 .card-img-top {
   width: 30%;
   margin: 10px auto;
-}
-.rating {
-  border: none;
-  padding: 5%;
 }
 </style>

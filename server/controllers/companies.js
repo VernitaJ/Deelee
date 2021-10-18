@@ -102,7 +102,7 @@ router.get("/api/companies/:id/reviews", function (req, res, next) {
 router.post("/api/companies/:id/deals", function (req, res, next) {
   Company.findById(req.params.id, function (err, company) {
     if (err) {
-      return res.status(500).send(err);
+      return res.status(500);
     }
     if (company == null) {
       return res.status(404).json({ message: "Company not found" });
@@ -110,7 +110,7 @@ router.post("/api/companies/:id/deals", function (req, res, next) {
     var deal = new Deal(req.body);
     deal.save(function (err) {
       if (err) {
-        return res.status(500).send(err);
+        return res.status(500);
       }
       console.log("Deal " + deal.name + " created.");
     });
@@ -124,7 +124,7 @@ router.post("/api/companies/:id/deals", function (req, res, next) {
 router.post("/api/companies/:id/reviews", function (req, res, next) {
   Company.findById(req.params.id, function (err, company) {
     if (err) {
-      return res.status(500).send(err);
+      return res.status(500);
     }
     if (company == null) {
       return res.status(404).json({ message: "Company not found" });
@@ -133,7 +133,7 @@ router.post("/api/companies/:id/reviews", function (req, res, next) {
     review.save(function (err) {
       if (err) {
         console.log(err)
-        return res.status(500).send(err);
+        return res.status(500);
       }
       console.log("Review " + review.title + " created.");
       // res.status(201).json(review);

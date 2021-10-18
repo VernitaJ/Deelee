@@ -67,7 +67,7 @@ export default {
 }
 </script>
 <style>
-.center {
+.logo {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -83,5 +83,12 @@ export default {
 div h2 {
   margin: 40px;
   color: rgb(51, 221, 213);
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-height: 768px) and (-webkit-device-pixel-ratio: 3) {
+  .logo {
+    width: 30%;
+    height: auto;
+  }
 }
 </style>
