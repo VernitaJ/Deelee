@@ -1,6 +1,8 @@
 <template>
   <form @submit.prevent="handleSubmit">
-    <h2 class="login">Log In</h2>
+    <div class="head">
+    <h1>Log In</h1>
+    </div>
     <div class="form-group">
       <input
         type="email"
@@ -59,8 +61,9 @@ export default {
 }
 </script>
 <style>
-h1 {
+.head h1 {
   color: white;
+  margin-top: 50px;
 }
 .login {
   color: white;

@@ -113,8 +113,9 @@ export default {
     deleteUser() {
       Api.delete(`/users/${this.user.id}`)
         .then((res) => {
+          localStorage.clear()
           console.log(res)
-          this.$router.push('/login')
+          this.$router.push('/login', this.$router.go(0))
         })
         .catch((error) => {
           console.log(error)
@@ -237,5 +238,14 @@ export default {
 }
 .form-update button {
   margin-top: 10px;
+}
+@media only screen and (min-device-width: 360px) and (max-device-height: 768px) and (-webkit-device-pixel-ratio: 3) {
+  .Logo img {
+   display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+  height: 2%;
+  }
 }
 </style>
