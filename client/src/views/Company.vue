@@ -1,16 +1,18 @@
 <template>
   <div>
-    <b-img src="/images/Deelee.png" class="center"> </b-img>
+    <b-img src="/images/Deelee.png" class="logo"> </b-img>
     <companies v-bind:company="company" />
-    <div class="reviews">
+    <div class="data">
       <div class="card-deck">
-       <div class="card-body">
-      <reviews v-bind:user="user.id"/>
-       </div>
         <div class="card-body">
-      <deals/>
+          <h2>Reviews</h2>
+          <reviews v-bind:user="user.id" />
         </div>
-    </div>
+        <div class="card-body">
+          <h2>Deals</h2>
+          <deals />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -72,10 +74,14 @@ export default {
   height: 20%;
   width: 15%;
 }
-.reviews {
+.data {
   max-width: 93%;
   margin: 10px auto;
   text-align: center;
   border-radius: 5px;
+}
+div h2 {
+  margin: 40px;
+  color: rgb(51, 221, 213);
 }
 </style>

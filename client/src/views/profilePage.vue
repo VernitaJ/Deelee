@@ -8,7 +8,10 @@
       <button
         class="button-update"
         onclick="document.getElementById('id01').style.display='block'"
-        style="width: auto">Update</button>
+        style="width: auto"
+      >
+        Update
+      </button>
       <div class="text-container">
         <div class="text">
           <div style="display: flex">
@@ -41,39 +44,40 @@
     <div id="id01" class="modal">
       <form class="modal-contents" @submit="updatingUser">
         <div class="container">
-        <div class="form-update">
+          <div class="form-update">
             <span
               onclick="document.getElementById('id01').style.display='none'"
               class="close"
               title="Close Modal"
               >&times;</span
             >
-              <input
-                type="text"
-                class="form-control"
-                v-model.lazy="firstName" placeholder="First Name"
-              />
-              <input
-                type="text"
-                class="form-control"
-                v-model.lazy="lastName"
-                placeholder="Last Name"
-              />
-              <input
-                type="number"
-                class="form-control"
-                v-model.lazy="age"
-                placeholder="Age"
-              />
-              <input
-                type="text"
-                class="form-control"
-                v-model.lazy="location"
-                placeholder="Location"
-              />
+            <input
+              type="text"
+              class="form-control"
+              v-model.lazy="firstName"
+              placeholder="First Name"
+            />
+            <input
+              type="text"
+              class="form-control"
+              v-model.lazy="lastName"
+              placeholder="Last Name"
+            />
+            <input
+              type="number"
+              class="form-control"
+              v-model.lazy="age"
+              placeholder="Age"
+            />
+            <input
+              type="text"
+              class="form-control"
+              v-model.lazy="location"
+              placeholder="Location"
+            />
             <button class="btn btn-primary btn-block">Update</button>
           </div>
-          </div>
+        </div>
       </form>
     </div>
   </div>
@@ -170,8 +174,9 @@ export default {
   color: black;
 }
 .form-data {
-  background-color: #258a74;
+  background-color: #1a6656;
   color: rgb(255, 255, 255);
+  border: 5px solid rgb(77, 124, 111);
   max-width: 800px;
   height: 450px;
   margin: 30px auto;
@@ -222,14 +227,13 @@ export default {
 }
 
 .container {
- background: none;
- margin-top: auto;
- margin-bottom: auto;
+  background: none;
+  margin-top: 20%;
+  margin-bottom: auto;
 }
 .form-update input {
-  padding:10px;
+  padding: 10px;
   margin-top: 10px;
-
 }
 .form-update button {
   margin-top: 10px;

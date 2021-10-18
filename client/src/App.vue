@@ -7,7 +7,7 @@
         /></b-navbar-brand>
         <b-navbar-nav class="ml-auto">
           <b-nav-item class="nav-item" href="/profile">Profile</b-nav-item>
-          <b-nav-item class="nav-item" @click="logout">Log out</b-nav-item>
+          <b-nav-item class="nav-item" @click="logout">Logout</b-nav-item>
         </b-navbar-nav>
       </b-navbar>
       <router-view v-bind:user="user" />
@@ -73,6 +73,11 @@ export default {
   text-align: center;
   color: #106877;
 }
+#app a {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+}
 .navigation {
   padding: 0;
   height: 80px;
@@ -81,22 +86,10 @@ export default {
 .home-link {
   align-self: flex-start;
 }
-.profile-link {
-  align-self: center;
-  margin-left: auto;
-  margin-right: 200px;
-}
-#nav a {
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-  padding: 0 15px 0;
-  border-radius: 4px;
-}
 .icon {
   width: 100px;
   padding-top: 0;
-  margin: 0 0 0 40px;
+  margin: 0;
 }
 .ml-auto {
   margin-right: 100px;
@@ -112,11 +105,17 @@ export default {
   font-size: 17px;
   font-weight: bolder;
 }
-#nav a.item-profile {
-  background: #258a74;
-  padding: 10px;
-}
 html body {
   background-color: #f7fff1;
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-height: 768px) and (-webkit-device-pixel-ratio: 3) {
+  .logo {
+    width: 25%;
+    height: auto;
+  }
+  .ml-auto {
+    margin-right: 0;
+  }
 }
 </style>

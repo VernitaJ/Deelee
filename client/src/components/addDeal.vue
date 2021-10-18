@@ -4,11 +4,13 @@
     <button class="cancel" @click="handleToggle">Cancel</button>
     <form class="form-container">
       <div class="form-item">
-        <input type="input" class="input" v-model="name" placeholder="Title" />
+        <input type="input" class="input" v-model="title" placeholder="Title" />
       </div>
       <div class="form-item">
         <textarea
           class="input"
+          type="input"
+          v-model="description"
           placeholder="Describe the deal"
           id="floatingTextarea"
         ></textarea>
@@ -100,7 +102,8 @@ export default {
         { value: 'Groceries', text: 'Groceries' }
       ],
       text: 'New Company',
-      name: '',
+      description: '',
+      title: '',
       tags: [],
       support: '0',
       companies: [],
@@ -145,7 +148,8 @@ export default {
     },
     createDeal() {
       const newDeal = {
-        name: this.name,
+        name: this.title,
+        description: this.description,
         tag: this.tag,
         support: this.support,
         company: this.selectedCompany,
