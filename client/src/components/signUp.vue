@@ -1,8 +1,8 @@
 <template>
   <div>
     <form @submit.prevent="handleSubmit">
-      <div>
-        <h2 class="signup">Sign Up</h2>
+      <div class="head">
+        <h1>Sign Up</h1>
       </div>
 
       <div class="form-group">
@@ -101,8 +101,7 @@ export default {
 }
 </script>
 <style scoped>
-.signup {
-  color: white;
-  margin: 10px;
+.head h1 {
+  margin-top: 50px;
 }
 </style>
