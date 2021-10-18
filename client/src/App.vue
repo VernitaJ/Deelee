@@ -19,7 +19,7 @@
   </div>
 </template>
 <script>
-import logIn from './components/logIn.vue'
+import logIn from './views/logIn.vue'
 import { Api } from '@/Api'
 
 export default {

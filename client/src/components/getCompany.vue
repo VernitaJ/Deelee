@@ -4,7 +4,7 @@
       <div class="card">
         <div class="card-body">
           <b-icon icon="briefcase-fill" font-scale="2" id="icon"></b-icon>
-          <h1 class="card-title text-info">{{ company.name }}</h1>
+          <h3 class="card-title text-info">{{ company.name }}</h3>
           <b-icon icon="tag-fill" font-scale="2" id="icon"></b-icon>
           <h4 class="card-title">{{ company.category }}</h4>
         </div>

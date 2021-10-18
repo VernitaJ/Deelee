@@ -4,8 +4,8 @@
       <b-img src="/images/Deelee.png"></b-img>
     </div>
     <div class="main">
-        <button class="button-1" v-on:click="handleToggle(true)">LogIn</button>
-        <button class="button-2" v-on:click="handleToggle(false)">SignUp</button>
+      <button class="button-1" v-on:click="handleToggle(true)">Log In</button>
+      <button class="button-2" v-on:click="handleToggle(false)">Sign Up</button>
       <div v-if="signIn">
         <sign-in @handleLogin="handleLogin()" :v-bind="signIn" />
       </div>
@@ -38,15 +38,15 @@ export default {
 </script>
 <style>
 .main {
-  max-width: 800px;
+  max-width: 40%;
   margin: 30px auto;
   background: #343633;
   padding: 40px;
   border-radius: 10px;
   margin-top: 10px;
 }
- .button-1 {
-   color: white;
+.button-1 {
+  color: white;
   background-color: #248c86;
   padding: 5px 32px;
   text-align: center;
@@ -69,5 +69,10 @@ export default {
   margin-right: auto;
   width: 15%;
   height: 2%;
+}
+@media only screen and (min-device-width: 360px) and (max-device-height: 768px) and (-webkit-device-pixel-ratio: 3) {
+  .main {
+    max-width: 80%;
+  }
 }
 </style>

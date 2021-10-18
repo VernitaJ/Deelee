@@ -2,7 +2,7 @@
   <div>
     <form @submit.prevent="handleSubmit">
       <div>
-        <h1>Sign Up</h1>
+        <h2 class="signup">Sign Up</h2>
       </div>
 
       <div class="form-group">
@@ -100,3 +100,9 @@ export default {
   }
 }
 </script>
+<style scoped>
+.signup {
+  color: white;
+  margin: 10px;
+}
+</style>
