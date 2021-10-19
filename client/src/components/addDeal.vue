@@ -24,16 +24,6 @@
         ></b-form-tags>
       </div>
       <div class="form-item">
-        <label class="label" for="example-datepicker"
-          >Offer end date (optional)</label
-        >
-        <b-form-datepicker
-          id="example-datepicker"
-          class="input"
-          v-model="date"
-        ></b-form-datepicker>
-      </div>
-      <div class="form-item">
         <label class="label">Category</label>
         <b-form-select
           v-model="category"
@@ -63,7 +53,11 @@
         </b-form-select>
       </div>
       <div v-if="show">
-        <add-company @setChanges="setChanges" v-bind:position="position" />
+        <add-company
+          @setChanges="setChanges"
+          v-bind:position="position"
+          v-bind:company="this.selectedCompany"
+        />
       </div>
       <b-button
         v-if="!show"
@@ -185,8 +179,8 @@ export default {
 }
 .label {
   color: rgb(255, 255, 255);
+  margin-left: 10px;
   display: inline-block;
-  margin: 0px 15px 2px;
   font-size: 1em;
   text-transform: none;
   box-sizing: border-box;
@@ -211,6 +205,7 @@ export default {
   position: fixed;
   overflow-y: auto;
   max-width: 35%;
+  text-align: left;
   height: 100%;
   padding-left: 10px;
   top: 0;

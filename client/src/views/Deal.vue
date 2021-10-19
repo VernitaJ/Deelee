@@ -164,7 +164,7 @@ export default {
 .card-body-deal {
   padding: 3%;
   padding-top: 5%;
-  background-color: #131d22;
+  background-color: #111a20ea;
   color: white;
   border: 2px solid #085c4d;
   border-radius: 10px;

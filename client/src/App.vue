@@ -45,6 +45,7 @@ export default {
       this.isLoggedIn = false
       this.user = {}
       localStorage.clear()
+      this.$router.push('/login')
     },
     handleLogin() {
       this.isLoggedIn = true
