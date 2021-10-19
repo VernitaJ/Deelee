@@ -230,13 +230,21 @@ export default {
 .form-update button {
   margin-top: 10px;
 }
-@media only screen and (min-device-width: 360px) and (max-device-height: 768px) and (-webkit-device-pixel-ratio: 3) {
-  .Logo img {
-   display: block;
+
+.Logo img {
+  display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 30%;
-  height: 2%;
+  width: 15%;
+  height: auto;
+}
+@media only screen and (min-device-width: 360px) and (max-device-height: 768px) and (-webkit-device-pixel-ratio: 3) {
+  .Logo img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+    height: 2%;
   }
 }
 </style>

@@ -60,6 +60,7 @@
         img-top
         id="preview"
       >
+        <button class="cancel" @click="togglePreview()">X</button>
         <b-card-body>
           <b-card-title>{{ input.title }}</b-card-title>
           <b-card-sub-title class="mb-2">{{ user.firstName }}</b-card-sub-title>
@@ -190,5 +191,31 @@ export default {
 #preview {
   float: center;
   margin-top: 100px;
+}
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (-webkit-device-pixel-ratio: 3) {
+  #container {
+    position: absolute;
+    top: 10px;
+    width: 90%;
+    height: auto;
+    background-color: #343633;
+    opacity: 95%;
+    color: white;
+    margin-top: 0;
+  }
+  #preview {
+    height: 400px;
+    position: absolute;
+    font-size: 20px;
+    bottom: 0;
+    background-color: white;
+    margin-top: 100px;
+  }
+  .cancel {
+    display: block;
+    position: absolute;
+    top: 2%;
+    right: 2%;
+  }
 }
 </style>
