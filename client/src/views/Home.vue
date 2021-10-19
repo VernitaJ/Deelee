@@ -1,6 +1,13 @@
 <template>
   <div>
     <google-map v-bind:deals="deals" v-bind:user="user.id" @toggle="toggle()" />
+    <button
+      class="delete-button"
+      v-if="user.email === 'admin@test.com'"
+      @click="delReviews()"
+    >
+      Delete All Reviews
+    </button>
   </div>
 </template>
 
@@ -44,6 +51,16 @@ export default {
     },
     toggle() {
       this.getDeals()
+    },
+    delReviews() {
+      Api.delete('/reviews')
+        .then((response) => {
+          console.log(response.data)
+          this.$bvModal.msgBoxOk('All Reviews Are Deleted')
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }
@@ -52,5 +69,8 @@ export default {
 <style>
 .btn_message {
   margin-bottom: 1em;
+}
+.delete-button {
+ margin-top: 10px;
 }
 </style>
