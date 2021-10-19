@@ -8,14 +8,15 @@
           alt="Card image cap"
         />
         <div class="card-body-list">
-          <h5 class="card-title">{{ deal.name }}</h5>
+          <router-link :to="{ name: 'deal', params: { id: deal._id } }"
+            >{{ deal.name }}
+          </router-link>
           <b-icon
             icon="hand-thumbs-up"
             font-scale="1"
             variant="success"
           ></b-icon>
           {{ deal.support }}
-          <a href="#" @click="getLink(deal)" />
         </div>
       </div>
     </div>
@@ -44,11 +45,6 @@ export default {
         this.deals = []
         console.log(error)
       })
-  },
-  methods: {
-    getLink(deal) {
-      return 'this'
-    }
   }
 }
 </script>

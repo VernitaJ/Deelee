@@ -4,7 +4,7 @@
       <div class="card">
         <img
           class="card-img-right"
-          src="https://picsum.photos/600/300/?image=25"
+          src="https://source.unsplash.com/400x250/?food"
           alt="Card image"
         />
         <div class="card-body-deal">

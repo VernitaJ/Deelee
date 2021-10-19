@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "61238e1a-88be-4091-9d62-0b0b88547b89",
-		"name": "Deelee",
+		"_postman_id": "ae3cc05a-a79b-4bfe-8ffc-312c65932280",
+		"name": "DeeleeApp",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -1362,6 +1362,47 @@
 			"response": []
 		},
 		{
+			"name": "PATCH / user / :id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful PUT request\", () => {\r",
+							"  pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\" : \"Changed\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/users/{{user_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "PATCH / companies / :id",
 			"request": {
 				"method": "PATCH",
@@ -1718,7 +1759,8 @@
 		},
 		{
 			"key": "port",
-			"value": "3001"
+			"value": "3001",
+			"disabled": true
 		}
 	]
 }

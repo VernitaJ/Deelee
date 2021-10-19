@@ -155,7 +155,7 @@ export default {
 .preview-button {
   border: none;
   border-radius: 10px;
-  background-color: aqua;
+  background-color: rgb(41, 160, 160);
   color: white;
 }
 .close:hover {
@@ -189,8 +189,8 @@ export default {
   margin-top: 0;
 }
 #preview {
-  float: center;
-  margin-top: 100px;
+  float: right;
+  margin-top: 10px;
 }
 @media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (-webkit-device-pixel-ratio: 3) {
   #container {
