@@ -4,7 +4,7 @@
       <div class="card-deals">
         <img
           class="card-img-top-deal"
-          src="https://source.unsplash.com/100x80/?deal,food"
+          src="https://source.unsplash.com/80x50/?food"
           alt="Card image cap"
         />
         <div class="card-body-list">
@@ -15,7 +15,6 @@
             icon="hand-thumbs-up"
             font-scale="1"
             variant="success"
-            class="icon"
           ></b-icon>
           {{ deal.support }}
         </div>
@@ -46,11 +45,6 @@ export default {
         this.deals = []
         console.log(error)
       })
-  },
-  methods: {
-    getLink(deal) {
-      return '/deals/' + deal._id
-    }
   }
 }
 </script>
@@ -59,7 +53,7 @@ export default {
   background: #f4f4f4;
   padding: 20px;
   border-radius: 10px;
-  margin: 10px auto;
+  margin: 10px 0;
   max-width: 600px;
   cursor: pointer;
   color: #444;
@@ -71,7 +65,7 @@ export default {
   text-decoration: none;
 }
 .deals {
-  max-width: 65vh;
+  max-width: 75vh;
   font-size: 1.5em;
   text-align: center;
 }
@@ -86,9 +80,6 @@ export default {
   color: black;
   margin: 20px;
   background-color: rgba(1, 1, 1, 0.15);
-}
-.icon {
-  margin-left: 30px;
 }
 .card-body-list {
   color: white;

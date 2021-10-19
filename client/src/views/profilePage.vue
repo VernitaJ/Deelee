@@ -167,20 +167,20 @@ export default {
   border-radius: 5px;
   text-align: center;
   cursor: pointer;
-  margin: 0 40px;
+  margin: 20px 40px;
   float: right;
 }
 .button-delete:hover {
   color: black;
 }
 .form-data {
-  background-color: #1a6656;
+  background-color: #1b6e6e;
   color: rgb(255, 255, 255);
   border: 5px solid rgb(77, 124, 111);
   max-width: 600px;
   height: auto;
-  margin: 30px auto;
-  padding: 40px;
+  margin: 0 auto;
+  padding: 60px;
   border-radius: 10px;
   margin-top: 10px;
 }
@@ -245,6 +245,9 @@ export default {
     margin-right: auto;
     width: 30%;
     height: 2%;
+  }
+  .form-data {
+    padding: 50px 10px 60px 5px;
   }
 }
 </style>

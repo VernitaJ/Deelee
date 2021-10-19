@@ -33,9 +33,14 @@
           placeholder="Category"
         ></b-form-select>
       </div>
-      <button @click.prevent="createCompany" class="btn btn-primary btn-block">
-        ADD
-      </button>
+      <b-button
+        @click.prevent="createCompany"
+        pill
+        variant="info"
+        type="submit"
+        class="btn btn-primary btn-block"
+        >Add</b-button
+      >
     </div>
   </div>
 </template>

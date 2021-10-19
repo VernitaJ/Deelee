@@ -198,7 +198,7 @@ export default {
 }
 .map {
   width: 90%;
-  height: 900px;
+  height: 80vh;
   margin-left: 3em;
   margin-top: 0;
 }
