@@ -4,7 +4,6 @@
       <b-img src="/images/Deelee.png"></b-img>
     </div>
     <div class="form-data">
-      <h3>Profile</h3>
       <button
         class="button-update"
         onclick="document.getElementById('id01').style.display='block'"
@@ -150,7 +149,7 @@ export default {
   text-align: center;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: -50px;
+  margin-top: 0;
   float: right;
 }
 .attribute {
@@ -167,7 +166,7 @@ export default {
   border-radius: 5px;
   text-align: center;
   cursor: pointer;
-  margin: 30px 120px;
+  margin: 0 40px;
   float: right;
 }
 .button-delete:hover {
@@ -177,19 +176,12 @@ export default {
   background-color: #1a6656;
   color: rgb(255, 255, 255);
   border: 5px solid rgb(77, 124, 111);
-  max-width: 800px;
-  height: 450px;
+  max-width: 600px;
+  height: auto;
   margin: 30px auto;
   padding: 40px;
   border-radius: 10px;
   margin-top: 10px;
-}
-.Logo img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 15%;
-  height: 2%;
 }
 .text-container {
   text-align: left;
@@ -210,7 +202,6 @@ export default {
   color: white;
   padding: 1px 1px;
 }
-
 .form-update {
   max-width: 60%;
   max-height: 1000px;

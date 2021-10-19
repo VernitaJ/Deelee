@@ -1,7 +1,7 @@
 <template>
-  <div id="container" class="container">
+  <div id="container">
     <h4 class="title">Add Review</h4>
-    <button type="button" class="close" @click="cancelReview()">Cancel</button>
+    <button class="close" @click="cancelReview()">X</button>
     <b-container fluid>
       <b-row class="my-3">
         <b-form-rating
@@ -14,7 +14,7 @@
 
       <b-row class="my-3">
         <b-col sm="2">
-          <label for="input-medium">Title</label>
+          <label for="input-small">Title</label>
         </b-col>
         <b-col sm="10">
           <b-form-input
@@ -33,7 +33,7 @@
 
       <b-row class="my-3">
         <b-col sm="2">
-          <label for="input-medium">Description</label>
+          <label for="input-small">Description</label>
         </b-col>
         <b-col sm="10">
           <b-form-input
@@ -148,9 +148,8 @@ export default {
 }
 .close {
   color: rgb(255, 255, 255);
-  font-weight: 200;
+  font-weight: 10;
   margin-right: 20px;
-  font-style: normal;
 }
 .preview-button {
   border: none;
@@ -167,18 +166,29 @@ export default {
   padding: 15px;
   border-radius: 10px;
   background-color: #343633;
-  border-color: green;
+  border-color: rgb(7, 100, 77);
   opacity: 95%;
+  position: relative;
   margin-left: 1%;
 }
 .button-reviews {
   background-color: #258a74;
 }
-.container {
+.title {
+  margin-top: 5%;
+}
+#container {
+  position: absolute;
+  top: 10px;
+  height: 80%;
+  width: 500px;
   background-color: #343633;
   opacity: 95%;
+  color: white;
+  margin-top: 0;
 }
 #preview {
   float: center;
+  margin-top: 100px;
 }
 </style>
