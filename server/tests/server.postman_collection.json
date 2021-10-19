@@ -539,7 +539,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"Sandwich - 3 for 2\",\r\n    \"description\": \"Hella lovely sandwiches here\",\r\n    \"tag\": [\"restaurant\", \"salad\", \"backaplan\"],\r\n    \"support\": 24,\r\n    \"category\": \"Food\",\r\n    \"company\": \"{{company_id}}\",\r\n    \"position\": { \"lat\": 57.72522833874753, \"lng\": 11.943609274058389 },\r\n    \"user\": \"6154a234234a994080bd3ec8\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Sandwich - 3 for 2\",\r\n    \"description\": \"Hella lovely sandwiches here\",\r\n    \"tag\": [\"restaurant\", \"salad\", \"backaplan\"],\r\n    \"support\": 24,\r\n    \"category\": \"Food\",\r\n    \"company\": \"{{company_id}}\",\r\n    \"position\": { \"lat\": 57.72522833874753, \"lng\": 11.943609274058389 },\r\n    \"user\": \"6154a234234a994080bd3ec8\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -569,9 +569,7 @@
 							"pm.test(\"Successful POST request\", () => {\r",
 							"  pm.response.to.have.status(201);\r",
 							"});\r",
-							"\r",
-							"var data = pm.response.json();\r",
-							"pm.environment.set(\"deal_id\", data._id);"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -597,7 +595,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"50% sale\",\r\n    \"description\": \"Hella lovely tshirts here\",\r\n    \"tag\": [\"clothing\", \"50%\", \"backaplan\"],\r\n    \"support\": 24,\r\n    \"category\": \"Clothing\",\r\n    \"company\": \"{{company_id}}\",\r\n    \"position\": { \"lat\": 57.71301017059749, \"lng\": 11.914426839976358 },\r\n    \"user\": \"6154a234234a994080bd3ec8\"\r\n}",
+					"raw": "{\r\n    \"name\": \"50% sale\",\r\n    \"description\": \"Hella lovely tshirts here\",\r\n    \"tag\": [\"clothing\", \"50%\", \"backaplan\"],\r\n    \"support\": 24,\r\n    \"category\": \"Clothing\",\r\n    \"company\": \"{{company_id}}\",\r\n    \"position\": { \"lat\": 57.71301017059749, \"lng\": 11.914426839976358 },\r\n    \"user\": \"6154a234234a994080bd3ec8\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -652,7 +650,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"title\": \"Sarmies - 3 for 2\",\r\n    \"description\": \"Hella lovely sandwiches here\",\r\n    \"tag\": [\"restaurant\", \"sandwich\", \"backaplan\"],\r\n    \"support\": 24,\r\n    \"category\": \"Food\",\r\n    \"company\": \"{{company_id}}\",\r\n    \"position\": { \"lat\": 57.72522833874753, \"lng\": 11.943609274058389 },\r\n    \"user\": \"6154a234234a994080bd3ec8\"\r\n}",
+					"raw": "{\r\n   \"name\": \"Sarmies - 3 for 2\",\r\n    \"description\": \"Hella lovely sandwiches here\",\r\n    \"tag\": [\"restaurant\", \"sandwich\", \"backaplan\"],\r\n    \"support\": 24,\r\n    \"category\": \"Food\",\r\n    \"company\": \"{{company_id}}\",\r\n    \"position\": { \"lat\": 57.72522833874753, \"lng\": 11.943609274058389 },\r\n    \"user\": \"6154a234234a994080bd3ec8\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1716,11 +1714,11 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "localhost:3000"
+			"value": "localhost:3001"
 		},
 		{
 			"key": "port",
-			"value": "3000"
+			"value": "3001"
 		}
 	]
 }
