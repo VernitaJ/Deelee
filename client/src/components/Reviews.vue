@@ -11,7 +11,7 @@
       >
         <img
           class="card-img-top"
-          src="https://source.unsplash.com/80x50/?drinks"
+          src="https://source.unsplash.com/100x60/?sale"
           alt="Card image cap"
         />
         <div class="card-body-list">
@@ -76,7 +76,7 @@ export default {
 
 <style scoped>
 .success {
-  max-width: 75vh;
+  max-width: 55vh;
   font-size: 1em;
   margin: 10px auto;
   text-align: center;

@@ -67,12 +67,15 @@ export default {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 15%;
-  height: 2%;
+  width: 30%;
+  height: auto;
 }
 @media only screen and (min-device-width: 360px) and (max-device-height: 768px) and (-webkit-device-pixel-ratio: 3) {
   .main {
     max-width: 80%;
+  }
+  .Logo img {
+    width: 50%;
   }
 }
 </style>

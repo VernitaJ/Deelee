@@ -90,5 +90,8 @@ div h2 {
     width: 30%;
     height: auto;
   }
+  .card-deck {
+    margin: 20px;
+  }
 }
 </style>

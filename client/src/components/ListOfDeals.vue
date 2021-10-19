@@ -4,18 +4,20 @@
       <div class="card-deals">
         <img
           class="card-img-top-deal"
-          src="https://source.unsplash.com/80x50/?food"
+          src="https://source.unsplash.com/100x80/?deal,food"
           alt="Card image cap"
         />
         <div class="card-body-list">
-          <h5 class="card-title">{{ deal.name }}</h5>
+          <router-link :to="{ name: 'deal', params: { id: deal._id } }"
+            >{{ deal.name }}
+          </router-link>
           <b-icon
             icon="hand-thumbs-up"
             font-scale="1"
             variant="success"
+            class="icon"
           ></b-icon>
           {{ deal.support }}
-          <a href="#" @click="getLink(deal)" />
         </div>
       </div>
     </div>
@@ -47,7 +49,7 @@ export default {
   },
   methods: {
     getLink(deal) {
-      return 'this'
+      return '/deals/' + deal._id
     }
   }
 }
@@ -69,7 +71,7 @@ export default {
   text-decoration: none;
 }
 .deals {
-  max-width: 75vh;
+  max-width: 65vh;
   font-size: 1.5em;
   text-align: center;
 }
@@ -84,6 +86,9 @@ export default {
   color: black;
   margin: 20px;
   background-color: rgba(1, 1, 1, 0.15);
+}
+.icon {
+  margin-left: 30px;
 }
 .card-body-list {
   color: white;

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div v-if="isLoggedIn">
-      <b-navbar type="dark" variant="dark" class="navigation">
+      <b-navbar type="dark navbar" variant="dark" class="navigation">
         <b-navbar-brand class="item" to="/"
           ><img class="icon" src="../public/images/Icon.png"
         /></b-navbar-brand>
@@ -106,10 +106,13 @@ export default {
   font-weight: bolder;
 }
 html body {
-  background-color: #f7fff1;
+  background-color: #eefcff;
 }
 
 @media only screen and (min-device-width: 360px) and (max-device-height: 768px) and (-webkit-device-pixel-ratio: 3) {
+  .navigation {
+    position: sticky-bottom;
+  }
   .logo {
     width: 25%;
     height: auto;

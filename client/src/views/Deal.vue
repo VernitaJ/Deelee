@@ -1,10 +1,9 @@
 <template>
   <div>
-    <b-img src="/images/Deelee.png" class="logo" alt="logo"> </b-img>
     <div class="card-group-deal">
       <div class="card">
         <img
-          class="card-img-top"
+          class="card-img-right"
           src="https://picsum.photos/600/300/?image=25"
           alt="Card image"
         />
@@ -22,18 +21,19 @@
           <b-card-sub-title class="mb-2"
             >Added by {{ deal.user.firstName || '' }}</b-card-sub-title
           >
+          <b-card-text class="mb-2"> {{ deal.description }} </b-card-text>
           <button v-if="unclicked" class="like-button" @click="addSupport()">
             <b-icon
               icon="hand-thumbs-up"
               font-scale="2"
-              variant="success"
+              variant="warning"
             ></b-icon>
           </button>
           <button v-else class="liked-button" @click="removeSupport()">
             <b-icon
               icon="hand-thumbs-up"
               font-scale="2"
-              variant="light"
+              variant="success"
             ></b-icon>
           </button>
           {{ deal.support }}
@@ -158,29 +158,36 @@ export default {
   font-size: 1.1rem;
 }
 .liked-button {
-  background-color: #085c4d;
   border: none;
+  background-color: #131d22;
 }
 .card-body-deal {
-  background-color: #085c4d;
+  padding: 3%;
+  padding-top: 5%;
+  background-color: #131d22;
   color: white;
+  border: 2px solid #085c4d;
   border-radius: 10px;
 }
 .card-img-top {
   border-radius: 15px;
 }
 .card-group-deal {
+  position: relative;
   max-width: 75vh;
-  margin: 0px auto;
+  margin: 20px auto;
   text-align: center;
   padding: 10px;
   border-radius: 30px;
+}
+.card-title {
+  padding-bottom: 2%;
 }
 .add-button {
   float: right;
   margin: 1em;
   padding: 5px;
-  background-color: rgb(80, 138, 134);
+  background-color: rgb(21, 173, 163);
   color: rgb(255, 255, 255);
   border: none;
   border-radius: 5px;
@@ -189,7 +196,6 @@ export default {
   color: white;
 }
 .delete-button {
-  margin: 1em;
   padding: 5px;
   background-color: rgb(80, 138, 134);
   color: rgb(255, 255, 255);
