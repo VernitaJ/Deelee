@@ -58,14 +58,14 @@ router.post("/api/companies", function (req, res, next) {
   var company = new Company(req.body);
   company.save(function (err) {
     if (err) {
-      return res.status(500).send(err);;
+      return res.status(500).send(err);
     }
     console.log("New Company ", company.name, "created");
     return res.status(201).json(company);
   });
 });
 
-router.get("/api/companies/category/:category", function (req, res, next) {
+router.get("/api/companies?category=:category", function (req, res, next) {
   console.log("finding");
   Company.find({ category: { $all: [req.params.category] } }).exec(function (
     err,
@@ -79,16 +79,15 @@ router.get("/api/companies/category/:category", function (req, res, next) {
   });
 });
 
-
 router.get("/api/companies/:id/reviews", function (req, res, next) {
   Company.findOne({ _id: req.params.id })
     .populate({
-      path: 'reviews',
-      model: 'reviews',
+      path: "reviews",
+      model: "reviews",
       populate: {
-          path: 'user',
-          model: 'users'
-      }
+        path: "user",
+        model: "users",
+      },
     })
     .exec(function (err, company) {
       if (err) {
@@ -132,7 +131,7 @@ router.post("/api/companies/:id/reviews", function (req, res, next) {
     var review = new Review(req.body);
     review.save(function (err) {
       if (err) {
-        console.log(err)
+        console.log(err);
         return res.status(500);
       }
       console.log("Review " + review.title + " created.");
@@ -148,7 +147,7 @@ router.post("/api/companies/:id/reviews", function (req, res, next) {
 router.delete("/api/companies", function (req, res) {
   Company.deleteMany(function (err, company) {
     if (err) {
-      return res.status(500).send(err);;
+      return res.status(500).send(err);
     }
     console.log("Deleted all instances of Company");
     res.status(200).json(company);

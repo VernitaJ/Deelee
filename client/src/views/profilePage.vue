@@ -210,8 +210,7 @@ export default {
   text-align: left;
   padding: 20px;
   border-radius: 10px;
-  background-color: #343633;
-  opacity: 95%;
+  background-color: (1, 1, 1, 0.9);
 }
 .h1 {
   color: black;
