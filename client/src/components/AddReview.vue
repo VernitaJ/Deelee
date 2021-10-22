@@ -198,7 +198,7 @@ export default {
     top: 10px;
     width: 90%;
     height: auto;
-    background-color: (1, 1, 1, 0.8);
+    background-color: rgb(1, 1, 1, 0.8);
     color: white;
     margin-top: 0;
   }
