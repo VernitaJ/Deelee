@@ -183,8 +183,7 @@ export default {
   top: 10px;
   height: 80%;
   width: 500px;
-  background-color: #343633;
-  opacity: 95%;
+  background-color: rgb(1, 1, 1, 0.8);
   color: white;
   margin-top: 0;
 }
