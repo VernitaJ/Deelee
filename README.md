@@ -1,4 +1,4 @@
-#### Deployed on [heroku](deelee.herokuapp.com)
+#### Deployed on [heroku](www.deelee.herokuapp.com)
 
 ### Purpose
 
