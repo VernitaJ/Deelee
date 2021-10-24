@@ -1,3 +1,5 @@
+#### Deployed on [heroku](https://www.deelee.herokuapp.com)
+
 ### Purpose
 
 A peer-to-peer system where users have the opportunity to share special offers and deals that they have come across. It ensures ease of discovery for users looking for specific special offers in their vicinity. The system gives the power of marketing to the users with the purpose of more honest and open communication within commerce.
