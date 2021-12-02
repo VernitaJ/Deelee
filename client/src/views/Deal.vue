@@ -18,9 +18,11 @@
           <div v-for="(tag, index) in deal.tag" v-bind:key="index">
             {{ tag }}
           </div>
-          <b-card-sub-title class="mb-2"
-            >Added by {{ deal.user.firstName || '' }}</b-card-sub-title
+          <div v-if="(user != null)">
+          <b-card-sub-title  class="mb-2"
+            >Added by {{ '' || "" }}</b-card-sub-title
           >
+          </div>
           <b-card-text class="mb-2"> {{ deal.description }} </b-card-text>
           <button v-if="unclicked" class="like-button" @click="addSupport()">
             <b-icon
@@ -53,10 +55,10 @@
     </div>
     <button
       class="delete-button"
-      v-if="user.id === deal.user._id"
+      v-if="user.id === null"
       @click="delDeal()"
     >
-      DELETE
+      Delete
     </button>
   </div>
 </template>
@@ -88,7 +90,7 @@ export default {
       Api.get('deals/' + this.$route.params.id)
         .then((response) => {
           this.deal = response.data
-          console.log('USER', this.deal)
+          console.log('DEAL', this.deal)
         })
         .catch((error) => {
           this.deal = {}

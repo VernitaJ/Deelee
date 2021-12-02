@@ -15,7 +15,7 @@ var authController = require("./controllers/auth");
 // Variables
 var mongoURI =
   process.env.MONGODB_URI ||
-  "mongodb+srv://project24:project24@cluster0.hlpfe.mongodb.net/Discussionforumdb?retryWrites=true&w=majority";
+  "mongodb+srv://vgouws:vgouws@cluster0.wbd9s.mongodb.net/deelee?retryWrites=true&w=majority";
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
